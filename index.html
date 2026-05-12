@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DormBros — University Essentials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* =============================================
+   DORMBROS — Navy & Orange Brand Theme
+   ============================================= */
+:root {
+  --navy:        #1B3A6B;
+  --navy-dark:   #0f2340;
+  --navy-light:  #2a5298;
+  --navy-pale:   #eef2f9;
+  --orange:      #E85D04;
+  --orange-light:#ff7c2a;
+  --orange-pale: #fff3ed;
+  --white:       #ffffff;
+  --off-white:   #f7f8fc;
+  --text:        #0f1c2e;
+  --text-muted:  #5b6a80;
+  --border:      #dde3ef;
+  --radius:      14px;
+  --radius-sm:   9px;
+  --shadow:      0 4px 24px rgba(27,58,107,0.10);
+  --shadow-lg:   0 8px 40px rgba(27,58,107,0.16);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); min-height: 100vh; }
+h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
+a { text-decoration: none; color: inherit; }
+img { display: block; width: 100%; object-fit: cover; }
+
+/* ---- NAVBAR ---- */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--navy);
+  box-shadow: 0 2px 16px rgba(15,35,64,0.25);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+  height: 66px; display: flex; align-items: center; gap: 2rem;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800;
+  color: var(--white); letter-spacing: -0.5px; cursor: pointer;
+}
+.logo-icon {
+  width: 38px; height: 38px;
+  background: var(--orange); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.logo span { color: var(--orange); }
+.nav-links { display: flex; gap: 1.5rem; flex: 1; }
+.nav-links a {
+  font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.7);
+  transition: color 0.2s; cursor: pointer;
+}
+.nav-links a:hover { color: var(--white); }
+.cart-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 20px;
+  background: var(--orange); color: white;
+  border: none; border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; position: relative;
+  transition: background 0.2s, transform 0.15s;
+}
+.cart-btn:hover { background: var(--orange-light); }
+.cart-btn.flash { animation: flashPulse 0.5s ease; }
+@keyframes flashPulse {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.1); background: #fff; color: var(--orange); }
+  100% { transform: scale(1); }
+}
+.cart-count {
+  position: absolute; top: -7px; right: -7px;
+  background: var(--white); color: var(--orange);
+  font-size: 11px; font-weight: 800;
+  width: 20px; height: 20px; border-radius: 50%;
+  display: none; align-items: center; justify-content: center;
+}
+
+/* ---- CART DRAWER ---- */
+.cart-overlay {
+  position: fixed; inset: 0; background: rgba(10,25,50,0.5);
+  z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.cart-overlay.open { opacity: 1; pointer-events: all; }
+.cart-drawer {
+  position: fixed; top: 0; right: 0; width: 420px; max-width: 95vw;
+  height: 100vh; background: var(--white); z-index: 201;
+  display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: -8px 0 40px rgba(27,58,107,0.2);
+}
+.cart-drawer.open { transform: translateX(0); }
+.cart-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
+  background: var(--navy);
+}
+.cart-header h2 { font-size: 1.1rem; font-weight: 700; color: white; }
+.close-cart {
+  background: rgba(255,255,255,0.15); border: none; font-size: 1rem;
+  color: white; cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  transition: background 0.2s;
+}
+.close-cart:hover { background: rgba(255,255,255,0.3); }
+.cart-items { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+.cart-empty { text-align: center; color: var(--text-muted); padding: 3rem 0; font-size: 0.95rem; }
+.cart-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 1rem 0; border-bottom: 1px solid var(--border);
+}
+.cart-item img { width: 68px; height: 68px; border-radius: var(--radius-sm); object-fit: cover; flex-shrink: 0; border: 1px solid var(--border); }
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-name { font-size: 0.88rem; font-weight: 600; margin-bottom: 2px; }
+.cart-item-price { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; }
+.cart-item-qty { display: flex; align-items: center; gap: 6px; }
+.cart-item-qty button {
+  width: 28px; height: 28px; border: 1px solid var(--border);
+  background: var(--off-white); border-radius: 6px;
+  font-size: 1rem; cursor: pointer; color: var(--navy); transition: background 0.15s;
+}
+.cart-item-qty button:hover { background: var(--navy-pale); }
+.cart-item-qty span { font-size: 0.9rem; font-weight: 700; min-width: 22px; text-align: center; }
+.remove-btn { color: #c0392b !important; font-size: 0.78rem !important; border-color: #f5c0c0 !important; }
+.cart-item-total { font-size: 0.95rem; font-weight: 800; color: var(--navy); flex-shrink: 0; }
+.cart-footer { padding: 1.25rem 1.5rem; border-top: 2px solid var(--border); background: var(--off-white); }
+.cart-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.05rem; margin-bottom: 1rem; color: var(--navy); }
+.checkout-btn {
+  width: 100%; padding: 14px;
+  background: var(--orange); color: white;
+  border: none; border-radius: var(--radius-sm);
+  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+}
+.checkout-btn:hover { background: var(--orange-light); transform: translateY(-1px); }
+
+/* ---- HERO ---- */
+.hero {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, var(--navy-light) 100%);
+  min-height: 500px; display: flex; align-items: center; padding: 4rem 2rem;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-bg-text {
+  position: absolute; font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(100px, 18vw, 200px); color: rgba(255,255,255,0.04);
+  top: 50%; right: -10px; transform: translateY(-50%);
+  user-select: none; letter-spacing: -8px;
+}
+.hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 4rem; position: relative; z-index: 2; }
+.hero-content { flex: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(232,93,4,0.2); border: 1px solid var(--orange);
+  color: #ffb088; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 100px; margin-bottom: 1.5rem;
+}
+.hero-content h1 {
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 800;
+  color: var(--white); line-height: 1.15; margin-bottom: 1rem;
+}
+.hero-content h1 em { font-style: normal; color: var(--orange); }
+.hero-content p { color: rgba(255,255,255,0.72); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem; }
+.hero-stats { display: flex; gap: 2rem; margin-bottom: 2rem; }
+.hero-stat strong { display: block; font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--orange); }
+.hero-stat span { font-size: 0.8rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.05em; }
+.hero-logo-wrap {
+  flex-shrink: 0; width: 280px;
+  background: white; border-radius: 20px;
+  padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-logo-wrap img { width: 100%; height: auto; object-fit: contain; border-radius: 10px; }
+.deco-circle { position: absolute; border-radius: 50%; opacity: 0.08; }
+.c1 { width: 350px; height: 350px; background: var(--orange); top: -100px; left: -100px; }
+.c2 { width: 180px; height: 180px; background: white; bottom: -50px; right: 320px; }
+
+/* ---- BUTTONS ---- */
+.btn-primary {
+  display: inline-block; padding: 14px 32px;
+  background: var(--orange); color: white;
+  border: none; border-radius: var(--radius-sm);
+  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+  cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,93,4,0.4); }
+
+/* ---- PRODUCTS ---- */
+.products-section { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-header h2 { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+.section-header p { color: var(--text-muted); font-size: 1rem; }
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 1.5rem; }
+
+.product-card {
+  background: var(--white); border-radius: var(--radius);
+  border: 1.5px solid var(--border); overflow: hidden; cursor: pointer;
+  transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+}
+.product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--navy-light); }
+.product-img-wrap { position: relative; height: 195px; overflow: hidden; background: var(--navy-pale); }
+.product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.product-card:hover .product-img-wrap img { transform: scale(1.06); }
+.product-badge {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--orange); color: white;
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; padding: 4px 10px; border-radius: 100px;
+}
+.product-info { padding: 1.1rem; }
+.product-cat { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--orange); }
+.product-info h3 { font-size: 1rem; font-weight: 700; margin: 4px 0 6px; color: var(--text); }
+.product-short { font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem; }
+.product-footer { display: flex; align-items: center; justify-content: space-between; }
+.product-price { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--navy); }
+.add-btn {
+  background: var(--navy); color: white; border: none;
+  border-radius: var(--radius-sm); padding: 7px 14px;
+  font-size: 0.83rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
+}
+.add-btn:hover { background: var(--orange); }
+
+/* ---- DETAIL PAGE ---- */
+.detail-container { max-width: 1100px; margin: 0 auto; padding: 2rem 2rem 4rem; }
+.back-btn {
+  background: none; border: 1.5px solid var(--border); color: var(--navy);
+  padding: 8px 18px; border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; margin-bottom: 2rem; display: inline-block; transition: background 0.2s;
+}
+.back-btn:hover { background: var(--navy-pale); }
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.detail-image-wrap {
+  border-radius: var(--radius); overflow: hidden; aspect-ratio: 1;
+  background: var(--navy-pale); border: 1.5px solid var(--border);
+}
+.detail-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.detail-badge {
+  display: inline-block; background: var(--orange-pale);
+  border: 1px solid var(--orange); color: var(--orange);
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; padding: 4px 12px; border-radius: 100px; margin-bottom: 0.75rem;
+}
+.detail-info h1 { font-size: 1.9rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.2; }
+.detail-price { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--orange); margin-bottom: 1rem; }
+.detail-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem; }
+.detail-specs { background: var(--navy-pale); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.5rem; }
+.spec-item { font-size: 0.875rem; color: var(--navy-dark); padding: 5px 0; border-bottom: 1px solid var(--border); }
+.spec-item:last-child { border-bottom: none; }
+.detail-qty { margin-bottom: 1.25rem; }
+.detail-qty label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+.qty-control { display: flex; align-items: center; width: fit-content; border: 1.5px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+.qty-control button { width: 40px; height: 40px; background: var(--off-white); border: none; font-size: 1.2rem; cursor: pointer; color: var(--navy); transition: background 0.15s; }
+.qty-control button:hover { background: var(--navy-pale); }
+.qty-control span { width: 48px; text-align: center; font-weight: 700; font-size: 1rem; border-left: 1px solid var(--border); border-right: 1px solid var(--border); height: 40px; line-height: 40px; }
+.add-cart-btn { width: 100%; text-align: center; margin-bottom: 1rem; padding: 16px; font-size: 1rem; }
+.detail-note { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+/* ---- ABOUT ---- */
+.about-section { background: var(--navy); border-top: 1.5px solid var(--border); padding: 5rem 2rem; }
+.about-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+.about-tag {
+  display: inline-block; background: rgba(232,93,4,0.15);
+  border: 1px solid var(--orange); color: var(--orange);
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; padding: 6px 16px; border-radius: 100px; margin-bottom: 1rem;
+}
+.about-inner h2 { font-size: 2rem; font-weight: 800; color: white; margin-bottom: 1rem; line-height: 1.25; }
+.about-inner p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.75; margin-bottom: 2.5rem; }
+.about-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: left; }
+.step { background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 1.25rem; }
+.step-num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--orange); margin-bottom: 0.5rem; }
+.step strong { display: block; font-size: 0.9rem; color: white; margin-bottom: 4px; }
+.step div { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+/* ---- CHECKOUT ---- */
+.checkout-container { max-width: 1100px; margin: 0 auto; padding: 2rem 2rem 5rem; }
+.checkout-title { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 2rem; }
+.checkout-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 2.5rem; align-items: start; }
+.checkout-summary { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.5rem; position: sticky; top: 80px; }
+.checkout-summary h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+.summary-item { display: flex; justify-content: space-between; font-size: 0.88rem; padding: 6px 0; color: var(--text-muted); border-bottom: 1px dashed var(--border); }
+.summary-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem; color: var(--navy); margin-top: 1rem; padding-top: 0.75rem; border-top: 2px solid var(--navy); }
+.payment-box { margin-top: 1.5rem; background: var(--orange-pale); border: 1.5px solid #f4a07a; border-radius: var(--radius-sm); padding: 1.1rem; }
+.payment-box h4 { font-size: 0.9rem; font-weight: 700; color: var(--orange); margin-bottom: 0.5rem; }
+.payment-box p { font-size: 0.84rem; color: #7a3500; margin-bottom: 0.5rem; }
+.payment-detail { background: white; border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-size: 0.88rem; margin: 0.5rem 0; }
+.highlight { font-family: monospace; font-weight: 800; color: var(--navy); font-size: 1rem; }
+.small-note { font-size: 0.78rem !important; opacity: 0.75; }
+.checkout-form-wrap h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 1.25rem; }
+.form-group { margin-bottom: 1.1rem; }
+.form-group label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+.form-group input, .form-group textarea {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text);
+  background: var(--white); transition: border-color 0.2s; outline: none;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--navy); }
+.upload-area {
+  border: 2px dashed var(--border); border-radius: var(--radius-sm);
+  padding: 2rem 1rem; text-align: center; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s; background: var(--off-white);
+}
+.upload-area:hover { border-color: var(--navy-light); background: var(--navy-pale); }
+.upload-area.uploaded { border-color: #22a06b; background: #edfcf4; }
+.upload-area svg { margin: 0 auto 0.75rem; color: var(--navy-light); }
+.upload-area p { font-size: 0.9rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.upload-area span { font-size: 0.78rem; color: var(--text-muted); }
+.submit-btn { width: 100%; padding: 16px; font-size: 1.05rem; margin-top: 0.5rem; }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+
+/* ---- SUCCESS ---- */
+.success-container { max-width: 480px; margin: 6rem auto; text-align: center; padding: 2rem; }
+.success-icon { width: 80px; height: 80px; background: var(--navy); color: white; font-size: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+.success-container h1 { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem; }
+.success-container p { color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
+
+/* ---- FOOTER ---- */
+.footer { text-align: center; padding: 2rem; background: var(--navy-dark); color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+.footer a { color: var(--orange); }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .hero-inner { flex-direction: column; }
+  .hero-logo-wrap { width: 200px; }
+  .hero-stats { gap: 1.2rem; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .about-steps { grid-template-columns: 1fr; }
+  .checkout-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .checkout-summary { position: static; }
+  .hero-bg-text { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="logo" onclick="showPage('home')">
+      <div class="logo-icon">🏠</div>
+      DORM<span>BROS</span>
+    </div>
+    <div class="nav-links">
+      <a onclick="showPage('home')">Shop</a>
+      <a onclick="showPage('home'); setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),100)">About</a>
+    </div>
+    <button class="cart-btn" onclick="toggleCart()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h2>🛒 Your Cart</h2>
+    <button class="close-cart" onclick="toggleCart()">✕ Close</button>
+  </div>
+  <div class="cart-items" id="cartItems"><div class="cart-empty">Your cart is empty.</div></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">¥0</span></div>
+    <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout →</button>
+  </div>
+</div>
+
+<!-- ======== HOME PAGE ======== -->
+<div id="homePage">
+  <section class="hero">
+    <div class="deco-circle c1"></div>
+    <div class="deco-circle c2"></div>
+    <div class="hero-bg-text">DORM</div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">⭐ CUHKSZ Official Dorm Store</div>
+        <h1>Everything you need,<br/><em>move-in ready.</em></h1>
+        <p>Curated dorm essentials delivered right to your block. Built by students, for freshmen.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><strong>100%</strong><span>Student Run</span></div>
+          <div class="hero-stat"><strong>Fast</strong><span>Dorm Delivery</span></div>
+          <div class="hero-stat"><strong>WeChat</strong><span>Pay Accepted</span></div>
+        </div>
+        <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now ↓</button>
+      </div>
+      <div class="hero-logo-wrap">
+        <!-- 
+          LOGO: Replace the src below with your actual logo file path.
+          If your logo is in the same folder as index.html, use: src="dormbros-logo.png"
+          The logo image you uploaded should be saved as "dormbros-logo.png" next to index.html
+        -->
+        <img src="dormbros-logo.png" alt="DormBros Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'text-align:center\'><div style=\'font-family:Syne,sans-serif;font-size:2rem;font-weight:800;color:#1B3A6B\'>DORM<span style=\'color:#E85D04\'>BROS</span></div><p style=\'color:#5b6a80;font-size:0.85rem;margin-top:8px\'>University Essentials</p></div>'" />
+      </div>
+    </div>
+  </section>
+
+  <section class="products-section" id="products">
+    <div class="section-header">
+      <h2>Dorm Essentials</h2>
+      <p>Everything a freshman needs, handpicked so you don't have to guess.</p>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
+
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <div class="about-tag">Who We Are</div>
+      <h2>Students helping students settle in.</h2>
+      <p>DormBros is a student-run store at CUHKSZ. We bulk-source the essentials so you don't have to scramble on move-in day. Pay via WeChat Pay or Alipay, upload your receipt, and we'll deliver to your dorm block.</p>
+      <div class="about-steps">
+        <div class="step"><div class="step-num">01</div><div><strong>Add to Cart</strong>Browse and pick what you need.</div></div>
+        <div class="step"><div class="step-num">02</div><div><strong>Pay & Upload</strong>Transfer via WeChat/Alipay and upload your proof.</div></div>
+        <div class="step"><div class="step-num">03</div><div><strong>We Deliver</strong>Order confirmed and delivered to your dorm.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 DormBros · CUHKSZ Student Store · Made with ❤️ for freshmen · <a href="mailto:dormbros@example.com">Contact Us</a></p>
+  </footer>
+</div>
+
+<!-- ======== DETAIL PAGE ======== -->
+<div id="detailPage" style="display:none;">
+  <div class="detail-container">
+    <button class="back-btn" onclick="showPage('home')">← Back to Shop</button>
+    <div class="detail-grid">
+      <div class="detail-image-wrap"><img id="detailImg" src="" alt="" /></div>
+      <div class="detail-info">
+        <div class="detail-badge" id="detailBadge" style="display:none;"></div>
+        <h1 id="detailName"></h1>
+        <p class="detail-price" id="detailPrice"></p>
+        <p class="detail-desc" id="detailDesc"></p>
+        <div class="detail-specs" id="detailSpecs"></div>
+        <div class="detail-qty">
+          <label>Quantity</label>
+          <div class="qty-control">
+            <button onclick="changeDetailQty(-1)">−</button>
+            <span id="detailQty">1</span>
+            <button onclick="changeDetailQty(1)">+</button>
+          </div>
+        </div>
+        <button class="btn-primary add-cart-btn" onclick="addCurrentToCart()">Add to Cart</button>
+        <p class="detail-note">💬 Pay via WeChat Pay or Alipay after placing your order. Upload your payment screenshot to confirm.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== CHECKOUT PAGE ======== -->
+<div id="checkoutPage" style="display:none;">
+  <div class="checkout-container">
+    <button class="back-btn" onclick="showPage('home')">← Back to Shop</button>
+    <h1 class="checkout-title">Complete Your Order</h1>
+    <div class="checkout-grid">
+      <div class="checkout-summary">
+        <h3>Order Summary</h3>
+        <div id="summaryItems"></div>
+        <div class="summary-total"><span>Total</span><span id="summaryTotal"></span></div>
+        <div class="payment-box">
+          <h4>💳 Payment Instructions</h4>
+          <p>Transfer the total to:</p>
+          <div class="payment-detail">
+            <strong>WeChat Pay / Alipay</strong><br/>
+            ID: <span class="highlight">dormbros2025</span>
+          </div>
+          <p class="small-note">Include your name in the transfer note, then upload the screenshot below.</p>
+        </div>
+      </div>
+      <div class="checkout-form-wrap">
+        <h3>Your Details</h3>
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="custName" placeholder="e.g. Li Wei" />
+        </div>
+        <div class="form-group">
+          <label>Student ID *</label>
+          <input type="text" id="custID" placeholder="e.g. 123456789" />
+        </div>
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" id="custEmail" placeholder="your@mail.com" />
+        </div>
+        <div class="form-group">
+          <label>WhatsApp / WeChat *</label>
+          <input type="text" id="custContact" placeholder="Phone or WeChat ID" />
+        </div>
+        <div class="form-group">
+          <label>Dorm Block & Room *</label>
+          <input type="text" id="custRoom" placeholder="e.g. Block C, Room 301" />
+        </div>
+        <div class="form-group">
+          <label>Upload Payment Screenshot *</label>
+          <div class="upload-area" id="uploadArea" onclick="document.getElementById('proofFile').click()">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <p id="uploadLabel">Click to upload screenshot</p>
+            <span>PNG, JPG up to 5MB</span>
+          </div>
+          <input type="file" id="proofFile" accept="image/*" style="display:none" onchange="handleFileUpload(this)" />
+        </div>
+        <div class="form-group">
+          <label>Additional Notes</label>
+          <textarea id="custNotes" placeholder="Any special requests..." rows="3"></textarea>
+        </div>
+        <button class="btn-primary submit-btn" id="submitBtn" onclick="submitOrder()">Submit Order ✓</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======== SUCCESS PAGE ======== -->
+<div id="successPage" style="display:none;">
+  <div class="success-container">
+    <div class="success-icon">✓</div>
+    <h1>Order Submitted!</h1>
+    <p>Thanks! We'll review your payment and confirm delivery details via email within 24 hours. Check your inbox (and spam folder).</p>
+    <button class="btn-primary" onclick="showPage('home')">Back to Shop</button>
+  </div>
+</div>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+// =====================================================
+//  DORMBROS — CONFIGURATION
+//  1. Sign up free at https://emailjs.com
+//  2. Create a service (Gmail works great)
+//  3. Create an email template (see comment below)
+//  4. Replace the 3 values below with your own
+// =====================================================
+const EMAILJS_SERVICE_ID  = 'service_2ka60gh';   // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'template_i8k98qo';  // e.g. 'template_xyz789'
+const EMAILJS_PUBLIC_KEY  = 'xQ8U65W7qi3rt85NH';   // e.g. 'abcDEFghiJKL'
+
+/*
+  EMAIL TEMPLATE VARIABLES (paste this into your EmailJS template body):
+  -----------------------------------------------------------------------
+  New Order from DormBros!
+
+  Name: {{customer_name}}
+  Student ID: {{student_id}}
+  Email: {{customer_email}}
+  Contact: {{contact}}
+  Dorm Room: {{room}}
+
+  ORDER:
+  {{order_details}}
+
+  TOTAL: {{order_total}}
+
+  Notes: {{notes}}
+
+  Payment proof is attached as: {{payment_filename}}
+  -----------------------------------------------------------------------
+  NOTE: EmailJS free plan doesn't support file attachments.
+  The image will be described by filename. For actual image receiving,
+  upgrade to EmailJS paid plan OR use the Google Form approach instead.
+  The order details will still come through perfectly on the free plan.
+*/
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+// =====================================================
+//  PRODUCTS — Edit this list to add your actual items!
+// =====================================================
+const PRODUCTS = [
+  {
+    id: 1, name: "Pillow & Pillowcase Set", price: 45,
+    category: "Bedding", badge: "Popular",
+    image: "https://images.unsplash.com/photo-1631049035182-249067d7618e?w=600&q=80",
+    shortDesc: "Soft memory foam pillow with cotton pillowcase.",
+    description: "A comfortable medium-firm memory foam pillow paired with a breathable 100% cotton pillowcase. Perfect for CUHKSZ dorm beds.",
+    specs: ["Memory foam fill", "Cotton pillowcase included", "Size: 48×74cm", "Machine washable cover"]
+  },
+  {
+    id: 2, name: "Bedsheet Set (Twin)", price: 88,
+    category: "Bedding", badge: "New",
+    image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=600&q=80",
+    shortDesc: "3-piece twin sheet set. Fits standard CUHKSZ dorm beds.",
+    description: "A full 3-piece fitted sheet set sized for CUHKSZ dorm single beds (90×190cm). Includes fitted sheet, flat sheet, and one pillowcase.",
+    specs: ["Fitted sheet + flat sheet + pillowcase", "90×190cm (single/twin)", "Microfibre fabric", "Available in white & light grey"]
+  },
+  {
+    id: 3, name: "Desk Lamp (USB Powered)", price: 68,
+    category: "Study", badge: "Best Seller",
+    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&q=80",
+    shortDesc: "Eye-care LED lamp with 3 brightness levels.",
+    description: "A foldable USB desk lamp with 3 brightness levels and warm/cool/neutral light modes. Powered by USB — works off your laptop or any power bank.",
+    specs: ["USB-C powered", "3 brightness + 3 colour modes", "360° adjustable arm", "Built-in USB-A charging port"]
+  },
+  {
+    id: 4, name: "Power Strip (3-outlet + USB)", price: 55,
+    category: "Electronics", badge: null,
+    image: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&q=80",
+    shortDesc: "3 outlets + 2 USB-A + 1 USB-C. Surge protected.",
+    description: "Compact power strip with 3 standard outlets, 2 USB-A and 1 USB-C port. Includes surge protection and a 1.8m cable.",
+    specs: ["3 AC outlets", "2 USB-A + 1 USB-C", "Surge protection", "1.8m cable"]
+  },
+  {
+    id: 5, name: "Shower Caddy Organiser", price: 38,
+    category: "Bathroom", badge: null,
+    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80",
+    shortDesc: "Portable hanging caddy for shared bathrooms.",
+    description: "A portable plastic shower caddy with drainage holes and a carry handle. Designed for CUHKSZ shared bathrooms.",
+    specs: ["5 compartments + toothbrush slots", "Drainage holes", "Carry handle", "Rust-proof plastic"]
+  },
+  {
+    id: 6, name: "Laundry Bag (Large)", price: 22,
+    category: "Laundry", badge: null,
+    image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=600&q=80",
+    shortDesc: "Durable mesh laundry bag. 45L capacity.",
+    description: "A large 45-litre mesh laundry bag with a strong drawstring. Goes directly in the washing machine — great for dorm laundry rooms.",
+    specs: ["45L capacity", "Breathable mesh fabric", "Drawstring + carry strap", "Machine wash safe"]
+  },
+  {
+    id: 7, name: "Hangers Set (20 pcs)", price: 25,
+    category: "Storage", badge: null,
+    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
+    shortDesc: "Slim velvet non-slip hangers, set of 20.",
+    description: "Pack of 20 slim velvet coat hangers. Non-slip surface, space-saving profile — perfect for the dorm wardrobe.",
+    specs: ["Set of 20", "Velvet non-slip coating", "360° swivel hook", "Slim space-saving design"]
+  },
+  {
+    id: 8, name: "Dorm Starter Bundle", price: 198,
+    category: "Bundle", badge: "Best Value",
+    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80",
+    shortDesc: "Pillow + Bedsheets + Lamp + Power Strip. Save ¥38.",
+    description: "The ultimate freshman bundle: Pillow & Pillowcase, Bedsheet Set, Desk Lamp, and Power Strip all in one. Save ¥38 vs buying separately.",
+    specs: ["Pillow & Pillowcase Set", "Bedsheet Set (Twin)", "Desk Lamp (USB)", "Power Strip (3-outlet)", "Save ¥38 vs individual prices"]
+  }
+];
+
+// =====================================================
+//  APP STATE
+// =====================================================
+let cart = JSON.parse(localStorage.getItem('dormbros_cart') || '[]');
+let currentProduct = null;
+let currentQty = 1;
+let uploadedFile = null;
+
+// =====================================================
+//  PAGE NAVIGATION
+// =====================================================
+function showPage(page) {
+  ['homePage','detailPage','checkoutPage','successPage'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+  const map = { home: 'homePage', detail: 'detailPage', checkout: 'checkoutPage', success: 'successPage' };
+  document.getElementById(map[page]).style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// =====================================================
+//  RENDER PRODUCT GRID
+// =====================================================
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = PRODUCTS.map(p => `
+    <div class="product-card" onclick="openProduct(${p.id})">
+      <div class="product-img-wrap">
+        <img src="${p.image}" alt="${p.name}" loading="lazy" />
+        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+      </div>
+      <div class="product-info">
+        <span class="product-cat">${p.category}</span>
+        <h3>${p.name}</h3>
+        <p class="product-short">${p.shortDesc}</p>
+        <div class="product-footer">
+          <span class="product-price">¥${p.price}</span>
+          <button class="add-btn" onclick="event.stopPropagation(); quickAdd(${p.id})">+ Add</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// =====================================================
+//  PRODUCT DETAIL
+// =====================================================
+function openProduct(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  currentProduct = p;
+  currentQty = 1;
+  document.getElementById('detailImg').src = p.image;
+  document.getElementById('detailImg').alt = p.name;
+  document.getElementById('detailName').textContent = p.name;
+  document.getElementById('detailPrice').textContent = `¥${p.price}`;
+  document.getElementById('detailDesc').textContent = p.description;
+  document.getElementById('detailQty').textContent = 1;
+  const badge = document.getElementById('detailBadge');
+  if (p.badge) { badge.textContent = p.badge; badge.style.display = 'inline-block'; }
+  else { badge.style.display = 'none'; }
+  document.getElementById('detailSpecs').innerHTML = p.specs.map(s => `<div class="spec-item">✓ ${s}</div>`).join('');
+  showPage('detail');
+}
+
+function changeDetailQty(d) {
+  currentQty = Math.max(1, currentQty + d);
+  document.getElementById('detailQty').textContent = currentQty;
+}
+
+function addCurrentToCart() {
+  if (!currentProduct) return;
+  addToCart(currentProduct, currentQty);
+  showPage('home');
+  setTimeout(() => toggleCart(), 300);
+}
+
+function quickAdd(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (p) addToCart(p, 1);
+}
+
+// =====================================================
+//  CART
+// =====================================================
+function addToCart(product, qty) {
+  const existing = cart.find(i => i.id === product.id);
+  if (existing) existing.qty += qty;
+  else cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, qty });
+  saveCart(); updateCartUI(); flashCartBtn();
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  saveCart(); updateCartUI();
+}
+
+function changeCartQty(id, d) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + d);
+  saveCart(); updateCartUI();
+}
+
+function saveCart() { localStorage.setItem('dormbros_cart', JSON.stringify(cart)); }
+
+function cartTotal() { return cart.reduce((s, i) => s + i.price * i.qty, 0); }
+
+function updateCartUI() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  const countEl = document.getElementById('cartCount');
+  countEl.textContent = count;
+  countEl.style.display = count > 0 ? 'flex' : 'none';
+  document.getElementById('cartTotal').textContent = `¥${cartTotal()}`;
+  const itemsEl = document.getElementById('cartItems');
+  if (cart.length === 0) { itemsEl.innerHTML = '<div class="cart-empty">Your cart is empty.</div>'; return; }
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <img src="${item.image}" alt="${item.name}" />
+      <div class="cart-item-info">
+        <p class="cart-item-name">${item.name}</p>
+        <p class="cart-item-price">¥${item.price} each</p>
+        <div class="cart-item-qty">
+          <button onclick="changeCartQty(${item.id}, -1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="changeCartQty(${item.id}, 1)">+</button>
+          <button class="remove-btn" onclick="removeFromCart(${item.id})">✕</button>
+        </div>
+      </div>
+      <span class="cart-item-total">¥${item.price * item.qty}</span>
+    </div>
+  `).join('');
+}
+
+function toggleCart() {
+  const drawer = document.getElementById('cartDrawer');
+  const overlay = document.getElementById('cartOverlay');
+  const open = drawer.classList.contains('open');
+  drawer.classList.toggle('open', !open);
+  overlay.classList.toggle('open', !open);
+}
+
+function flashCartBtn() {
+  const btn = document.querySelector('.cart-btn');
+  btn.classList.add('flash');
+  setTimeout(() => btn.classList.remove('flash'), 600);
+}
+
+// =====================================================
+//  CHECKOUT
+// =====================================================
+function goToCheckout() {
+  if (cart.length === 0) { alert('Your cart is empty!'); return; }
+  toggleCart();
+  document.getElementById('summaryItems').innerHTML = cart.map(i =>
+    `<div class="summary-item"><span>${i.name} × ${i.qty}</span><span>¥${i.price * i.qty}</span></div>`
+  ).join('');
+  document.getElementById('summaryTotal').textContent = `¥${cartTotal()}`;
+  showPage('checkout');
+}
+
+function handleFileUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  uploadedFile = file;
+  document.getElementById('uploadLabel').textContent = `✓ ${file.name}`;
+  document.getElementById('uploadArea').classList.add('uploaded');
+}
+
+async function submitOrder() {
+  const name    = document.getElementById('custName').value.trim();
+  const sid     = document.getElementById('custID').value.trim();
+  const email   = document.getElementById('custEmail').value.trim();
+  const contact = document.getElementById('custContact').value.trim();
+  const room    = document.getElementById('custRoom').value.trim();
+  const notes   = document.getElementById('custNotes').value.trim();
+
+  if (!name || !sid || !email || !contact || !room) {
+    alert('Please fill in all required fields (*).');
+    return;
+  }
+  if (!uploadedFile) {
+    alert('Please upload your payment screenshot.');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Submitting…';
+  btn.disabled = true;
+
+  const orderLines = cart.map(i => `${i.name} x${i.qty} = ¥${i.price * i.qty}`).join('\n');
+
+  const params = {
+    customer_name:    name,
+    student_id:       sid,
+    customer_email:   email,
+    contact:          contact,
+    room:             room,
+    order_details:    orderLines,
+    order_total:      `¥${cartTotal()}`,
+    notes:            notes || 'None',
+    payment_filename: uploadedFile.name,
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+    cart = []; saveCart(); updateCartUI();
+    showPage('success');
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    alert('Submission failed. Please check your EmailJS config or try again.\n\nError: ' + (err.text || err));
+    btn.textContent = 'Submit Order ✓';
+    btn.disabled = false;
+  }
+}
+
+// =====================================================
+//  INIT
+// =====================================================
+renderProducts();
+updateCartUI();
+</script>
+</body>
+</html>
