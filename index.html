@@ -710,7 +710,7 @@ const EMAILJS_PUBLIC_KEY  = 'xQ8U65W7qi3rt85NH';   // e.g. 'abcDEFghiJKL'
 
   Notes: {{notes}}
 
-  Payment proof is attached as: {{payment_filename}}
+  Payment proof is attached as: {{payment_screenshot}}
   -----------------------------------------------------------------------
   NOTE: EmailJS free plan doesn't support file attachments.
   The image will be described by filename. For actual image receiving,
@@ -1071,7 +1071,7 @@ async function submitOrder() {
     order_total:        `¥${cartTotal()}`,
     notes:              notes || 'None',
     payment_screenshot: uploadedImageUrl || 'Upload failed - please contact us',
-    payment_filename:   uploadedFile.name,
+    payment_screenshot:   uploadedFile.name,
   };
 
   try {
