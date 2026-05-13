@@ -1061,7 +1061,6 @@ async function submitOrder() {
   const orderLines = cart.map(i => `${i.name} x${i.qty} = ¥${i.price * i.qty}`).join('\n');
 
   const params = {
-    to_email:           email,
     customer_name:      name,
     student_id:         sid,
     customer_email:     email,
@@ -1071,7 +1070,7 @@ async function submitOrder() {
     order_total:        `¥${cartTotal()}`,
     notes:              notes || 'None',
     payment_screenshot: uploadedImageUrl || 'Upload failed - please contact us',
-    payment_screenshot:   uploadedFile.name,
+    payment_filename:   uploadedFile.name,
   };
 
   try {
