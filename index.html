@@ -335,6 +335,90 @@ img { display: block; width: 100%; object-fit: cover; }
 .footer { text-align: center; padding: 2rem; background: var(--navy-dark); color: rgba(255,255,255,0.5); font-size: 0.85rem; }
 .footer a { color: var(--orange); }
 
+/* ---- MY ORDERS PAGE ---- */
+.orders-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+}
+.orders-header {
+  margin-bottom: 2rem;
+}
+.orders-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 1rem 0 0.5rem;
+}
+.orders-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.order-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  transition: box-shadow 0.2s;
+}
+.order-card:hover {
+  box-shadow: var(--shadow);
+}
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.order-number {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  color: var(--navy);
+  font-size: 0.9rem;
+}
+.order-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.order-items {
+  margin-bottom: 1rem;
+}
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  padding: 4px 0;
+  color: var(--text);
+}
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+  border-top: 2px solid var(--border);
+  font-weight: 800;
+  color: var(--navy);
+}
+.orders-empty {
+  text-align: center;
+  padding: 3rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+}
+@media (max-width: 768px) {
+  .orders-container { padding: 1.5rem; }
+}
+</style>
+
 /* ---- RESPONSIVE ---- */
 @media (max-width: 768px) {
   .hero-inner { flex-direction: column; }
@@ -360,6 +444,7 @@ img { display: block; width: 100%; object-fit: cover; }
     </div>
     <div class="nav-links">
       <a onclick="showPage('home')">Shop</a>
+      <a onclick="showPage('orders')">My Orders</a>
       <a onclick="showPage('home'); setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),100)">About</a>
     </div>
     <button class="cart-btn" onclick="toggleCart()">
@@ -536,6 +621,20 @@ img { display: block; width: 100%; object-fit: cover; }
   </div>
 </div>
 
+<!-- ======== MY ORDERS PAGE ======== -->
+<div id="ordersPage" style="display:none;">
+  <div class="orders-container">
+    <div class="orders-header">
+      <button class="back-btn" onclick="showPage('home')">← Back to Shop</button>
+      <h1 class="orders-title">My Orders</h1>
+      <p class="orders-subtitle">Orders submitted from this device are shown below.</p>
+    </div>
+    <div id="ordersList" class="orders-list">
+      <div class="orders-empty">No orders yet. Start shopping!</div>
+    </div>
+  </div>
+</div>
+
 <!-- EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
@@ -661,11 +760,15 @@ let uploadedFile = null;
 //  PAGE NAVIGATION
 // =====================================================
 function showPage(page) {
-  ['homePage','detailPage','checkoutPage','successPage'].forEach(id => {
+  ['homePage','detailPage','checkoutPage','successPage','ordersPage'].forEach(id => {
     document.getElementById(id).style.display = 'none';
   });
-  const map = { home: 'homePage', detail: 'detailPage', checkout: 'checkoutPage', success: 'successPage' };
+  const map = { home: 'homePage', detail: 'detailPage', checkout: 'checkoutPage', success: 'successPage', orders: 'ordersPage' };
   document.getElementById(map[page]).style.display = 'block';
+  // Load orders when viewing orders page
+  if (page === 'orders') {
+    loadAndDisplayOrders();
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -754,6 +857,50 @@ function changeCartQty(id, d) {
 }
 
 function saveCart() { localStorage.setItem('dormbros_cart', JSON.stringify(cart)); }
+
+// =====================================================
+//  ORDER STORAGE
+// =====================================================
+function saveOrder(orderData) {
+  const orders = JSON.parse(localStorage.getItem('dormbros_orders') || '[]');
+  orders.unshift(orderData); // Add newest first
+  localStorage.setItem('dormbros_orders', JSON.stringify(orders));
+}
+
+function loadAndDisplayOrders() {
+  const orders = JSON.parse(localStorage.getItem('dormbros_orders') || '[]');
+  const ordersList = document.getElementById('ordersList');
+  
+  if (orders.length === 0) {
+    ordersList.innerHTML = '<div class="orders-empty">📦 No orders yet. Start shopping!</div>';
+    return;
+  }
+  
+  ordersList.innerHTML = orders.map(order => `
+    <div class="order-card">
+      <div class="order-header">
+        <span class="order-number">ORDER #${order.orderId}</span>
+        <span class="order-date">${order.date}</span>
+      </div>
+      <div class="order-items">
+        ${order.items.map(item => `
+          <div class="order-item">
+            <span>${item.name} × ${item.qty}</span>
+            <span>¥${item.price * item.qty}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="order-total">
+        <span>Total Paid</span>
+        <span>¥${order.total}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function generateOrderId() {
+  return 'DB-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+}
 
 function cartTotal() { return cart.reduce((s, i) => s + i.price * i.qty, 0); }
 
@@ -855,6 +1002,17 @@ async function submitOrder() {
 
   try {
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
+  
+    // Save order to localStorage
+    const orderData = {
+      orderId: generateOrderId(),
+      date: new Date().toLocaleString(),
+      items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
+      total: cartTotal(),
+      customerName: name
+    };
+    saveOrder(orderData);
+  
     cart = []; saveCart(); updateCartUI();
     showPage('success');
   } catch (err) {
