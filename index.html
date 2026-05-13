@@ -431,6 +431,66 @@ img { display: block; width: 100%; object-fit: cover; }
   .hero-bg-text { display: none; }
 }
 
+/* ---- MOBILE BOTTOM NAV ---- */
+.bottom-nav {
+  display: none;
+}
+@media (max-width: 768px) {
+  body { padding-bottom: 68px; }
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 68px;
+    background: var(--navy-dark);
+    border-top: 2px solid rgba(255,255,255,0.1);
+    z-index: 300;
+    box-shadow: 0 -4px 20px rgba(10,25,60,0.3);
+  }
+  .bnav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s;
+    position: relative;
+    padding: 0;
+  }
+  .bnav-btn:hover,
+  .bnav-btn.active { color: #fff; }
+  .bnav-btn.active .bnav-icon-wrap {
+    background: var(--orange);
+    border-radius: 10px;
+    padding: 3px 14px;
+  }
+  .bnav-icon { font-size: 1.3rem; line-height: 1; }
+  .bnav-cart-dot {
+    position: absolute;
+    top: 5px;
+    right: calc(50% - 22px);
+    background: var(--orange);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    min-width: 17px;
+    height: 17px;
+    border-radius: 9px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -453,6 +513,25 @@ img { display: block; width: 100%; object-fit: cover; }
     </button>
   </div>
 </nav>
+
+<!-- BOTTOM NAV (mobile only) -->
+<div class="bottom-nav">
+  <button class="bnav-btn active" id="bnav-shop" onclick="showPage('home')">
+    <div class="bnav-icon-wrap"><span class="bnav-icon">🏠</span></div>
+    Shop
+  </button>
+  <button class="bnav-btn" id="bnav-orders" onclick="showPage('orders')">
+    <div class="bnav-icon-wrap"><span class="bnav-icon">📦</span></div>
+    My Orders
+  </button>
+  <button class="bnav-btn" onclick="toggleCart()">
+    <div class="bnav-icon-wrap">
+      <span class="bnav-icon">🛒</span>
+      <span class="bnav-cart-dot" id="bnavDot">0</span>
+    </div>
+    Cart
+  </button>
+</div>
 
 <!-- CART DRAWER -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
@@ -808,6 +887,7 @@ function showPage(page) {
   });
   const map = { home: 'homePage', detail: 'detailPage', checkout: 'checkoutPage', success: 'successPage', orders: 'ordersPage' };
   document.getElementById(map[page]).style.display = 'block';
+  updateActiveBottomNav(page);
   // Load orders when viewing orders page
   if (page === 'orders') {
     loadAndDisplayOrders();
@@ -952,6 +1032,8 @@ function updateCartUI() {
   const countEl = document.getElementById('cartCount');
   countEl.textContent = count;
   countEl.style.display = count > 0 ? 'flex' : 'none';
+  const dot = document.getElementById('bnavDot');
+  if (dot) { dot.textContent = count; dot.style.display = count > 0 ? 'flex' : 'none'; }
   document.getElementById('cartTotal').textContent = `¥${cartTotal()}`;
   const itemsEl = document.getElementById('cartItems');
   if (cart.length === 0) { itemsEl.innerHTML = '<div class="cart-empty">Your cart is empty.</div>'; return; }
