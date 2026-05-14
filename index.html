@@ -3,43 +3,123 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DormBros — University Essentials</title>
+<title>DormBros — Dorm Essentials for CUHKSZ Students</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet" />
 <style>
 /* =============================================
-   DORMBROS — Navy & Orange Brand Theme
+   DORMBROS — Teal & Coral Brand Theme
+   PRIORITY 10: Updated color scheme (Fresh & Energetic)
    ============================================= */
 :root {
-  --navy:        #1B3A6B;
-  --navy-dark:   #0f2340;
-  --navy-light:  #2a5298;
-  --navy-pale:   #eef2f9;
-  --orange:      #E85D04;
-  --orange-light:#ff7c2a;
-  --orange-pale: #fff3ed;
+  --teal:        #007A7A;
+  --teal-dark:   #005555;
+  --teal-light:  #009999;
+  --teal-pale:   #e8f5f5;
+  --coral:       #FF6B47;
+  --coral-light: #ff8a6b;
+  --coral-pale:  #fff2ee;
+  --sage:        #6B8F71;
+  --cream:       #FFF8F0;
   --white:       #ffffff;
-  --off-white:   #f7f8fc;
-  --text:        #0f1c2e;
-  --text-muted:  #5b6a80;
-  --border:      #dde3ef;
+  --off-white:   #f6f9f9;
+  --text:        #0d1f1f;
+  --text-muted:  #4a6060;
+  --border:      #d4e8e8;
   --radius:      14px;
   --radius-sm:   9px;
-  --shadow:      0 4px 24px rgba(27,58,107,0.10);
-  --shadow-lg:   0 8px 40px rgba(27,58,107,0.16);
+  --shadow:      0 4px 24px rgba(0,122,122,0.10);
+  --shadow-lg:   0 8px 40px rgba(0,122,122,0.16);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); min-height: 100vh; }
-h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--off-white); color: var(--text); min-height: 100vh; font-size: 16px; }
+h1,h2,h3,h4 { font-family: 'Bricolage Grotesque', sans-serif; }
 a { text-decoration: none; color: inherit; }
 img { display: block; width: 100%; object-fit: cover; }
+
+/* =============================================
+   PRIORITY 2: FLOATING CONTACT BUTTONS
+   ============================================= */
+.floating-contacts {
+  position: fixed;
+  bottom: 90px; /* Above mobile nav */
+  right: 18px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.float-btn {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  position: relative;
+}
+.float-btn:hover { transform: scale(1.1); box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
+.float-btn-wa { background: #25D366; color: white; }
+.float-btn-wc { background: #07C160; color: white; }
+.float-tooltip {
+  position: absolute;
+  right: 60px;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  font-size: 0.72rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.float-btn:hover .float-tooltip { opacity: 1; }
+@media (min-width: 769px) {
+  .floating-contacts { bottom: 24px; }
+}
+
+/* =============================================
+   PRIORITY 1: CURRENCY DISPLAY
+   ============================================= */
+.price-idr {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--teal);
+}
+.price-cny {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.exchange-banner {
+  background: var(--teal-pale);
+  border-bottom: 1px solid var(--border);
+  padding: 6px 2rem;
+  text-align: right;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.exchange-banner span { font-weight: 700; color: var(--teal); }
+.exchange-dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
 /* ---- NAVBAR ---- */
 .navbar {
   position: sticky; top: 0; z-index: 100;
-  background: var(--navy);
-  box-shadow: 0 2px 16px rgba(15,35,64,0.25);
+  background: var(--teal-dark);
+  box-shadow: 0 2px 16px rgba(0,85,85,0.25);
 }
 .nav-inner {
   max-width: 1200px; margin: 0 auto; padding: 0 2rem;
@@ -47,16 +127,16 @@ img { display: block; width: 100%; object-fit: cover; }
 }
 .logo {
   display: flex; align-items: center; gap: 10px;
-  font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800;
+  font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; font-weight: 800;
   color: var(--white); letter-spacing: -0.5px; cursor: pointer;
 }
 .logo-icon {
   width: 38px; height: 38px;
   background: var(--white); border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; flex-shrink: 0;
+  font-size: 1.1rem; flex-shrink: 0; overflow: hidden;
 }
-.logo span { color: var(--orange); }
+.logo span { color: var(--coral); }
 .nav-links { display: flex; gap: 1.5rem; flex: 1; }
 .nav-links a {
   font-size: 0.9rem; font-weight: 500; color: rgba(255,255,255,0.7);
@@ -66,22 +146,18 @@ img { display: block; width: 100%; object-fit: cover; }
 .cart-btn {
   display: flex; align-items: center; gap: 8px;
   padding: 9px 20px;
-  background: var(--orange); color: white;
+  background: var(--coral); color: white;
   border: none; border-radius: var(--radius-sm);
-  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
   cursor: pointer; position: relative;
   transition: background 0.2s, transform 0.15s;
 }
-.cart-btn:hover { background: var(--orange-light); }
+.cart-btn:hover { background: var(--coral-light); }
 .cart-btn.flash { animation: flashPulse 0.5s ease; }
-@keyframes flashPulse {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.1); background: #fff; color: var(--orange); }
-  100% { transform: scale(1); }
-}
+@keyframes flashPulse { 0%{transform:scale(1)} 40%{transform:scale(1.1);background:#fff;color:var(--coral)} 100%{transform:scale(1)} }
 .cart-count {
   position: absolute; top: -7px; right: -7px;
-  background: var(--white); color: var(--orange);
+  background: var(--white); color: var(--coral);
   font-size: 11px; font-weight: 800;
   width: 20px; height: 20px; border-radius: 50%;
   display: none; align-items: center; justify-content: center;
@@ -89,7 +165,7 @@ img { display: block; width: 100%; object-fit: cover; }
 
 /* ---- CART DRAWER ---- */
 .cart-overlay {
-  position: fixed; inset: 0; background: rgba(10,25,50,0.5);
+  position: fixed; inset: 0; background: rgba(0,30,30,0.5);
   z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s;
 }
 .cart-overlay.open { opacity: 1; pointer-events: all; }
@@ -98,13 +174,13 @@ img { display: block; width: 100%; object-fit: cover; }
   height: 100vh; background: var(--white); z-index: 201;
   display: flex; flex-direction: column;
   transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: -8px 0 40px rgba(27,58,107,0.2);
+  box-shadow: -8px 0 40px rgba(0,122,122,0.2);
 }
 .cart-drawer.open { transform: translateX(0); }
 .cart-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
-  background: var(--navy);
+  background: var(--teal-dark);
 }
 .cart-header h2 { font-size: 1.1rem; font-weight: 700; color: white; }
 .close-cart {
@@ -122,41 +198,44 @@ img { display: block; width: 100%; object-fit: cover; }
 .cart-item img { width: 68px; height: 68px; border-radius: var(--radius-sm); object-fit: cover; flex-shrink: 0; border: 1px solid var(--border); }
 .cart-item-info { flex: 1; min-width: 0; }
 .cart-item-name { font-size: 0.88rem; font-weight: 600; margin-bottom: 2px; }
+.cart-item-color { font-size: 0.75rem; color: var(--teal); font-weight: 600; margin-bottom: 2px; }
 .cart-item-price { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; }
 .cart-item-qty { display: flex; align-items: center; gap: 6px; }
 .cart-item-qty button {
   width: 28px; height: 28px; border: 1px solid var(--border);
   background: var(--off-white); border-radius: 6px;
-  font-size: 1rem; cursor: pointer; color: var(--navy); transition: background 0.15s;
+  font-size: 1rem; cursor: pointer; color: var(--teal); transition: background 0.15s;
 }
-.cart-item-qty button:hover { background: var(--navy-pale); }
+.cart-item-qty button:hover { background: var(--teal-pale); }
 .cart-item-qty span { font-size: 0.9rem; font-weight: 700; min-width: 22px; text-align: center; }
 .remove-btn { color: #c0392b !important; font-size: 0.78rem !important; border-color: #f5c0c0 !important; }
-.cart-item-total { font-size: 0.95rem; font-weight: 800; color: var(--navy); flex-shrink: 0; }
+.cart-item-total { font-size: 0.95rem; font-weight: 800; color: var(--teal); flex-shrink: 0; text-align: right; }
+.cart-item-total small { display: block; font-size: 0.68rem; color: var(--text-muted); font-weight: 400; }
 .cart-footer { padding: 1.25rem 1.5rem; border-top: 2px solid var(--border); background: var(--off-white); }
-.cart-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.05rem; margin-bottom: 1rem; color: var(--navy); }
+.cart-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.05rem; margin-bottom: 0.25rem; color: var(--teal); }
+.cart-total-cny { font-size: 0.78rem; color: var(--text-muted); text-align: right; margin-bottom: 0.75rem; }
 .checkout-btn {
   width: 100%; padding: 14px;
-  background: var(--orange); color: white;
+  background: var(--coral); color: white;
   border: none; border-radius: var(--radius-sm);
-  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+  font-family: 'Bricolage Grotesque', sans-serif; font-size: 1rem; font-weight: 700;
   cursor: pointer; transition: background 0.2s, transform 0.15s;
 }
-.checkout-btn:hover { background: var(--orange-light); transform: translateY(-1px); }
+.checkout-btn:hover { background: var(--coral-light); transform: translateY(-1px); }
 
 /* ---- HERO ---- */
 .hero {
   position: relative; overflow: hidden;
-  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, var(--navy-light) 100%);
+  background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 60%, var(--teal-light) 100%);
   min-height: 500px; display: flex; align-items: center; padding: 4rem 2rem;
 }
 .hero::before {
   content: '';
   position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 .hero-bg-text {
-  position: absolute; font-family: 'Syne', sans-serif; font-weight: 800;
+  position: absolute; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
   font-size: clamp(100px, 18vw, 200px); color: rgba(255,255,255,0.04);
   top: 50%; right: -10px; transform: translateY(-50%);
   user-select: none; letter-spacing: -8px;
@@ -165,19 +244,26 @@ img { display: block; width: 100%; object-fit: cover; }
 .hero-content { flex: 1; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(232,93,4,0.2); border: 1px solid var(--orange);
-  color: #ffb088; font-size: 0.78rem; font-weight: 600;
+  background: rgba(255,107,71,0.2); border: 1px solid var(--coral);
+  color: #ffb8a0; font-size: 0.78rem; font-weight: 600;
   letter-spacing: 0.08em; text-transform: uppercase;
   padding: 6px 14px; border-radius: 100px; margin-bottom: 1.5rem;
 }
 .hero-content h1 {
   font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 800;
-  color: var(--white); line-height: 1.15; margin-bottom: 1rem;
+  color: var(--white); line-height: 1.15; margin-bottom: 0.75rem;
 }
-.hero-content h1 em { font-style: normal; color: var(--orange); }
-.hero-content p { color: rgba(255,255,255,0.72); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem; }
+.hero-content h1 em { font-style: normal; color: var(--coral); }
+/* PRIORITY 3: Indonesian tagline in hero */
+.hero-tagline-id {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-bottom: 0.75rem;
+}
+.hero-content > p { color: rgba(255,255,255,0.72); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem; }
 .hero-stats { display: flex; gap: 2rem; margin-bottom: 2rem; }
-.hero-stat strong { display: block; font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--orange); }
+.hero-stat strong { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--coral); }
 .hero-stat span { font-size: 0.8rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.05em; }
 .hero-logo-wrap {
   flex-shrink: 0; width: 280px;
@@ -187,23 +273,42 @@ img { display: block; width: 100%; object-fit: cover; }
 }
 .hero-logo-wrap img { width: 100%; height: auto; object-fit: contain; border-radius: 10px; }
 .deco-circle { position: absolute; border-radius: 50%; opacity: 0.08; }
-.c1 { width: 350px; height: 350px; background: var(--orange); top: -100px; left: -100px; }
+.c1 { width: 350px; height: 350px; background: var(--coral); top: -100px; left: -100px; }
 .c2 { width: 180px; height: 180px; background: white; bottom: -50px; right: 320px; }
+
+/* =============================================
+   PRIORITY 9: TRUST BADGES
+   ============================================= */
+.trust-bar {
+  background: var(--white);
+  border-bottom: 1.5px solid var(--border);
+  padding: 0.75rem 2rem;
+}
+.trust-bar-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  gap: 2rem; flex-wrap: wrap;
+}
+.trust-badge {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; font-weight: 600; color: var(--text-muted);
+}
+.trust-badge .tb-icon { font-size: 1rem; }
 
 /* ---- BUTTONS ---- */
 .btn-primary {
   display: inline-block; padding: 14px 32px;
-  background: var(--orange); color: white;
+  background: var(--coral); color: white;
   border: none; border-radius: var(--radius-sm);
-  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+  font-family: 'Bricolage Grotesque', sans-serif; font-size: 1rem; font-weight: 700;
   cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
 }
-.btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,93,4,0.4); }
+.btn-primary:hover { background: var(--coral-light); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,71,0.4); }
 
 /* ---- PRODUCTS ---- */
 .products-section { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
 .section-header { text-align: center; margin-bottom: 3rem; }
-.section-header h2 { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+.section-header h2 { font-size: 2rem; font-weight: 800; color: var(--teal); margin-bottom: 0.5rem; }
 .section-header p { color: var(--text-muted); font-size: 1rem; }
 .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 1.5rem; }
 
@@ -212,71 +317,194 @@ img { display: block; width: 100%; object-fit: cover; }
   border: 1.5px solid var(--border); overflow: hidden; cursor: pointer;
   transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
 }
-.product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--navy-light); }
-.product-img-wrap { position: relative; height: 195px; overflow: hidden; background: var(--navy-pale); }
+.product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--teal-light); }
+.product-img-wrap { position: relative; height: 195px; overflow: hidden; background: var(--teal-pale); }
 .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
 .product-card:hover .product-img-wrap img { transform: scale(1.06); }
 .product-badge {
   position: absolute; top: 12px; left: 12px;
-  background: var(--orange); color: white;
+  background: var(--coral); color: white;
   font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.06em; padding: 4px 10px; border-radius: 100px;
 }
+/* PRIORITY 7: Early bird badge */
+.early-bird-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: #f59e0b; color: white;
+  font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; padding: 4px 8px; border-radius: 6px;
+}
 .product-info { padding: 1.1rem; }
-.product-cat { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--orange); }
-.product-info h3 { font-size: 1rem; font-weight: 700; margin: 4px 0 6px; color: var(--text); }
+.product-cat { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--coral); }
+.product-info h3 { font-size: 1rem; font-weight: 700; margin: 4px 0 2px; color: var(--text); }
+/* PRIORITY 3: Indonesian sub-name */
+.product-name-id { font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-bottom: 6px; }
 .product-short { font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1rem; }
 .product-footer { display: flex; align-items: center; justify-content: space-between; }
-.product-price { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--navy); }
+.product-price-wrap { display: flex; flex-direction: column; }
+.product-price { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--teal); }
+.product-price-orig { font-size: 0.78rem; color: var(--text-muted); text-decoration: line-through; }
+.product-price-cny-small { font-size: 0.7rem; color: var(--text-muted); }
 .add-btn {
-  background: var(--navy); color: white; border: none;
+  background: var(--teal); color: white; border: none;
   border-radius: var(--radius-sm); padding: 7px 14px;
   font-size: 0.83rem; font-weight: 600; cursor: pointer; transition: background 0.2s;
 }
-.add-btn:hover { background: var(--orange); }
+.add-btn:hover { background: var(--coral); }
 
 /* ---- DETAIL PAGE ---- */
 .detail-container { max-width: 1100px; margin: 0 auto; padding: 2rem 2rem 4rem; }
 .back-btn {
-  background: none; border: 1.5px solid var(--border); color: var(--navy);
+  background: none; border: 1.5px solid var(--border); color: var(--teal);
   padding: 8px 18px; border-radius: var(--radius-sm);
-  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; font-weight: 600;
   cursor: pointer; margin-bottom: 2rem; display: inline-block; transition: background 0.2s;
 }
-.back-btn:hover { background: var(--navy-pale); }
+.back-btn:hover { background: var(--teal-pale); }
 .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
 .detail-image-wrap {
   border-radius: var(--radius); overflow: hidden; aspect-ratio: 1;
-  background: var(--navy-pale); border: 1.5px solid var(--border);
+  background: var(--teal-pale); border: 1.5px solid var(--border);
 }
 .detail-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
 .detail-badge {
-  display: inline-block; background: var(--orange-pale);
-  border: 1px solid var(--orange); color: var(--orange);
+  display: inline-block; background: var(--coral-pale);
+  border: 1px solid var(--coral); color: var(--coral);
   font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.06em; padding: 4px 12px; border-radius: 100px; margin-bottom: 0.75rem;
 }
-.detail-info h1 { font-size: 1.9rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.2; }
-.detail-price { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--orange); margin-bottom: 1rem; }
-.detail-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem; }
-.detail-specs { background: var(--navy-pale); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.5rem; }
-.spec-item { font-size: 0.875rem; color: var(--navy-dark); padding: 5px 0; border-bottom: 1px solid var(--border); }
+.detail-info h1 { font-size: 1.9rem; font-weight: 800; color: var(--teal); margin-bottom: 4px; line-height: 1.2; }
+.detail-name-id { font-size: 0.9rem; color: var(--text-muted); font-style: italic; margin-bottom: 0.75rem; }
+.detail-price-wrap { margin-bottom: 1rem; }
+.detail-price-idr { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.9rem; font-weight: 800; color: var(--coral); }
+.detail-price-cny { font-size: 0.9rem; color: var(--text-muted); margin-top: 2px; }
+.detail-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.5rem; }
+.detail-desc-id { color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; font-style: italic; margin-bottom: 1.25rem; border-left: 3px solid var(--teal-pale); padding-left: 10px; }
+.detail-specs { background: var(--teal-pale); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1.5rem; }
+.spec-item { font-size: 0.875rem; color: var(--teal-dark); padding: 5px 0; border-bottom: 1px solid var(--border); }
 .spec-item:last-child { border-bottom: none; }
 .detail-qty { margin-bottom: 1.25rem; }
 .detail-qty label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
 .qty-control { display: flex; align-items: center; width: fit-content; border: 1.5px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
-.qty-control button { width: 40px; height: 40px; background: var(--off-white); border: none; font-size: 1.2rem; cursor: pointer; color: var(--navy); transition: background 0.15s; }
-.qty-control button:hover { background: var(--navy-pale); }
+.qty-control button { width: 40px; height: 40px; background: var(--off-white); border: none; font-size: 1.2rem; cursor: pointer; color: var(--teal); transition: background 0.15s; }
+.qty-control button:hover { background: var(--teal-pale); }
 .qty-control span { width: 48px; text-align: center; font-weight: 700; font-size: 1rem; border-left: 1px solid var(--border); border-right: 1px solid var(--border); height: 40px; line-height: 40px; }
 .add-cart-btn { width: 100%; text-align: center; margin-bottom: 1rem; padding: 16px; font-size: 1rem; }
 .detail-note { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
 
+/* PRIORITY 4: COLOR OPTIONS */
+.color-option-wrap { margin-bottom: 1.25rem; }
+.color-option-wrap label { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+.color-swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+.color-swatch {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 2.5px solid transparent;
+  cursor: pointer; transition: transform 0.15s, border-color 0.15s;
+  position: relative;
+}
+.color-swatch:hover { transform: scale(1.15); }
+.color-swatch.selected { border-color: var(--teal); box-shadow: 0 0 0 2px var(--teal-pale); }
+.color-swatch[data-color="White"] { background: #f0ede8; border: 2.5px solid #ccc; }
+.color-swatch[data-color="Grey"] { background: #9ea3a3; }
+.color-swatch[data-color="Navy"] { background: #1B3A6B; }
+.color-swatch[data-color="Pink"] { background: #f4a7b9; }
+.color-label { font-size: 0.82rem; color: var(--teal); font-weight: 600; margin-top: 6px; }
+
+/* =============================================
+   PRIORITY 6: DORM INFORMATION SECTION
+   ============================================= */
+.dorm-section {
+  background: var(--cream);
+  border-top: 1.5px solid var(--border);
+  padding: 4rem 2rem;
+}
+.dorm-inner { max-width: 1200px; margin: 0 auto; }
+.dorm-section .section-header { margin-bottom: 2.5rem; }
+.dorm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1.25rem;
+}
+.dorm-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  transition: box-shadow 0.2s;
+}
+.dorm-card:hover { box-shadow: var(--shadow); }
+.dorm-card-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 0.75rem;
+}
+.dorm-letter {
+  width: 42px; height: 42px;
+  background: var(--teal); color: white;
+  border-radius: 10px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 1.3rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.dorm-name { font-size: 0.95rem; font-weight: 700; color: var(--teal-dark); }
+.dorm-sub { font-size: 0.75rem; color: var(--text-muted); }
+.dorm-stat {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; color: var(--text-muted);
+  padding: 3px 0;
+}
+.dorm-stat .ds-icon { font-size: 0.9rem; }
+.dorm-tip {
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--teal-pale);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: var(--teal-dark);
+  line-height: 1.4;
+}
+
+/* =============================================
+   PRIORITY 5: FAQ SECTION
+   ============================================= */
+.faq-section {
+  max-width: 800px; margin: 0 auto; padding: 4rem 2rem;
+}
+.faq-item {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: var(--white);
+}
+.faq-question {
+  width: 100%; background: none; border: none;
+  padding: 1rem 1.25rem;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem; font-weight: 700; color: var(--teal-dark);
+  cursor: pointer; text-align: left;
+  transition: background 0.15s;
+}
+.faq-question:hover { background: var(--teal-pale); }
+.faq-icon { font-size: 1.1rem; color: var(--teal); transition: transform 0.25s; flex-shrink: 0; margin-left: 12px; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.25s;
+  padding: 0 1.25rem;
+  font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;
+}
+.faq-answer.open { max-height: 500px; padding: 0.75rem 1.25rem 1.25rem; }
+.faq-answer p { margin-bottom: 0.4rem; }
+.faq-answer .faq-id { font-style: italic; color: var(--sage); }
+
 /* ---- ABOUT ---- */
-.about-section { background: var(--navy); border-top: 1.5px solid var(--border); padding: 5rem 2rem; }
+.about-section { background: var(--teal-dark); border-top: 1.5px solid var(--border); padding: 5rem 2rem; }
 .about-inner { max-width: 780px; margin: 0 auto; text-align: center; }
 .about-tag {
-  display: inline-block; background: rgba(232,93,4,0.15);
-  border: 1px solid var(--orange); color: var(--orange);
+  display: inline-block; background: rgba(255,107,71,0.15);
+  border: 1px solid var(--coral); color: var(--coral);
   font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.1em; padding: 6px 16px; border-radius: 100px; margin-bottom: 1rem;
 }
@@ -284,139 +512,137 @@ img { display: block; width: 100%; object-fit: cover; }
 .about-inner p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.75; margin-bottom: 2.5rem; }
 .about-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; text-align: left; }
 .step { background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 1.25rem; }
-.step-num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--orange); margin-bottom: 0.5rem; }
+.step-num { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--coral); margin-bottom: 0.5rem; }
 .step strong { display: block; font-size: 0.9rem; color: white; margin-bottom: 4px; }
 .step div { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
 
+/* =============================================
+   PRIORITY 9: PARENT SECTION
+   ============================================= */
+.parent-section {
+  background: #fffdf5;
+  border-top: 1.5px solid #f0e8d0;
+  padding: 4rem 2rem;
+}
+.parent-inner { max-width: 800px; margin: 0 auto; }
+.parent-tag {
+  display: inline-block;
+  background: #fff3cd; border: 1px solid #f59e0b; color: #92400e;
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; padding: 5px 14px; border-radius: 100px; margin-bottom: 1rem;
+}
+.parent-inner h2 { font-size: 1.75rem; font-weight: 800; color: #92400e; margin-bottom: 0.75rem; }
+.parent-inner > p { font-size: 1rem; line-height: 1.7; color: #5a3e1b; margin-bottom: 2rem; }
+.parent-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+.parent-step {
+  background: white; border: 1.5px solid #f0e8d0; border-radius: var(--radius); padding: 1.25rem;
+}
+.parent-step .ps-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+.parent-step strong { display: block; font-size: 0.9rem; color: #7c3a00; margin-bottom: 4px; }
+.parent-step p { font-size: 0.82rem; color: #7a5a3a; line-height: 1.5; }
+.parent-contact {
+  background: white; border: 1.5px solid #f0e8d0; border-radius: var(--radius);
+  padding: 1.25rem; font-size: 0.9rem; color: #5a3e1b; line-height: 1.7;
+}
+.parent-contact strong { color: #7c3a00; }
+
 /* ---- CHECKOUT ---- */
 .checkout-container { max-width: 1100px; margin: 0 auto; padding: 2rem 2rem 5rem; }
-.checkout-title { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 2rem; }
+.checkout-title { font-size: 2rem; font-weight: 800; color: var(--teal); margin-bottom: 2rem; }
 .checkout-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 2.5rem; align-items: start; }
 .checkout-summary { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.5rem; position: sticky; top: 80px; }
-.checkout-summary h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+.checkout-summary h3 { font-size: 1.05rem; font-weight: 700; color: var(--teal); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
 .summary-item { display: flex; justify-content: space-between; font-size: 0.88rem; padding: 6px 0; color: var(--text-muted); border-bottom: 1px dashed var(--border); }
-.summary-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem; color: var(--navy); margin-top: 1rem; padding-top: 0.75rem; border-top: 2px solid var(--navy); }
-.payment-box { margin-top: 1.5rem; background: var(--orange-pale); border: 1.5px solid #f4a07a; border-radius: var(--radius-sm); padding: 1.1rem; }
-.payment-box h4 { font-size: 0.9rem; font-weight: 700; color: var(--orange); margin-bottom: 0.5rem; }
+.summary-item-name { flex: 1; padding-right: 8px; }
+.summary-total { display: flex; justify-content: space-between; font-weight: 800; font-size: 1.05rem; color: var(--teal); margin-top: 0.75rem; padding-top: 0.75rem; border-top: 2px solid var(--teal); }
+.summary-total-cny { font-size: 0.78rem; color: var(--text-muted); text-align: right; margin-top: 2px; }
+
+/* PRIORITY 3: Bilingual payment instructions */
+.payment-box { margin-top: 1.5rem; background: var(--coral-pale); border: 1.5px solid #f4a07a; border-radius: var(--radius-sm); padding: 1.1rem; }
+.payment-box h4 { font-size: 0.9rem; font-weight: 700; color: var(--coral); margin-bottom: 0.5rem; }
 .payment-box p { font-size: 0.84rem; color: #7a3500; margin-bottom: 0.5rem; }
+.payment-box .payment-id { font-size: 0.8rem; color: #c45a00; font-style: italic; }
 .payment-detail { background: white; border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-size: 0.88rem; margin: 0.5rem 0; }
-.highlight { font-family: monospace; font-weight: 800; color: var(--navy); font-size: 1rem; }
+.highlight { font-family: monospace; font-weight: 800; color: var(--teal); font-size: 1rem; }
 .small-note { font-size: 0.78rem !important; opacity: 0.75; }
-.checkout-form-wrap h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 1.25rem; }
+.checkout-form-wrap h3 { font-size: 1.05rem; font-weight: 700; color: var(--teal); margin-bottom: 1.25rem; }
 .form-group { margin-bottom: 1.1rem; }
 .form-group label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
-.form-group input, .form-group textarea {
+.form-group input, .form-group textarea, .form-group select {
   width: 100%; padding: 11px 14px;
   border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-  font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; color: var(--text);
   background: var(--white); transition: border-color 0.2s; outline: none;
 }
-.form-group input:focus, .form-group textarea:focus { border-color: var(--navy); }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--teal); }
 .upload-area {
   border: 2px dashed var(--border); border-radius: var(--radius-sm);
   padding: 2rem 1rem; text-align: center; cursor: pointer;
   transition: border-color 0.2s, background 0.2s; background: var(--off-white);
 }
-.upload-area:hover { border-color: var(--navy-light); background: var(--navy-pale); }
+.upload-area:hover { border-color: var(--teal-light); background: var(--teal-pale); }
 .upload-area.uploaded { border-color: #22a06b; background: #edfcf4; }
-.upload-area svg { margin: 0 auto 0.75rem; color: var(--navy-light); }
-.upload-area p { font-size: 0.9rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.upload-area svg { margin: 0 auto 0.75rem; color: var(--teal-light); }
+.upload-area p { font-size: 0.9rem; font-weight: 600; color: var(--teal); margin-bottom: 4px; }
 .upload-area span { font-size: 0.78rem; color: var(--text-muted); }
 .submit-btn { width: 100%; padding: 16px; font-size: 1.05rem; margin-top: 0.5rem; }
 .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
+/* =============================================
+   PRIORITY 8: REFERRAL SECTION (Success Page)
+   ============================================= */
+.referral-box {
+  margin-top: 2rem;
+  background: var(--teal-pale);
+  border: 1.5px solid var(--teal);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: left;
+}
+.referral-box h3 { font-size: 1rem; font-weight: 800; color: var(--teal-dark); margin-bottom: 0.4rem; }
+.referral-box p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+.referral-link-wrap {
+  display: flex; gap: 8px; align-items: center;
+}
+.referral-link-input {
+  flex: 1; padding: 10px 12px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-family: monospace; font-size: 0.82rem; color: var(--teal-dark);
+  background: white; outline: none;
+}
+.copy-link-btn {
+  padding: 10px 16px;
+  background: var(--teal); color: white; border: none;
+  border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 700;
+  cursor: pointer; transition: background 0.2s; white-space: nowrap;
+}
+.copy-link-btn:hover { background: var(--teal-dark); }
+
 /* ---- SUCCESS ---- */
-.success-container { max-width: 480px; margin: 6rem auto; text-align: center; padding: 2rem; }
-.success-icon { width: 80px; height: 80px; background: var(--navy); color: white; font-size: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
-.success-container h1 { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem; }
-.success-container p { color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
+.success-container { max-width: 520px; margin: 6rem auto; text-align: center; padding: 2rem; }
+.success-icon { width: 80px; height: 80px; background: var(--teal); color: white; font-size: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+.success-container h1 { font-size: 2rem; font-weight: 800; color: var(--teal); margin-bottom: 1rem; }
+.success-container > p { color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
 
 /* ---- FOOTER ---- */
-.footer { text-align: center; padding: 2rem; background: var(--navy-dark); color: rgba(255,255,255,0.5); font-size: 0.85rem; }
-.footer a { color: var(--orange); }
+.footer { text-align: center; padding: 2rem; background: var(--teal-dark); color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+.footer a { color: var(--coral); }
 
 /* ---- MY ORDERS PAGE ---- */
-.orders-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem 2rem 4rem;
-}
-.orders-header {
-  margin-bottom: 2rem;
-}
-.orders-title {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--navy);
-  margin: 1rem 0 0.5rem;
-}
-.orders-subtitle {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-.orders-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-.order-card {
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  transition: box-shadow 0.2s;
-}
-.order-card:hover {
-  box-shadow: var(--shadow);
-}
-.order-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border);
-}
-.order-number {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  color: var(--navy);
-  font-size: 0.9rem;
-}
-.order-date {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-.order-items {
-  margin-bottom: 1rem;
-}
-.order-item {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.88rem;
-  padding: 4px 0;
-  color: var(--text);
-}
-.order-total {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 0.75rem;
-  margin-top: 0.5rem;
-  border-top: 2px solid var(--border);
-  font-weight: 800;
-  color: var(--navy);
-}
-.orders-empty {
-  text-align: center;
-  padding: 3rem;
-  background: var(--white);
-  border-radius: var(--radius);
-  border: 1.5px solid var(--border);
-  color: var(--text-muted);
-}
-@media (max-width: 768px) {
-  .orders-container { padding: 1.5rem; }
-}
+.orders-container { max-width: 800px; margin: 0 auto; padding: 2rem 2rem 4rem; }
+.orders-header { margin-bottom: 2rem; }
+.orders-title { font-size: 2rem; font-weight: 800; color: var(--teal); margin: 1rem 0 0.5rem; }
+.orders-subtitle { color: var(--text-muted); font-size: 0.9rem; }
+.orders-list { display: flex; flex-direction: column; gap: 1.5rem; }
+.order-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem; transition: box-shadow 0.2s; }
+.order-card:hover { box-shadow: var(--shadow); }
+.order-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+.order-number { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; color: var(--teal); font-size: 0.9rem; }
+.order-date { font-size: 0.8rem; color: var(--text-muted); }
+.order-items { margin-bottom: 1rem; }
+.order-item { display: flex; justify-content: space-between; font-size: 0.88rem; padding: 4px 0; color: var(--text); }
+.order-total { display: flex; justify-content: space-between; padding-top: 0.75rem; margin-top: 0.5rem; border-top: 2px solid var(--border); font-weight: 800; color: var(--teal); }
+.orders-empty { text-align: center; padding: 3rem; background: var(--white); border-radius: var(--radius); border: 1.5px solid var(--border); color: var(--text-muted); }
 
 /* ---- RESPONSIVE ---- */
 @media (max-width: 768px) {
@@ -429,83 +655,83 @@ img { display: block; width: 100%; object-fit: cover; }
   .nav-links { display: none; }
   .checkout-summary { position: static; }
   .hero-bg-text { display: none; }
+  .trust-bar-inner { gap: 1rem; }
+  .dorm-grid { grid-template-columns: 1fr 1fr; }
+  .parent-steps { grid-template-columns: 1fr 1fr; }
+  .orders-container { padding: 1.5rem; }
+  body { font-size: 15px; }
 }
 
 /* ---- MOBILE BOTTOM NAV ---- */
-.bottom-nav {
-  display: none;
-}
+.bottom-nav { display: none; }
 @media (max-width: 768px) {
   body { padding-bottom: 68px; }
   .bottom-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    height: 68px;
-    background: var(--navy-dark);
+    display: flex; position: fixed;
+    bottom: 0; left: 0; right: 0; height: 68px;
+    background: var(--teal-dark);
     border-top: 2px solid rgba(255,255,255,0.1);
     z-index: 300;
-    box-shadow: 0 -4px 20px rgba(10,25,60,0.3);
+    box-shadow: 0 -4px 20px rgba(0,60,60,0.3);
   }
   .bnav-btn {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    background: none;
-    border: none;
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px;
+    background: none; border: none;
     color: rgba(255,255,255,0.5);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.2s;
-    position: relative;
-    padding: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.65rem; font-weight: 600;
+    cursor: pointer; transition: color 0.2s; position: relative; padding: 0;
   }
-  .bnav-btn:hover,
-  .bnav-btn.active { color: #fff; }
-  .bnav-btn.active .bnav-icon-wrap {
-    background: var(--orange);
-    border-radius: 10px;
-    padding: 3px 14px;
-  }
+  .bnav-btn:hover, .bnav-btn.active { color: #fff; }
+  .bnav-btn.active .bnav-icon-wrap { background: var(--coral); border-radius: 10px; padding: 3px 14px; }
   .bnav-icon { font-size: 1.3rem; line-height: 1; }
   .bnav-cart-dot {
-    position: absolute;
-    top: 5px;
-    right: calc(50% - 22px);
-    background: var(--orange);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 800;
-    min-width: 17px;
-    height: 17px;
-    border-radius: 9px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 0 3px;
+    position: absolute; top: 5px; right: calc(50% - 22px);
+    background: var(--coral); color: #fff;
+    font-size: 10px; font-weight: 800; min-width: 17px; height: 17px;
+    border-radius: 9px; display: none; align-items: center; justify-content: center; padding: 0 3px;
   }
 }
-
 </style>
 </head>
 <body>
+
+<!-- =============================================
+     PRIORITY 2: FLOATING CONTACT BUTTONS
+     ============================================= -->
+<div class="floating-contacts">
+  <!-- WhatsApp: Replace 62XXXXXXXXXX with your full number (no + or spaces) -->
+  <a class="float-btn float-btn-wa" href="https://wa.me/62XXXXXXXXXX" target="_blank" rel="noopener" title="WhatsApp">
+    <span>💬</span>
+    <span class="float-tooltip">WhatsApp us!</span>
+  </a>
+  <!-- WeChat: Opens WeChat app (works on mobile). On desktop shows a tooltip. -->
+  <a class="float-btn float-btn-wc" href="weixin://dl/chat" target="_blank" rel="noopener" title="WeChat">
+    <span>🟢</span>
+    <span class="float-tooltip">WeChat: dormbros</span>
+  </a>
+</div>
+
+<!-- PRIORITY 1: Live exchange rate banner -->
+<div class="exchange-banner">
+  <span class="exchange-dot"></span>
+  Live Rate: <span id="liveRate">Loading…</span> &nbsp;|&nbsp; 1 CNY = <span id="cnyToIdr">Loading…</span> IDR
+</div>
 
 <!-- NAVBAR -->
 <nav class="navbar">
   <div class="nav-inner">
     <div class="logo" onclick="showPage('home')">
-      <div class="logo-icon"> <img src="dormbrosnobg.png" alt="DormBros Logo" style="height: 38px; width: auto; border-radius: 8px;" /></div>
+      <div class="logo-icon">
+        <img src="dormbrosnobg.png" alt="DormBros Logo" style="height:38px;width:auto;border-radius:8px;" />
+      </div>
       DORM<span>BROS</span>
     </div>
     <div class="nav-links">
       <a onclick="showPage('home')">Shop</a>
       <a onclick="showPage('orders')">My Orders</a>
       <a onclick="showPage('home'); setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),100)">About</a>
+      <a onclick="showPage('home'); setTimeout(()=>document.getElementById('faq').scrollIntoView({behavior:'smooth'}),100)">FAQ</a>
     </div>
     <button class="cart-btn" onclick="toggleCart()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -542,21 +768,26 @@ img { display: block; width: 100%; object-fit: cover; }
   </div>
   <div class="cart-items" id="cartItems"><div class="cart-empty">Your cart is empty.</div></div>
   <div class="cart-footer">
-    <div class="cart-total"><span>Total</span><span id="cartTotal">¥0</span></div>
+    <div class="cart-total"><span>Total</span><span id="cartTotal">Rp0</span></div>
+    <div class="cart-total-cny" id="cartTotalCny">≈ ¥0</div>
     <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout →</button>
   </div>
 </div>
 
 <!-- ======== HOME PAGE ======== -->
 <div id="homePage">
+
+  <!-- HERO -->
   <section class="hero">
     <div class="deco-circle c1"></div>
     <div class="deco-circle c2"></div>
     <div class="hero-bg-text">DORM</div>
     <div class="hero-inner">
       <div class="hero-content">
-        <div class="hero-badge">⭐CUHKSZ Student Dorm Store</div>
+        <div class="hero-badge">⭐ CUHKSZ Student Dorm Store</div>
         <h1>Everything you need,<br/><em>move-in ready.</em></h1>
+        <!-- PRIORITY 3: Indonesian tagline -->
+        <p class="hero-tagline-id">🇮🇩 Toko perlengkapan dorm untuk mahasiswa Indonesia di CUHKSZ.</p>
         <p>Curated dorm essentials delivered right to your building. Built by students, for students.</p>
         <div class="hero-stats">
           <div class="hero-stat"><strong>100%</strong><span>Student Run</span></div>
@@ -566,39 +797,163 @@ img { display: block; width: 100%; object-fit: cover; }
         <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now ↓</button>
       </div>
       <div class="hero-logo-wrap">
-        <!-- 
-          LOGO: Replace the src below with your actual logo file path.
-          If your logo is in the same folder as index.html, use: src="dormbros-logo.png"
-          The logo image you uploaded should be saved as "dormbros-logo.png" next to index.html
-        -->
-        <img src="dormbros-logo.png" alt="DormBros Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'text-align:center\'><div style=\'font-family:Syne,sans-serif;font-size:2rem;font-weight:800;color:#1B3A6B\'>DORM<span style=\'color:#E85D04\'>BROS</span></div><p style=\'color:#5b6a80;font-size:0.85rem;margin-top:8px\'>University Essentials</p></div>'" />
+        <img src="dormbros-logo.png" alt="DormBros Logo"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'text-align:center\'><div style=\'font-family:Bricolage Grotesque,sans-serif;font-size:2rem;font-weight:800;color:#007A7A\'>DORM<span style=\'color:#FF6B47\'>BROS</span></div><p style=\'color:#4a6060;font-size:0.85rem;margin-top:8px\'>University Essentials</p></div>'" />
       </div>
     </div>
   </section>
 
+  <!-- PRIORITY 9: TRUST BADGES -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <div class="trust-badge"><span class="tb-icon">✅</span> Student-Run Business</div>
+      <div class="trust-badge"><span class="tb-icon">🚚</span> Campus Dorm Delivery</div>
+      <div class="trust-badge"><span class="tb-icon">🔒</span> Secure Payment (BCA / WeChat / Alipay)</div>
+      <div class="trust-badge"><span class="tb-icon">📱</span> WhatsApp Support</div>
+      <div class="trust-badge"><span class="tb-icon">🇮🇩</span> Indonesian-Friendly</div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
   <section class="products-section" id="products">
     <div class="section-header">
       <h2>Dorm Essentials</h2>
-      <p>Everything a freshman needs, handpicked so you don't have to guess.</p>
+      <p>Everything a freshman needs, handpicked so you don't have to guess. <em style="color:var(--text-muted);font-size:0.9rem;">Semua yang kamu butuhkan untuk dorm.</em></p>
     </div>
     <div class="products-grid" id="productsGrid"></div>
   </section>
 
+  <!-- PRIORITY 6: DORM INFO SECTION -->
+  <section class="dorm-section" id="dorms">
+    <div class="dorm-inner">
+      <div class="section-header">
+        <h2>Know Your Dorm 🏢</h2>
+        <p>CUHKSZ dorm info to help you choose the right items. <em style="color:var(--text-muted);">Informasi kamar untuk mahasiswa baru.</em></p>
+      </div>
+      <div class="dorm-grid">
+        <div class="dorm-card">
+          <div class="dorm-card-header">
+            <div class="dorm-letter">A</div>
+            <div><div class="dorm-name">Block A</div><div class="dorm-sub">Harmonia College</div></div>
+          </div>
+          <div class="dorm-stat"><span class="ds-icon">🛏️</span> Single bed — 90×190cm</div>
+          <div class="dorm-stat"><span class="ds-icon">❄️</span> Central AC (shared control)</div>
+          <div class="dorm-stat"><span class="ds-icon">🚿</span> Shared bathroom per floor</div>
+          <div class="dorm-stat"><span class="ds-icon">📐</span> Room ~18m²</div>
+          <div class="dorm-tip">💡 Buy a shower caddy — shared bathrooms have limited shelf space.</div>
+        </div>
+        <div class="dorm-card">
+          <div class="dorm-card-header">
+            <div class="dorm-letter" style="background:var(--coral);">B</div>
+            <div><div class="dorm-name">Block B</div><div class="dorm-sub">Harmonia College</div></div>
+          </div>
+          <div class="dorm-stat"><span class="ds-icon">🛏️</span> Single bed — 90×190cm</div>
+          <div class="dorm-stat"><span class="ds-icon">❄️</span> Individual AC unit</div>
+          <div class="dorm-stat"><span class="ds-icon">🚿</span> Shared bathroom per floor</div>
+          <div class="dorm-stat"><span class="ds-icon">📐</span> Room ~18m²</div>
+          <div class="dorm-tip">💡 Individual AC means you control your own temperature — great!</div>
+        </div>
+        <div class="dorm-card">
+          <div class="dorm-card-header">
+            <div class="dorm-letter" style="background:#6B8F71;">C</div>
+            <div><div class="dorm-name">Block C</div><div class="dorm-sub">Harmonia College</div></div>
+          </div>
+          <div class="dorm-stat"><span class="ds-icon">🛏️</span> Single bed — 90×190cm</div>
+          <div class="dorm-stat"><span class="ds-icon">❄️</span> Central AC</div>
+          <div class="dorm-stat"><span class="ds-icon">🚿</span> Shared bathroom (larger)</div>
+          <div class="dorm-stat"><span class="ds-icon">📐</span> Room ~20m²</div>
+          <div class="dorm-tip">💡 Slightly larger rooms — good wardrobe space. Get extra hangers!</div>
+        </div>
+        <div class="dorm-card">
+          <div class="dorm-card-header">
+            <div class="dorm-letter" style="background:#7c3aed;">D</div>
+            <div><div class="dorm-name">Block D</div><div class="dorm-sub">Harmonia College</div></div>
+          </div>
+          <div class="dorm-stat"><span class="ds-icon">🛏️</span> Single bed — 90×190cm</div>
+          <div class="dorm-stat"><span class="ds-icon">❄️</span> Individual AC unit</div>
+          <div class="dorm-stat"><span class="ds-icon">🚿</span> En-suite bathroom</div>
+          <div class="dorm-stat"><span class="ds-icon">📐</span> Room ~22m²</div>
+          <div class="dorm-tip">💡 En-suite bathroom! You don't need a shower caddy here.</div>
+        </div>
+        <div class="dorm-card">
+          <div class="dorm-card-header">
+            <div class="dorm-letter" style="background:#0f6e8c;">E</div>
+            <div><div class="dorm-name">Block E</div><div class="dorm-sub">Harmonia College</div></div>
+          </div>
+          <div class="dorm-stat"><span class="ds-icon">🛏️</span> Single bed — 90×190cm</div>
+          <div class="dorm-stat"><span class="ds-icon">❄️</span> Central AC</div>
+          <div class="dorm-stat"><span class="ds-icon">🚿</span> Shared bathroom per floor</div>
+          <div class="dorm-stat"><span class="ds-icon">📐</span> Room ~18m²</div>
+          <div class="dorm-tip">💡 Closest to the canteen — popular block. Get a laundry bag early!</div>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:1.5rem;font-size:0.82rem;color:var(--text-muted);">* Dorm info is approximate. Confirm with your college office upon arrival. | <em>Info kamar bersifat perkiraan, konfirmasi ke kantor college setelah tiba.</em></p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
   <section class="about-section" id="about">
     <div class="about-inner">
-      <div class="about-tag">Who We Are</div>
+      <div class="about-tag">Who We Are / Siapa Kami</div>
       <h2>Students helping students settle in.</h2>
-      <p>DormBros is a student-run store at the Chinese University of Hong Kong, Shenzhen (CUHKSZ). We take care of purchasing the essentials so you don't have to scramble on move-in day. Pay via BCA transfer/WeChat Pay/Alipay, upload your receipt, and we'll deliver to your dorm block.</p>
+      <p>DormBros is a student-run store at the Chinese University of Hong Kong, Shenzhen (CUHKSZ). We take care of purchasing the essentials so you don't have to scramble on move-in day. Pay via BCA transfer/WeChat Pay/Alipay, upload your receipt, and we'll deliver to your dorm block.<br/><em style="font-size:0.9rem;opacity:0.7;">DormBros adalah toko yang dijalankan mahasiswa di CUHKSZ. Bayar lewat BCA/WeChat/Alipay, upload bukti, dan kami antar ke dorm kamu.</em></p>
       <div class="about-steps">
-        <div class="step"><div class="step-num">01</div><div><strong>Add to Cart</strong>Browse and pick what you need.</div></div>
-        <div class="step"><div class="step-num">02</div><div><strong>Pay & Upload</strong>Transfer via BCA/Alipay/Wechat and upload your proof.</div></div>
-        <div class="step"><div class="step-num">03</div><div><strong>We Deliver</strong>Order confirmed and delivered to your dorm.</div></div>
+        <div class="step"><div class="step-num">01</div><div><strong>Add to Cart</strong>Browse and pick what you need. <em style="display:block;opacity:0.6;font-size:0.8rem;">Pilih barang yang kamu butuhkan.</em></div></div>
+        <div class="step"><div class="step-num">02</div><div><strong>Pay & Upload</strong>Transfer via BCA/Alipay/WeChat and upload your proof. <em style="display:block;opacity:0.6;font-size:0.8rem;">Transfer dan upload bukti bayar.</em></div></div>
+        <div class="step"><div class="step-num">03</div><div><strong>We Deliver</strong>Confirmed and delivered to your dorm. <em style="display:block;opacity:0.6;font-size:0.8rem;">Kami antar ke kamar kamu!</em></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIORITY 5: FAQ SECTION -->
+  <section class="faq-section" id="faq">
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+      <p>Got questions? We've got answers. <em style="color:var(--text-muted);">Ada pertanyaan? Kami siap membantu.</em></p>
+    </div>
+    <div id="faqList"></div>
+  </section>
+
+  <!-- PRIORITY 9: PARENT SECTION -->
+  <section class="parent-section" id="parents">
+    <div class="parent-inner">
+      <div class="parent-tag">👨‍👩‍👧 For Parents / Untuk Orang Tua</div>
+      <h2>Parents: Here's How This Works</h2>
+      <p>Helping your child move into CUHKSZ? This guide is for you. DormBros is a trusted student-run service that delivers dorm essentials directly to your child's room on campus.<br/><em style="font-size:0.9rem;color:#7a5a3a;">Membantu anak Anda pindah ke CUHKSZ? DormBros adalah layanan terpercaya yang dikelola mahasiswa untuk mengantarkan perlengkapan dorm langsung ke kamar.</em></p>
+      <div class="parent-steps">
+        <div class="parent-step">
+          <div class="ps-icon">🛍️</div>
+          <strong>Step 1: Choose Items</strong>
+          <p>Browse the products together with your child and add what they need to the cart.</p>
+        </div>
+        <div class="parent-step">
+          <div class="ps-icon">💳</div>
+          <strong>Step 2: Transfer Payment</strong>
+          <p>Send payment via BCA transfer, WeChat Pay, or Alipay to <strong>dormbros2026</strong>. Include your child's name in the note.</p>
+        </div>
+        <div class="parent-step">
+          <div class="ps-icon">📸</div>
+          <strong>Step 3: Upload Screenshot</strong>
+          <p>Take a screenshot of your transfer confirmation and upload it on the checkout page.</p>
+        </div>
+        <div class="parent-step">
+          <div class="ps-icon">📦</div>
+          <strong>Step 4: We Deliver</strong>
+          <p>We confirm the order by email and deliver directly to your child's dorm room. No hassle!</p>
+        </div>
+      </div>
+      <div class="parent-contact">
+        <strong>📞 Questions? Contact us directly:</strong><br/>
+        WhatsApp: <strong>+62 XXXXXXXXXX</strong> (Indonesian number)<br/>
+        WeChat: <strong>dormbros</strong><br/>
+        Email: <strong>dormbros512@gmail.com</strong><br/>
+        <em>We speak Bahasa Indonesia! / Kami bisa berbicara Bahasa Indonesia!</em>
       </div>
     </div>
   </section>
 
   <footer class="footer">
-    <p>© 2026 DormBros · Operate only in CUHKSZ · Made with ❤️ for freshmen · <a href="mailto:dormbros512@gmail.com">Contact Us: dormbros512@gmail.com / +62 </a></p>
+    <p>© 2026 DormBros · CUHKSZ Campus · Made with ❤️ for Indonesian freshmen · <a href="mailto:dormbros512@gmail.com">dormbros512@gmail.com</a></p>
   </footer>
 </div>
 
@@ -611,19 +966,32 @@ img { display: block; width: 100%; object-fit: cover; }
       <div class="detail-info">
         <div class="detail-badge" id="detailBadge" style="display:none;"></div>
         <h1 id="detailName"></h1>
-        <p class="detail-price" id="detailPrice"></p>
+        <p class="detail-name-id" id="detailNameId"></p>
+        <!-- PRIORITY 7: Early bird notice -->
+        <div id="earlyBirdNotice" style="display:none; margin-bottom:0.75rem; padding:0.6rem 0.9rem; background:#fef3c7; border:1px solid #f59e0b; border-radius:8px; font-size:0.84rem; color:#92400e;"></div>
+        <div class="detail-price-wrap">
+          <div class="detail-price-idr" id="detailPriceIdr"></div>
+          <div class="detail-price-cny" id="detailPriceCny"></div>
+        </div>
         <p class="detail-desc" id="detailDesc"></p>
+        <p class="detail-desc-id" id="detailDescId"></p>
         <div class="detail-specs" id="detailSpecs"></div>
+        <!-- PRIORITY 4: Color options (shown dynamically) -->
+        <div id="colorOptionWrap" style="display:none;" class="color-option-wrap">
+          <label>Choose Color / Pilih Warna</label>
+          <div class="color-swatches" id="colorSwatches"></div>
+          <div class="color-label" id="colorLabel">Selected: —</div>
+        </div>
         <div class="detail-qty">
-          <label>Quantity</label>
+          <label>Quantity / Jumlah</label>
           <div class="qty-control">
             <button onclick="changeDetailQty(-1)">−</button>
             <span id="detailQty">1</span>
             <button onclick="changeDetailQty(1)">+</button>
           </div>
         </div>
-        <button class="btn-primary add-cart-btn" onclick="addCurrentToCart()">Add to Cart</button>
-        <p class="detail-note">💬 Pay via BCA transfer/WeChat Pay/Alipay after placing your order. Upload your payment screenshot to confirm.</p>
+        <button class="btn-primary add-cart-btn" onclick="addCurrentToCart()">Add to Cart / Tambah ke Keranjang</button>
+        <p class="detail-note">💬 Bayar via BCA transfer/WeChat Pay/Alipay setelah order. Upload screenshot pembayaran untuk konfirmasi.<br/><em>Pay via BCA transfer/WeChat Pay/Alipay after ordering. Upload payment screenshot to confirm.</em></p>
       </div>
     </div>
   </div>
@@ -636,23 +1004,27 @@ img { display: block; width: 100%; object-fit: cover; }
     <h1 class="checkout-title">Complete Your Order</h1>
     <div class="checkout-grid">
       <div class="checkout-summary">
-        <h3>Order Summary</h3>
+        <h3>Order Summary / Ringkasan Pesanan</h3>
         <div id="summaryItems"></div>
         <div class="summary-total"><span>Total</span><span id="summaryTotal"></span></div>
+        <div class="summary-total-cny" id="summaryTotalCny"></div>
+        <!-- PRIORITY 8: Referral discount notice -->
+        <div id="referralDiscountNotice" style="display:none; margin-top:0.75rem; padding:0.5rem 0.75rem; background:#e8f5e9; border:1px solid #22c55e; border-radius:8px; font-size:0.82rem; color:#166534;"></div>
         <div class="payment-box">
-          <h4>💳 Payment Instructions</h4>
-          <p>Transfer the total to:</p>
+          <h4>💳 Payment Instructions / Cara Pembayaran</h4>
+          <p>Transfer the total to / Transfer jumlah ke:</p>
           <div class="payment-detail">
-            <strong>BCA Transfer/ WeChat Pay / Alipay</strong><br/>
+            <strong>BCA Transfer / WeChat Pay / Alipay</strong><br/>
             ID: <span class="highlight">dormbros2026</span>
           </div>
           <p class="small-note">Include your name in the transfer note, then upload the screenshot below.</p>
+          <p class="payment-id">Cantumkan nama kamu di keterangan transfer, lalu upload screenshot di bawah.</p>
         </div>
       </div>
       <div class="checkout-form-wrap">
-        <h3>Your Details</h3>
+        <h3>Your Details / Detail Kamu</h3>
         <div class="form-group">
-          <label>Full Name *</label>
+          <label>Full Name / Nama Lengkap *</label>
           <input type="text" id="custName" placeholder="e.g. Givon Ryan Tjandra" />
         </div>
         <div class="form-group">
@@ -668,23 +1040,27 @@ img { display: block; width: 100%; object-fit: cover; }
           <input type="text" id="custContact" placeholder="Phone or WeChat ID" />
         </div>
         <div class="form-group">
-          <label>Dorm Name & Block*</label>
-          <input type="text" id="custRoom" placeholder="e.g. Harmonia College D" />
+          <label>Dorm Block / Blok Kamar *</label>
+          <input type="text" id="custRoom" placeholder="e.g. Harmonia College Block D, Room 402" />
         </div>
         <div class="form-group">
-          <label>Upload Payment Screenshot *</label>
+          <label>Upload Payment Screenshot / Upload Bukti Bayar *</label>
           <div class="upload-area" id="uploadArea" onclick="document.getElementById('proofFile').click()">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            <p id="uploadLabel">Click to upload screenshot</p>
+            <p id="uploadLabel">Click to upload screenshot / Klik untuk upload</p>
             <span>PNG, JPG up to 5MB</span>
           </div>
           <input type="file" id="proofFile" accept="image/*" style="display:none" onchange="handleFileUpload(this)" />
         </div>
         <div class="form-group">
-          <label>Additional Notes</label>
-          <textarea id="custNotes" placeholder="Any special requests..." rows="3"></textarea>
+          <label>Referral Code (optional) / Kode Referral</label>
+          <input type="text" id="referralCode" placeholder="Enter referral code if you have one" />
         </div>
-        <button class="btn-primary submit-btn" id="submitBtn" onclick="submitOrder()">Submit Order ✓</button>
+        <div class="form-group">
+          <label>Additional Notes / Catatan Tambahan</label>
+          <textarea id="custNotes" placeholder="Any special requests... / Permintaan khusus..." rows="3"></textarea>
+        </div>
+        <button class="btn-primary submit-btn" id="submitBtn" onclick="submitOrder()">Submit Order / Kirim Pesanan ✓</button>
       </div>
     </div>
   </div>
@@ -694,9 +1070,19 @@ img { display: block; width: 100%; object-fit: cover; }
 <div id="successPage" style="display:none;">
   <div class="success-container">
     <div class="success-icon">✓</div>
-    <h1>Order Submitted!</h1>
-    <p>Thanks! We'll review your payment and confirm delivery details via email within 24 hours. Check your inbox (and spam folder).</p>
-    <button class="btn-primary" onclick="showPage('home')">Back to Shop</button>
+    <h1>Order Submitted! 🎉</h1>
+    <p>Thanks! We'll review your payment and confirm delivery via email within 24 hours. Check your inbox (and spam folder).<br/><em style="font-size:0.9rem;">Terima kasih! Kami akan mengecek pembayaran dan konfirmasi pengiriman via email dalam 24 jam.</em></p>
+    <!-- PRIORITY 8: Referral link section -->
+    <div class="referral-box">
+      <h3>🎁 Share & Save! / Bagikan & Hemat!</h3>
+      <p>Share your referral link with friends. When they order, <strong>both of you get Rp50,000 off</strong> your next purchase!<br/><em>Bagikan link referralmu. Ketika temanmu order, kamu dan dia dapat diskon <strong>Rp50.000</strong>!</em></p>
+      <div class="referral-link-wrap">
+        <input type="text" class="referral-link-input" id="referralLinkDisplay" readonly />
+        <button class="copy-link-btn" onclick="copyReferralLink()">📋 Copy</button>
+      </div>
+    </div>
+    <br/>
+    <button class="btn-primary" onclick="showPage('home')">Back to Shop / Kembali ke Toko</button>
   </div>
 </div>
 
@@ -705,11 +1091,11 @@ img { display: block; width: 100%; object-fit: cover; }
   <div class="orders-container">
     <div class="orders-header">
       <button class="back-btn" onclick="showPage('home')">← Back to Shop</button>
-      <h1 class="orders-title">My Orders</h1>
-      <p class="orders-subtitle">Orders submitted from this device are shown below.</p>
+      <h1 class="orders-title">My Orders / Pesanan Saya</h1>
+      <p class="orders-subtitle">Orders submitted from this device. / Pesanan dari perangkat ini.</p>
     </div>
     <div id="ordersList" class="orders-list">
-      <div class="orders-empty">No orders yet. Start shopping!</div>
+      <div class="orders-empty">No orders yet. Start shopping! / Belum ada pesanan. Mulai belanja!</div>
     </div>
   </div>
 </div>
@@ -718,154 +1104,311 @@ img { display: block; width: 100%; object-fit: cover; }
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
-
 // =====================================================
 //  IMGBB IMAGE UPLOAD
 // =====================================================
-// Replace with your actual ImgBB API key
-const IMGBB_API_KEY = '62f55204851d53ab57f4b69ea8c206f1';  // ← PASTE YOUR API KEY HERE
+const IMGBB_API_KEY = '62f55204851d53ab57f4b69ea8c206f1';
 
 async function uploadToImgBB(file) {
-    // Show uploading status
-    const uploadLabel = document.getElementById('uploadLabel');
-    const originalText = uploadLabel.textContent;
-    uploadLabel.textContent = '📤 Uploading to cloud...';
-    
-    const formData = new FormData();
-    formData.append('image', file);
-    
-    try {
-        const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
-            method: 'POST',
-            body: formData
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            uploadLabel.textContent = '✓ Uploaded successfully!';
-            setTimeout(() => {
-                uploadLabel.textContent = originalText;
-            }, 2000);
-            return data.data.url; // Return the image URL
-        } else {
-            throw new Error(data.error.message || 'Upload failed');
-        }
-    } catch (error) {
-        console.error('ImgBB upload error:', error);
-        uploadLabel.textContent = '❌ Upload failed - please try again';
-        setTimeout(() => {
-            uploadLabel.textContent = originalText;
-        }, 3000);
-        return null;
+  const uploadLabel = document.getElementById('uploadLabel');
+  uploadLabel.textContent = '📤 Uploading to cloud...';
+  const formData = new FormData();
+  formData.append('image', file);
+  try {
+    const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+      method: 'POST', body: formData
+    });
+    const data = await response.json();
+    if (data.success) {
+      uploadLabel.textContent = '✓ Uploaded successfully!';
+      return data.data.url;
+    } else {
+      throw new Error(data.error.message || 'Upload failed');
     }
+  } catch (error) {
+    console.error('ImgBB upload error:', error);
+    uploadLabel.textContent = '❌ Upload failed - please try again';
+    return null;
+  }
 }
+
 // =====================================================
-//  DORMBROS — CONFIGURATION
-//  1. Sign up free at https://emailjs.com
-//  2. Create a service (Gmail works great)
-//  3. Create an email template (see comment below)
-//  4. Replace the 3 values below with your own
+//  EMAILJS CONFIG
 // =====================================================
-const EMAILJS_SERVICE_ID  = 'service_2ka60gh';   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'template_i8k98qo';  // e.g. 'template_xyz789'
-const EMAILJS_PUBLIC_KEY  = 'xQ8U65W7qi3rt85NH';   // e.g. 'abcDEFghiJKL'
-
-/*
-  EMAIL TEMPLATE VARIABLES (paste this into your EmailJS template body):
-  -----------------------------------------------------------------------
-  New Order from DormBros!
-
-  Name: {{customer_name}}
-  Student ID: {{student_id}}
-  Email: {{customer_email}}
-  Contact: {{contact}}
-  Dorm Room: {{room}}
-
-  ORDER:
-  {{order_details}}
-
-  TOTAL: {{order_total}}
-
-  Notes: {{notes}}
-
-  Payment proof is attached as: {{payment_screenshot}}
-  -----------------------------------------------------------------------
-  NOTE: EmailJS free plan doesn't support file attachments.
-  The image will be described by filename. For actual image receiving,
-  upgrade to EmailJS paid plan OR use the Google Form approach instead.
-  The order details will still come through perfectly on the free plan.
-*/
-
+const EMAILJS_SERVICE_ID  = 'service_2ka60gh';
+const EMAILJS_TEMPLATE_ID = 'template_i8k98qo';
+const EMAILJS_PUBLIC_KEY  = 'xQ8U65W7qi3rt85NH';
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
 // =====================================================
-//  PRODUCTS — Edit this list to add your actual items!
+//  PRIORITY 1: CURRENCY & EXCHANGE RATE
+//  Primary: IDR (Rp). Secondary: CNY (¥)
+//  We use a fixed fallback rate + fetch live rate from
+//  a free API (exchangerate-api.com open endpoint).
+// =====================================================
+let CNY_TO_IDR = 2200;   // Fallback: 1 CNY ≈ 2200 IDR (update manually if needed)
+let IDR_TO_CNY = 1 / 2200;
+
+async function fetchExchangeRate() {
+  try {
+    // Free open endpoint — no API key required
+    const res = await fetch('https://open.er-api.com/v6/latest/CNY');
+    const data = await res.json();
+    if (data && data.rates && data.rates.IDR) {
+      CNY_TO_IDR = data.rates.IDR;
+      IDR_TO_CNY = 1 / CNY_TO_IDR;
+      document.getElementById('liveRate').textContent = `1 CNY = Rp${Math.round(CNY_TO_IDR).toLocaleString('id-ID')}`;
+      document.getElementById('cnyToIdr').textContent = Math.round(CNY_TO_IDR).toLocaleString('id-ID');
+    }
+  } catch (e) {
+    // Fallback to fixed rate silently
+    document.getElementById('liveRate').textContent = `1 CNY ≈ Rp${Math.round(CNY_TO_IDR).toLocaleString('id-ID')} (est.)`;
+    document.getElementById('cnyToIdr').textContent = Math.round(CNY_TO_IDR).toLocaleString('id-ID');
+  }
+}
+
+// Convert CNY price → IDR string e.g. "Rp 198.000"
+function toIDR(cnyPrice) {
+  const idr = Math.round(cnyPrice * CNY_TO_IDR);
+  return 'Rp ' + idr.toLocaleString('id-ID');
+}
+
+// Convert CNY price → CNY string e.g. "¥198"
+function toCNY(cnyPrice) {
+  return '¥' + cnyPrice.toLocaleString('id-ID');
+}
+
+// =====================================================
+//  PRIORITY 7: EARLY BIRD BUNDLE DISCOUNT
+//  First 10 customers get Rp50,000 off on bundles
+// =====================================================
+const EARLY_BIRD_LIMIT = 10;            // How many slots
+const EARLY_BIRD_DISCOUNT_CNY = 20;     // Discount in CNY
+
+function getEarlyBirdCount() {
+  return parseInt(localStorage.getItem('dormbros_earlybird_count') || '0');
+}
+function incrementEarlyBird() {
+  const count = getEarlyBirdCount() + 1;
+  localStorage.setItem('dormbros_earlybird_count', count.toString());
+}
+function earlyBirdSlotsLeft() {
+  return Math.max(0, EARLY_BIRD_LIMIT - getEarlyBirdCount());
+}
+function isEarlyBirdAvailable(product) {
+  return product.earlyBird && earlyBirdSlotsLeft() > 0;
+}
+
+// =====================================================
+//  PRIORITY 8: REFERRAL SYSTEM
+// =====================================================
+const REFERRAL_DISCOUNT_CNY = 20;  // Both get ¥20 off
+
+function generateReferralCode() {
+  return 'DB-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+}
+
+function getMyReferralCode() {
+  let code = localStorage.getItem('dormbros_my_referral');
+  if (!code) {
+    code = generateReferralCode();
+    localStorage.setItem('dormbros_my_referral', code);
+  }
+  return code;
+}
+
+function getReferralLink() {
+  const code = getMyReferralCode();
+  return window.location.href.split('?')[0] + '?ref=' + code;
+}
+
+function copyReferralLink() {
+  const input = document.getElementById('referralLinkDisplay');
+  input.select();
+  navigator.clipboard.writeText(input.value).then(() => {
+    const btn = document.querySelector('.copy-link-btn');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy', 2000);
+  });
+}
+
+function checkIncomingReferral() {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get('ref');
+  if (ref) {
+    localStorage.setItem('dormbros_ref_code', ref);
+    // Store who referred us (for discount)
+    const referrals = JSON.parse(localStorage.getItem('dormbros_referrals') || '{}');
+    referrals[ref] = (referrals[ref] || 0) + 1;
+    localStorage.setItem('dormbros_referrals', JSON.stringify(referrals));
+  }
+}
+
+function getAppliedReferral() {
+  return localStorage.getItem('dormbros_ref_code') || null;
+}
+
+function validateReferralCode(code) {
+  // A referral code is valid if it exists in stored referrals OR matches format
+  if (!code) return false;
+  const referrals = JSON.parse(localStorage.getItem('dormbros_referrals') || '{}');
+  // Valid if code was stored (someone shared it) OR matches DB- pattern
+  return code.startsWith('DB-') && code.length === 9;
+}
+
+// =====================================================
+//  PRODUCTS — Edit this list to add your real items!
+//  PRIORITY 4: Added 'colors' array
+//  PRIORITY 7: Added 'earlyBird' flag on bundles
 // =====================================================
 const PRODUCTS = [
   {
-    id: 1, name: "Dillow & Pillowcase Set", price: 45,
-    category: "Bedding", badge: "Popular",
+    id: 1,
+    name: "Pillow & Pillowcase Set",
+    nameId: "Bantal & Sarung Bantal",
+    price: 45,         // Price in CNY — IDR shown automatically
+    category: "Bedding",
+    badge: "Popular",
     image: "https://images.unsplash.com/photo-1631049035182-249067d7618e?w=600&q=80",
     shortDesc: "Soft memory foam pillow with cotton pillowcase.",
     description: "A comfortable medium-firm memory foam pillow paired with a breathable 100% cotton pillowcase. Perfect for CUHKSZ dorm beds.",
-    specs: ["Memory foam fill", "Cotton pillowcase included", "Size: 48×74cm", "Machine washable cover"]
+    descriptionId: "Bantal memory foam yang nyaman dengan sarung bantal katun 100%. Cocok untuk tempat tidur dorm CUHKSZ.",
+    specs: ["Memory foam fill", "Cotton pillowcase included", "Size: 48×74cm", "Machine washable cover"],
+    colors: ["White", "Grey"]   // PRIORITY 4: Color options
   },
   {
-    id: 2, name: "Bedsheet Set (Twin)", price: 88,
-    category: "Bedding", badge: "New",
+    id: 2,
+    name: "Bedsheet Set (Twin)",
+    nameId: "Set Sprei (Single)",
+    price: 88,
+    category: "Bedding",
+    badge: "New",
     image: "https://images.unsplash.com/photo-1616627561950-9f746e330187?w=600&q=80",
     shortDesc: "3-piece twin sheet set. Fits standard CUHKSZ dorm beds.",
     description: "A full 3-piece fitted sheet set sized for CUHKSZ dorm single beds (90×190cm). Includes fitted sheet, flat sheet, and one pillowcase.",
-    specs: ["Fitted sheet + flat sheet + pillowcase", "90×190cm (single/twin)", "Microfibre fabric", "Available in white & light grey"]
+    descriptionId: "Set sprei 3 lembar untuk kasur single CUHKSZ (90×190cm). Termasuk sprei, flat sheet, dan sarung bantal.",
+    specs: ["Fitted sheet + flat sheet + pillowcase", "90×190cm (single/twin)", "Microfibre fabric"],
+    colors: ["White", "Grey", "Navy", "Pink"]  // PRIORITY 4: Color options
   },
   {
-    id: 3, name: "Desk Lamp (USB Powered)", price: 68,
-    category: "Study", badge: "Best Seller",
+    id: 3,
+    name: "Desk Lamp (USB Powered)",
+    nameId: "Lampu Meja (USB)",
+    price: 68,
+    category: "Study",
+    badge: "Best Seller",
     image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&q=80",
     shortDesc: "Eye-care LED lamp with 3 brightness levels.",
     description: "A foldable USB desk lamp with 3 brightness levels and warm/cool/neutral light modes. Powered by USB — works off your laptop or any power bank.",
-    specs: ["USB-C powered", "3 brightness + 3 colour modes", "360° adjustable arm", "Built-in USB-A charging port"]
+    descriptionId: "Lampu meja USB lipat dengan 3 tingkat kecerahan. Cocok untuk belajar malam hari.",
+    specs: ["USB-C powered", "3 brightness + 3 colour modes", "360° adjustable arm", "Built-in USB-A charging port"],
+    colors: null
   },
   {
-    id: 4, name: "Power Strip (3-outlet + USB)", price: 55,
-    category: "Electronics", badge: null,
+    id: 4,
+    name: "Power Strip (3-outlet + USB)",
+    nameId: "Stop Kontak (3 lubang + USB)",
+    price: 55,
+    category: "Electronics",
+    badge: null,
     image: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=600&q=80",
     shortDesc: "3 outlets + 2 USB-A + 1 USB-C. Surge protected.",
     description: "Compact power strip with 3 standard outlets, 2 USB-A and 1 USB-C port. Includes surge protection and a 1.8m cable.",
-    specs: ["3 AC outlets", "2 USB-A + 1 USB-C", "Surge protection", "1.8m cable"]
+    descriptionId: "Stop kontak kompak dengan 3 outlet, 2 USB-A, dan 1 USB-C. Dilengkapi proteksi arus lebih.",
+    specs: ["3 AC outlets", "2 USB-A + 1 USB-C", "Surge protection", "1.8m cable"],
+    colors: null
   },
   {
-    id: 5, name: "Shower Caddy Organiser", price: 38,
-    category: "Bathroom", badge: null,
+    id: 5,
+    name: "Shower Caddy Organiser",
+    nameId: "Tas Perlengkapan Mandi",
+    price: 38,
+    category: "Bathroom",
+    badge: null,
     image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&q=80",
     shortDesc: "Portable hanging caddy for shared bathrooms.",
     description: "A portable plastic shower caddy with drainage holes and a carry handle. Designed for CUHKSZ shared bathrooms.",
-    specs: ["5 compartments + toothbrush slots", "Drainage holes", "Carry handle", "Rust-proof plastic"]
+    descriptionId: "Tas mandi portabel dengan lubang saluran air dan pegangan. Ideal untuk kamar mandi bersama.",
+    specs: ["5 compartments + toothbrush slots", "Drainage holes", "Carry handle", "Rust-proof plastic"],
+    colors: null
   },
   {
-    id: 6, name: "Laundry Bag (Large)", price: 22,
-    category: "Laundry", badge: null,
+    id: 6,
+    name: "Laundry Bag (Large)",
+    nameId: "Tas Laundry (Besar)",
+    price: 22,
+    category: "Laundry",
+    badge: null,
     image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=600&q=80",
     shortDesc: "Durable mesh laundry bag. 45L capacity.",
-    description: "A large 45-litre mesh laundry bag with a strong drawstring. Goes directly in the washing machine — great for dorm laundry rooms.",
-    specs: ["45L capacity", "Breathable mesh fabric", "Drawstring + carry strap", "Machine wash safe"]
+    description: "A large 45-litre mesh laundry bag with a strong drawstring. Goes directly in the washing machine.",
+    descriptionId: "Tas laundry jaring berukuran besar 45L. Bisa langsung masuk mesin cuci.",
+    specs: ["45L capacity", "Breathable mesh fabric", "Drawstring + carry strap", "Machine wash safe"],
+    colors: null
   },
   {
-    id: 7, name: "Hangers Set (20 pcs)", price: 25,
-    category: "Storage", badge: null,
+    id: 7,
+    name: "Hangers Set (20 pcs)",
+    nameId: "Set Gantungan Baju (20 pcs)",
+    price: 25,
+    category: "Storage",
+    badge: null,
     image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80",
     shortDesc: "Slim velvet non-slip hangers, set of 20.",
-    description: "Pack of 20 slim velvet coat hangers. Non-slip surface, space-saving profile — perfect for the dorm wardrobe.",
-    specs: ["Set of 20", "Velvet non-slip coating", "360° swivel hook", "Slim space-saving design"]
+    description: "Pack of 20 slim velvet coat hangers. Non-slip surface, space-saving profile.",
+    descriptionId: "20 gantungan baju velvet tipis anti-slip. Hemat ruang, cocok untuk lemari dorm.",
+    specs: ["Set of 20", "Velvet non-slip coating", "360° swivel hook", "Slim space-saving design"],
+    colors: null
   },
   {
-    id: 8, name: "Dorm Starter Bundle", price: 198,
-    category: "Bundle", badge: "Best Value",
+    id: 8,
+    name: "Dorm Starter Bundle",
+    nameId: "Paket Lengkap Mahasiswa Baru",
+    price: 198,
+    earlyBirdPrice: 178,  // PRIORITY 7: Discounted price
+    earlyBird: true,       // This product has early bird
+    category: "Bundle",
+    badge: "Best Value",
     image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80",
     shortDesc: "Pillow + Bedsheets + Lamp + Power Strip. Save ¥38.",
     description: "The ultimate freshman bundle: Pillow & Pillowcase, Bedsheet Set, Desk Lamp, and Power Strip all in one. Save ¥38 vs buying separately.",
-    specs: ["Pillow & Pillowcase Set", "Bedsheet Set (Twin)", "Desk Lamp (USB)", "Power Strip (3-outlet)", "Save ¥38 vs individual prices"]
+    descriptionId: "Paket lengkap untuk mahasiswa baru: Bantal, Sprei, Lampu Meja, dan Stop Kontak. Hemat ¥38 dibanding beli sendiri-sendiri!",
+    specs: ["Pillow & Pillowcase Set", "Bedsheet Set (Twin)", "Desk Lamp (USB)", "Power Strip (3-outlet)", "Save ¥38 vs individual prices"],
+    colors: null
+  }
+];
+
+// =====================================================
+//  FAQ DATA — PRIORITY 5
+// =====================================================
+const FAQS = [
+  {
+    q: "How do I pay? / Bagaimana cara membayar?",
+    a: "You can pay via <strong>BCA Transfer, WeChat Pay, or Alipay</strong> to account <strong>dormbros2026</strong>. After transferring, upload a screenshot of your receipt during checkout.<br/><span class='faq-id'>Kamu bisa bayar lewat BCA Transfer, WeChat Pay, atau Alipay ke akun <strong>dormbros2026</strong>. Setelah transfer, upload screenshot bukti bayar saat checkout.</span>"
+  },
+  {
+    q: "How long does delivery take? / Berapa lama pengiriman?",
+    a: "We deliver within <strong>1–3 days</strong> after confirming your payment. For urgent orders, contact us on WhatsApp and we'll do our best!<br/><span class='faq-id'>Kami kirim dalam <strong>1–3 hari</strong> setelah pembayaran dikonfirmasi. Untuk pesanan mendesak, hubungi kami via WhatsApp.</span>"
+  },
+  {
+    q: "Can I return or exchange items? / Bisa retur atau tukar barang?",
+    a: "We accept exchanges for <strong>defective items</strong> reported within 24 hours of delivery. Please take a photo and WhatsApp us immediately.<br/><span class='faq-id'>Kami menerima penukaran untuk <strong>barang cacat/rusak</strong> yang dilaporkan dalam 24 jam setelah diterima. Foto dan WhatsApp kami segera.</span>"
+  },
+  {
+    q: "Do you deliver to all dorm blocks? / Apakah kalian kirim ke semua blok?",
+    a: "Yes! We deliver to <strong>all blocks (A, B, C, D, E)</strong> at Harmonia College, CUHKSZ. Just fill in your block and room number at checkout.<br/><span class='faq-id'>Ya! Kami kirim ke <strong>semua blok (A, B, C, D, E)</strong> di Harmonia College, CUHKSZ.</span>"
+  },
+  {
+    q: "How do I track my order? / Bagaimana cara lacak pesanan?",
+    a: "Go to <strong>My Orders</strong> in the top menu to see all your submitted orders. We'll also contact you via WhatsApp/email to confirm delivery.<br/><span class='faq-id'>Buka <strong>My Orders</strong> di menu atas untuk melihat semua pesananmu. Kami juga akan konfirmasi via WhatsApp/email.</span>"
+  },
+  {
+    q: "What if my payment upload fails? / Bagaimana jika upload gagal?",
+    a: "If the upload fails, simply <strong>WhatsApp or WeChat us</strong> your payment screenshot directly. We'll still process your order!<br/><span class='faq-id'>Jika upload gagal, langsung <strong>kirim screenshot via WhatsApp atau WeChat</strong>. Kami tetap proses pesananmu!</span>"
+  },
+  {
+    q: "Is it safe to order here? / Apakah aman pesan di sini?",
+    a: "Yes! DormBros is run by CUHKSZ students. We have a clear refund policy, and you can contact us directly anytime on WhatsApp.<br/><span class='faq-id'>Ya! DormBros dijalankan oleh mahasiswa CUHKSZ. Kami punya kebijakan pengembalian yang jelas dan bisa dihubungi kapan saja.</span>"
   }
 ];
 
@@ -875,6 +1418,7 @@ const PRODUCTS = [
 let cart = JSON.parse(localStorage.getItem('dormbros_cart') || '[]');
 let currentProduct = null;
 let currentQty = 1;
+let selectedColor = null;
 let uploadedFile = null;
 let uploadedImageUrl = null;
 
@@ -885,59 +1429,122 @@ function showPage(page) {
   ['homePage','detailPage','checkoutPage','successPage','ordersPage'].forEach(id => {
     document.getElementById(id).style.display = 'none';
   });
-  const map = { home: 'homePage', detail: 'detailPage', checkout: 'checkoutPage', success: 'successPage', orders: 'ordersPage' };
+  const map = { home:'homePage', detail:'detailPage', checkout:'checkoutPage', success:'successPage', orders:'ordersPage' };
   document.getElementById(map[page]).style.display = 'block';
   updateActiveBottomNav(page);
-  // Load orders when viewing orders page
-  if (page === 'orders') {
-    loadAndDisplayOrders();
-  }
+  if (page === 'orders') loadAndDisplayOrders();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// =====================================================
-//  RENDER PRODUCT GRID
-// =====================================================
-function renderProducts() {
-  const grid = document.getElementById('productsGrid');
-  grid.innerHTML = PRODUCTS.map(p => `
-    <div class="product-card" onclick="openProduct(${p.id})">
-      <div class="product-img-wrap">
-        <img src="${p.image}" alt="${p.name}" loading="lazy" />
-        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
-      </div>
-      <div class="product-info">
-        <span class="product-cat">${p.category}</span>
-        <h3>${p.name}</h3>
-        <p class="product-short">${p.shortDesc}</p>
-        <div class="product-footer">
-          <span class="product-price">¥${p.price}</span>
-          <button class="add-btn" onclick="event.stopPropagation(); quickAdd(${p.id})">+ Add</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
+function updateActiveBottomNav(page) {
+  document.querySelectorAll('.bnav-btn').forEach(b => b.classList.remove('active'));
+  const map = { home: 'bnav-shop', orders: 'bnav-orders' };
+  if (map[page]) document.getElementById(map[page])?.classList.add('active');
 }
 
 // =====================================================
-//  PRODUCT DETAIL
+//  RENDER PRODUCTS — PRIORITY 1, 3, 7
+// =====================================================
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = PRODUCTS.map(p => {
+    const slotsLeft = p.earlyBird ? earlyBirdSlotsLeft() : 0;
+    const useEarlyBird = p.earlyBird && slotsLeft > 0;
+    const displayPrice = useEarlyBird ? p.earlyBirdPrice : p.price;
+    return `
+      <div class="product-card" onclick="openProduct(${p.id})">
+        <div class="product-img-wrap">
+          <img src="${p.image}" alt="${p.name}" loading="lazy" />
+          ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+          ${useEarlyBird ? `<span class="early-bird-badge">🐦 ${slotsLeft} Early Bird left!</span>` : ''}
+        </div>
+        <div class="product-info">
+          <span class="product-cat">${p.category}</span>
+          <h3>${p.name}</h3>
+          <p class="product-name-id">${p.nameId || ''}</p>
+          <p class="product-short">${p.shortDesc}</p>
+          <div class="product-footer">
+            <div class="product-price-wrap">
+              ${p.earlyBird && !useEarlyBird ? '' : ''}
+              ${useEarlyBird ? `<span class="product-price-orig">${toIDR(p.price)}</span>` : ''}
+              <span class="product-price">${toIDR(displayPrice)}</span>
+              <span class="product-price-cny-small">${toCNY(displayPrice)}</span>
+            </div>
+            <button class="add-btn" onclick="event.stopPropagation(); quickAdd(${p.id})">+ Add</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// =====================================================
+//  PRODUCT DETAIL — PRIORITY 1, 3, 4, 7
 // =====================================================
 function openProduct(id) {
   const p = PRODUCTS.find(x => x.id === id);
   if (!p) return;
   currentProduct = p;
   currentQty = 1;
+  selectedColor = null;
+
   document.getElementById('detailImg').src = p.image;
   document.getElementById('detailImg').alt = p.name;
   document.getElementById('detailName').textContent = p.name;
-  document.getElementById('detailPrice').textContent = `¥${p.price}`;
+  document.getElementById('detailNameId').textContent = p.nameId || '';
   document.getElementById('detailDesc').textContent = p.description;
+  document.getElementById('detailDescId').textContent = p.descriptionId || '';
   document.getElementById('detailQty').textContent = 1;
+
+  // PRIORITY 7: Early bird pricing
+  const slotsLeft = p.earlyBird ? earlyBirdSlotsLeft() : 0;
+  const useEarlyBird = p.earlyBird && slotsLeft > 0;
+  const displayPrice = useEarlyBird ? p.earlyBirdPrice : p.price;
+
+  document.getElementById('detailPriceIdr').textContent = toIDR(displayPrice);
+  document.getElementById('detailPriceCny').textContent = `≈ ${toCNY(displayPrice)} · 1 CNY ≈ Rp${Math.round(CNY_TO_IDR).toLocaleString('id-ID')}`;
+
+  const notice = document.getElementById('earlyBirdNotice');
+  if (useEarlyBird) {
+    notice.style.display = 'block';
+    notice.innerHTML = `🐦 <strong>Early Bird Price!</strong> You save ${toIDR(p.price - p.earlyBirdPrice)} — only <strong>${slotsLeft} slots left</strong> at this price!`;
+  } else if (p.earlyBird && slotsLeft === 0) {
+    notice.style.display = 'block';
+    notice.innerHTML = `ℹ️ Early bird slots are full. Regular price applies.`;
+  } else {
+    notice.style.display = 'none';
+  }
+
   const badge = document.getElementById('detailBadge');
   if (p.badge) { badge.textContent = p.badge; badge.style.display = 'inline-block'; }
   else { badge.style.display = 'none'; }
+
   document.getElementById('detailSpecs').innerHTML = p.specs.map(s => `<div class="spec-item">✓ ${s}</div>`).join('');
+
+  // PRIORITY 4: Color swatches
+  const colorWrap = document.getElementById('colorOptionWrap');
+  const swatchesEl = document.getElementById('colorSwatches');
+  if (p.colors && p.colors.length > 0) {
+    colorWrap.style.display = 'block';
+    swatchesEl.innerHTML = p.colors.map(c => `
+      <div class="color-swatch" data-color="${c}" title="${c}" onclick="selectColor('${c}')">
+        <span style="display:none">${c}</span>
+      </div>
+    `).join('');
+    document.getElementById('colorLabel').textContent = 'Selected: — (please choose)';
+  } else {
+    colorWrap.style.display = 'none';
+  }
+
   showPage('detail');
+}
+
+function selectColor(color) {
+  selectedColor = color;
+  document.querySelectorAll('.color-swatch').forEach(s => {
+    s.classList.toggle('selected', s.dataset.color === color);
+  });
+  document.getElementById('colorLabel').textContent = 'Selected: ' + color;
 }
 
 function changeDetailQty(d) {
@@ -947,33 +1554,57 @@ function changeDetailQty(d) {
 
 function addCurrentToCart() {
   if (!currentProduct) return;
-  addToCart(currentProduct, currentQty);
+  if (currentProduct.colors && !selectedColor) {
+    alert('Please choose a color / Pilih warna dulu ya!');
+    return;
+  }
+  addToCart(currentProduct, currentQty, selectedColor);
   showPage('home');
   setTimeout(() => toggleCart(), 300);
 }
 
 function quickAdd(id) {
   const p = PRODUCTS.find(x => x.id === id);
-  if (p) addToCart(p, 1);
+  if (!p) return;
+  if (p.colors && p.colors.length > 0) {
+    // Go to detail page to choose color
+    openProduct(id);
+    return;
+  }
+  addToCart(p, 1, null);
 }
 
 // =====================================================
-//  CART
+//  CART — PRIORITY 1, 4
 // =====================================================
-function addToCart(product, qty) {
-  const existing = cart.find(i => i.id === product.id);
+function addToCart(product, qty, color) {
+  const slotsLeft = product.earlyBird ? earlyBirdSlotsLeft() : 0;
+  const useEarlyBird = product.earlyBird && slotsLeft > 0;
+  const actualPrice = useEarlyBird ? product.earlyBirdPrice : product.price;
+
+  // If same product + same color exists, increase qty
+  const existing = cart.find(i => i.id === product.id && i.color === color);
   if (existing) existing.qty += qty;
-  else cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, qty });
+  else cart.push({
+    id: product.id,
+    name: product.name,
+    nameId: product.nameId,
+    price: actualPrice,
+    image: product.image,
+    qty,
+    color,
+    earlyBird: useEarlyBird
+  });
   saveCart(); updateCartUI(); flashCartBtn();
 }
 
-function removeFromCart(id) {
-  cart = cart.filter(i => i.id !== id);
+function removeFromCart(id, color) {
+  cart = cart.filter(i => !(i.id === id && i.color === color));
   saveCart(); updateCartUI();
 }
 
-function changeCartQty(id, d) {
-  const item = cart.find(i => i.id === id);
+function changeCartQty(id, color, d) {
+  const item = cart.find(i => i.id === id && i.color === color);
   if (!item) return;
   item.qty = Math.max(1, item.qty + d);
   saveCart(); updateCartUI();
@@ -982,50 +1613,28 @@ function changeCartQty(id, d) {
 function saveCart() { localStorage.setItem('dormbros_cart', JSON.stringify(cart)); }
 
 // =====================================================
-//  ORDER STORAGE
+//  REFERRAL DISCOUNT LOGIC — PRIORITY 8
 // =====================================================
-function saveOrder(orderData) {
-  const orders = JSON.parse(localStorage.getItem('dormbros_orders') || '[]');
-  orders.unshift(orderData); // Add newest first
-  localStorage.setItem('dormbros_orders', JSON.stringify(orders));
-}
-
-function loadAndDisplayOrders() {
-  const orders = JSON.parse(localStorage.getItem('dormbros_orders') || '[]');
-  const ordersList = document.getElementById('ordersList');
-  
-  if (orders.length === 0) {
-    ordersList.innerHTML = '<div class="orders-empty">📦 No orders yet. Start shopping!</div>';
-    return;
+function getReferralDiscountAmount() {
+  const refCode = localStorage.getItem('dormbros_ref_code');
+  const refUsed = localStorage.getItem('dormbros_ref_used');
+  if (refCode && !refUsed && validateReferralCode(refCode)) {
+    return REFERRAL_DISCOUNT_CNY;
   }
-  
-  ordersList.innerHTML = orders.map(order => `
-    <div class="order-card">
-      <div class="order-header">
-        <span class="order-number">ORDER #${order.orderId}</span>
-        <span class="order-date">${order.date}</span>
-      </div>
-      <div class="order-items">
-        ${order.items.map(item => `
-          <div class="order-item">
-            <span>${item.name} × ${item.qty}</span>
-            <span>¥${item.price * item.qty}</span>
-          </div>
-        `).join('')}
-      </div>
-      <div class="order-total">
-        <span>Total Paid</span>
-        <span>¥${order.total}</span>
-      </div>
-    </div>
-  `).join('');
+  return 0;
 }
 
-function generateOrderId() {
-  return 'DB-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+function getManualReferralDiscount(code) {
+  if (code && validateReferralCode(code)) return REFERRAL_DISCOUNT_CNY;
+  return 0;
 }
 
-function cartTotal() { return cart.reduce((s, i) => s + i.price * i.qty, 0); }
+// =====================================================
+//  CART TOTALS
+// =====================================================
+function cartTotal() {
+  return cart.reduce((s, i) => s + i.price * i.qty, 0);
+}
 
 function updateCartUI() {
   const count = cart.reduce((s, i) => s + i.qty, 0);
@@ -1034,7 +1643,11 @@ function updateCartUI() {
   countEl.style.display = count > 0 ? 'flex' : 'none';
   const dot = document.getElementById('bnavDot');
   if (dot) { dot.textContent = count; dot.style.display = count > 0 ? 'flex' : 'none'; }
-  document.getElementById('cartTotal').textContent = `¥${cartTotal()}`;
+
+  const total = cartTotal();
+  document.getElementById('cartTotal').textContent = toIDR(total);
+  document.getElementById('cartTotalCny').textContent = `≈ ${toCNY(total)}`;
+
   const itemsEl = document.getElementById('cartItems');
   if (cart.length === 0) { itemsEl.innerHTML = '<div class="cart-empty">Your cart is empty.</div>'; return; }
   itemsEl.innerHTML = cart.map(item => `
@@ -1042,15 +1655,19 @@ function updateCartUI() {
       <img src="${item.image}" alt="${item.name}" />
       <div class="cart-item-info">
         <p class="cart-item-name">${item.name}</p>
-        <p class="cart-item-price">¥${item.price} each</p>
+        ${item.color ? `<p class="cart-item-color">🎨 ${item.color}</p>` : ''}
+        <p class="cart-item-price">${toIDR(item.price)} each</p>
         <div class="cart-item-qty">
-          <button onclick="changeCartQty(${item.id}, -1)">−</button>
+          <button onclick="changeCartQty(${item.id}, ${JSON.stringify(item.color)}, -1)">−</button>
           <span>${item.qty}</span>
-          <button onclick="changeCartQty(${item.id}, 1)">+</button>
-          <button class="remove-btn" onclick="removeFromCart(${item.id})">✕</button>
+          <button onclick="changeCartQty(${item.id}, ${JSON.stringify(item.color)}, 1)">+</button>
+          <button class="remove-btn" onclick="removeFromCart(${item.id}, ${JSON.stringify(item.color)})">✕</button>
         </div>
       </div>
-      <span class="cart-item-total">¥${item.price * item.qty}</span>
+      <div class="cart-item-total">
+        ${toIDR(item.price * item.qty)}
+        <small>${toCNY(item.price * item.qty)}</small>
+      </div>
     </div>
   `).join('');
 }
@@ -1070,49 +1687,57 @@ function flashCartBtn() {
 }
 
 // =====================================================
-//  CHECKOUT
+//  CHECKOUT — PRIORITY 1, 3, 4, 8
 // =====================================================
 function goToCheckout() {
-  if (cart.length === 0) { alert('Your cart is empty!'); return; }
+  if (cart.length === 0) { alert('Your cart is empty! / Keranjang kamu kosong!'); return; }
   toggleCart();
+
+  const refDiscount = getReferralDiscountAmount();
+  const total = cartTotal();
+  const finalTotal = Math.max(0, total - refDiscount);
+
   document.getElementById('summaryItems').innerHTML = cart.map(i =>
-    `<div class="summary-item"><span>${i.name} × ${i.qty}</span><span>¥${i.price * i.qty}</span></div>`
-  ).join('');
-  document.getElementById('summaryTotal').textContent = `¥${cartTotal()}`;
+    `<div class="summary-item">
+      <span class="summary-item-name">${i.name}${i.color ? ` (${i.color})` : ''} × ${i.qty}</span>
+      <span>${toIDR(i.price * i.qty)}</span>
+    </div>`
+  ).join('') + (refDiscount > 0 ? `
+    <div class="summary-item" style="color:#22c55e;">
+      <span>🎁 Referral Discount</span>
+      <span>-${toIDR(refDiscount)}</span>
+    </div>` : '');
+
+  document.getElementById('summaryTotal').textContent = toIDR(finalTotal);
+  document.getElementById('summaryTotalCny').textContent = `≈ ${toCNY(finalTotal)}`;
+
+  // Show referral discount notice if applicable
+  const refNotice = document.getElementById('referralDiscountNotice');
+  if (refDiscount > 0) {
+    refNotice.style.display = 'block';
+    refNotice.innerHTML = `🎁 Referral discount applied: <strong>-${toIDR(refDiscount)}</strong>`;
+  } else {
+    refNotice.style.display = 'none';
+  }
+
   showPage('checkout');
 }
 
 async function handleFileUpload(input) {
-    const file = input.files[0];
-    if (!file) return;
-    
-    // Check file size (max 16MB for ImgBB)
-    if (file.size > 16 * 1024 * 1024) {
-        alert('File is too large! Maximum size is 16MB.');
-        input.value = '';
-        return;
-    }
-    
-    // Check file type
-    if (!file.type.startsWith('image/')) {
-        alert('Please upload an image file (PNG, JPG, JPEG).');
-        input.value = '';
-        return;
-    }
-    
-    uploadedFile = file;
-    document.getElementById('uploadLabel').textContent = `✓ ${file.name} (uploading...)`;
-    document.getElementById('uploadArea').classList.add('uploaded');
-    
-    // Upload to ImgBB immediately
-    const imageUrl = await uploadToImgBB(file);
-    
-    if (imageUrl) {
-        uploadedImageUrl = imageUrl;  // Store the URL
-        document.getElementById('uploadLabel').textContent = `✓ ${file.name} (uploaded)`;
-    } else {
-        document.getElementById('uploadLabel').textContent = `⚠️ ${file.name} (upload failed)`;
-    }
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 16 * 1024 * 1024) { alert('File too large! Max 16MB.'); input.value = ''; return; }
+  if (!file.type.startsWith('image/')) { alert('Please upload an image file.'); input.value = ''; return; }
+  uploadedFile = file;
+  document.getElementById('uploadLabel').textContent = `✓ ${file.name} (uploading...)`;
+  document.getElementById('uploadArea').classList.add('uploaded');
+  const imageUrl = await uploadToImgBB(file);
+  if (imageUrl) {
+    uploadedImageUrl = imageUrl;
+    document.getElementById('uploadLabel').textContent = `✓ ${file.name} (uploaded ✅)`;
+  } else {
+    document.getElementById('uploadLabel').textContent = `⚠️ ${file.name} (upload failed - WhatsApp us)`;
+  }
 }
 
 async function submitOrder() {
@@ -1122,17 +1747,18 @@ async function submitOrder() {
   const contact = document.getElementById('custContact').value.trim();
   const room    = document.getElementById('custRoom').value.trim();
   const notes   = document.getElementById('custNotes').value.trim();
+  const refCode = document.getElementById('referralCode').value.trim();
 
   if (!name || !sid || !email || !contact || !room) {
-    alert('Please fill in all required fields (*).');
+    alert('Please fill in all required fields (*). / Isi semua field wajib (*).');
     return;
   }
   if (!uploadedFile) {
-    alert('Please upload your payment screenshot.');
+    alert('Please upload your payment screenshot. / Upload bukti bayar dulu ya!');
     return;
   }
   if (!uploadedImageUrl) {
-    alert('Please wait for image to finish uploading before submitting.');
+    alert('Please wait for image to finish uploading. / Tunggu hingga upload selesai.');
     return;
   }
 
@@ -1140,7 +1766,15 @@ async function submitOrder() {
   btn.textContent = 'Submitting…';
   btn.disabled = true;
 
-  const orderLines = cart.map(i => `${i.name} x${i.qty} = ¥${i.price * i.qty}`).join('\n');
+  // Calculate final total with referral discount
+  const refDiscount = refCode ? getManualReferralDiscount(refCode) : getReferralDiscountAmount();
+  const total = cartTotal();
+  const finalTotal = Math.max(0, total - refDiscount);
+
+  // Format order lines with color info
+  const orderLines = cart.map(i =>
+    `${i.name}${i.color ? ` [${i.color}]` : ''} x${i.qty} = ${toIDR(i.price * i.qty)} (${toCNY(i.price * i.qty)})`
+  ).join('\n');
 
   const params = {
     customer_name:      name,
@@ -1149,40 +1783,138 @@ async function submitOrder() {
     contact:            contact,
     room:               room,
     order_details:      orderLines,
-    order_total:        `¥${cartTotal()}`,
-    notes:              notes || 'None',
-    payment_screenshot: uploadedImageUrl || 'Upload failed - please contact us',
+    order_total:        `${toIDR(finalTotal)} (${toCNY(finalTotal)})`,
+    notes:              `${notes || 'None'}\nReferral Code: ${refCode || 'None'}\nDiscount Applied: ${refDiscount > 0 ? toIDR(refDiscount) : 'None'}`,
+    payment_screenshot: uploadedImageUrl || 'Upload failed - customer will WhatsApp',
     payment_filename:   uploadedFile.name,
   };
 
   try {
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params);
-  
-    // Save order to localStorage
+
+    // Save order locally
+    const orderId = generateOrderId();
     const orderData = {
-      orderId: generateOrderId(),
-      date: new Date().toLocaleString(),
-      items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
-      total: cartTotal(),
+      orderId,
+      date: new Date().toLocaleString('id-ID'),
+      items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price, color: i.color })),
+      total: finalTotal,
+      totalIdr: toIDR(finalTotal),
       customerName: name
     };
     saveOrder(orderData);
-  
+
+    // Mark early bird slots used (for bundles)
+    cart.forEach(item => {
+      const p = PRODUCTS.find(x => x.id === item.id);
+      if (p && p.earlyBird && item.earlyBird) incrementEarlyBird();
+    });
+
+    // Mark referral as used
+    if (refDiscount > 0) localStorage.setItem('dormbros_ref_used', '1');
+
+    // Generate referral code for THIS customer
+    const myCode = getMyReferralCode();
+
     cart = []; saveCart(); updateCartUI();
+
+    // Show success + referral link
+    document.getElementById('referralLinkDisplay').value = getReferralLink();
     showPage('success');
+
   } catch (err) {
     console.error('EmailJS error:', err);
-    alert('Submission failed. Please check your EmailJS config or try again.\n\nError: ' + (err.text || err));
+    alert('Submission failed. Please try again or contact us on WhatsApp.\n\nError: ' + (err.text || err));
     btn.textContent = 'Submit Order ✓';
     btn.disabled = false;
   }
 }
 
 // =====================================================
+//  ORDER STORAGE
+// =====================================================
+function saveOrder(orderData) {
+  const orders = JSON.parse(localStorage.getItem('dormbros_orders') || '[]');
+  orders.unshift(orderData);
+  localStorage.setItem('dormbros_orders', JSON.stringify(orders));
+}
+
+function loadAndDisplayOrders() {
+  const orders = JSON.parse(localStorage.getItem('dormbros_orders') || '[]');
+  const ordersList = document.getElementById('ordersList');
+  if (orders.length === 0) {
+    ordersList.innerHTML = '<div class="orders-empty">📦 No orders yet. Start shopping! / Belum ada pesanan. Ayo belanja!</div>';
+    return;
+  }
+  ordersList.innerHTML = orders.map(order => `
+    <div class="order-card">
+      <div class="order-header">
+        <span class="order-number">ORDER #${order.orderId}</span>
+        <span class="order-date">${order.date}</span>
+      </div>
+      <div class="order-items">
+        ${order.items.map(item => `
+          <div class="order-item">
+            <span>${item.name}${item.color ? ` (${item.color})` : ''} × ${item.qty}</span>
+            <span>${toIDR(item.price * item.qty)}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="order-total">
+        <span>Total Paid / Total Bayar</span>
+        <span>${order.totalIdr || toIDR(order.total)}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function generateOrderId() {
+  return 'DB-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+}
+
+// =====================================================
+//  RENDER FAQ — PRIORITY 5
+// =====================================================
+function renderFAQ() {
+  const container = document.getElementById('faqList');
+  container.innerHTML = FAQS.map((faq, i) => `
+    <div class="faq-item" id="faq-${i}">
+      <button class="faq-question" onclick="toggleFAQ(${i})">
+        <span>${faq.q}</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer" id="faq-answer-${i}"><p>${faq.a}</p></div>
+    </div>
+  `).join('');
+}
+
+function toggleFAQ(i) {
+  const item = document.getElementById(`faq-${i}`);
+  const answer = document.getElementById(`faq-answer-${i}`);
+  const isOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.faq-answer').forEach(el => el.classList.remove('open'));
+  // Open clicked (if it wasn't open)
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.classList.add('open');
+  }
+}
+
+// =====================================================
 //  INIT
 // =====================================================
-renderProducts();
-updateCartUI();
+fetchExchangeRate().then(() => {
+  renderProducts(); // Re-render after rate is fetched to show correct IDR prices
+  updateCartUI();
+});
+renderFAQ();
+checkIncomingReferral();
+updateCartUI(); // Initial render with fallback rate
+
+// Refresh exchange rate every 10 minutes
+setInterval(fetchExchangeRate, 10 * 60 * 1000);
 </script>
 </body>
 </html>
