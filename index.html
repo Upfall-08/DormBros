@@ -423,6 +423,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
   padding: 0 10px;
 }
 
+/* Mobile styles (768px and below) */
 @media(max-width: 768px) {
   .menu-btn {
     display: block;
@@ -437,11 +438,13 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
     background: white;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1.5rem;
-    gap: 1rem;
+    padding: 1rem;
+    gap: 0.5rem;
     transition: left 0.3s ease;
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
     z-index: 200;
+    display: flex;
+    overflow-y: auto;
   }
   
   .nav-links.open {
@@ -449,10 +452,24 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
   }
   
   .nav-links a {
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 8px 0;
     width: 100%;
     border-bottom: 1px solid var(--bdr);
+  }
+  
+  .desktop-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .mobile-categories {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
   }
   
   .botnav {
@@ -468,36 +485,65 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
   }
 }
 
+/* Desktop styles (769px and above) */
 @media(min-width: 769px) {
   .menu-btn {
     display: none;
   }
-}
-
-/* Default - show everything */
-.srch {
-  display: block;
-  flex: 1;
-  max-width: 360px;
-}
-
-/* Mobile only - hide search */
-@media(max-width: 480px) {
-  .srch {
-    display: none;
+  
+  .nav-links {
+    display: flex;
+    position: static;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    padding: 0;
+    box-shadow: none;
   }
   
-  .menu-btn {
+  .desktop-links {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  
+  .mobile-categories {
+    display: none !important;
+  }
+  
+  .srch {
     display: block;
+    flex: 1;
+    max-width: 360px;
+  }
+  
+  .nav-links a {
+    margin: 0 4px;
   }
 }
 
-/* PC/Tablet - hide menu button */
-@media(min-width: 481px) {
-  .menu-btn {
-    display: none;
+@media(max-width: 768px) {
+  .desktop-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .mobile-categories::before {
+    content: "✨ KATEGORI ✨";
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--orange);
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--orange);
   }
 }
+
 </style>
 </head>
 <body>
@@ -521,11 +567,25 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
       <div class="sdrop" id="sdrop"></div>
     </div>
     <div class="nav-links" id="navLinks">
-      <a onclick="showPage('home'); closeMobileMenu()">Shop</a>
-      <a onclick="showPage('orders'); closeMobileMenu()">My Orders</a>
-      <a onclick="showPage('home'); setTimeout(()=>document.getElementById('parents').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu()">Guide To Order</a>
-      <a onclick="showPage('home'); setTimeout(()=>document.getElementById('faq').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu()">FAQ</a>
-      <a onclick="showPage('home'); setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu()">About Us</a>
+      <!-- Desktop: Only these show -->
+      <div class="desktop-links">
+        <a onclick="showPage('home'); closeMobileMenu()">Shop</a>
+        <a onclick="showPage('orders'); closeMobileMenu()">My Orders</a>
+        <a onclick="showPage('home'); setTimeout(()=>document.getElementById('parents').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu()">Guide To Order</a>
+        <a onclick="showPage('home'); setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu()">About Us</a>
+        <a onclick="showPage('home'); setTimeout(()=>document.getElementById('faq').scrollIntoView({behavior:'smooth'}),100); closeMobileMenu()">FAQ</a>
+
+      </div>
+      <!-- Mobile only: Categories appear here -->
+      <div class="mobile-categories">
+        <a onclick="filterCategory('bundles', this); closeMobileMenu()">🎁 Bundel Hemat</a>
+        <a onclick="filterCategory('Sleep', this); closeMobileMenu()">😴 Tidur & Kasur</a>
+        <a onclick="filterCategory('Sanitary', this); closeMobileMenu()">🚿 Kamar Mandi</a>
+        <a onclick="filterCategory('Room/Personal', this); closeMobileMenu()">🪴 Kamar & Meja</a>
+        <a onclick="filterCategory('Laundry', this); closeMobileMenu()">👕 Laundry</a>
+        <a onclick="filterCategory('Kitchen', this); closeMobileMenu()">🍳 Dapur & Makan</a>
+        <a onclick="filterCategory('Stationary', this); closeMobileMenu()">✏️ Alat Tulis</a>
+      </div>
     </div>
     <button class="cart-btn" onclick="toggleCart()">🛒 Keranjang <span class="cbdg" id="cbdg">0</span></button>
     <button class="menu-btn" id="menuBtn" onclick="toggleMobileMenu()">☰</button>
