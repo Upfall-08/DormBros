@@ -4,6 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>DormBros — Perlengkapan Dorm CUHKSZ</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
@@ -52,10 +54,20 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
 .cbdg{position:absolute;top:-6px;right:-6px;background:var(--navy);color:#fff;font-size:9px;font-weight:800;width:18px;height:18px;border-radius:50%;display:none;align-items:center;justify-content:center}
 .tbar{background:var(--navy-p);border-bottom:1px solid var(--bdr);padding:7px 1.5rem}
 .tbar-in{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:1.75rem;flex-wrap:wrap}
+.tbar { display: none;}
 .tbdg{display:flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;color:var(--navy)}
 .tbdg .tico{font-size:.9rem}
-.hero{background:linear-gradient(135deg,var(--navy-d) 0%,var(--navy) 50%,var(--navy-l) 100%);padding:3.5rem 1.5rem;position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.hero{background:var(--navy-d);padding:3.5rem 1.5rem;position:relative;overflow:hidden}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("https://i.ibb.co/b5QDj1JZ/image.png");
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  opacity: 0.15;
+  pointer-events: none;
+}
 .hero-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 280px;gap:2.5rem;align-items:center;position:relative;z-index:1}
 .h-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(232,93,4,.15);border:1px solid rgba(232,93,4,.4);color:#ffb27a;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:100px;margin-bottom:1rem}
 .hero h1{font-size:clamp(1.65rem,3.2vw,2.7rem);color:#fff;line-height:1.2;margin-bottom:.6rem;font-family:'Playfair Display',serif}
@@ -69,8 +81,8 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
 .hbtn-s{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.25)}
 .hbtn-s:hover{background:rgba(255,255,255,.18)}
 .hstats{display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap}
-.hstat strong{display:block;font-size:1.4rem;color:#ffd08a;font-family:'Playfair Display',serif}
-.hstat span{font-size:.64rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.05em}
+.hstat strong{display:block;font-size:1.6rem;color:#cfcf0d;text-align: center;font-family:'Playfair Display',serif}
+.hstat span{font-size:.85rem;color:rgb(255, 255, 255);text-transform:uppercase;letter-spacing:.05em}
 .hero-vis{background:#fff;border-radius:var(--rm);padding:1.75rem;box-shadow:0 20px 50px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.75rem}
 .hero-vis img{width:100%;max-width:160px;height:auto;object-fit:contain}
 .hero-vis-cta{font-size:.72rem;font-weight:700;color:var(--mut);text-align:center;line-height:1.5}
@@ -209,16 +221,43 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
 .qctrl span{width:40px;text-align:center;font-weight:800;font-size:.9rem;border-left:1px solid var(--bdr);border-right:1px solid var(--bdr);height:38px;line-height:38px}
 .atcbtn{flex:1;padding:11px;background:var(--navy);color:#fff;border:none;border-radius:100px;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:800;transition:.2s;cursor:pointer}
 .atcbtn:hover{background:var(--orange)}
-.abtsec{background:linear-gradient(135deg,var(--navy-d) 0%,var(--navy) 100%);padding:4rem 1.5rem}
+.abtsec{background:linear-gradient(135deg,var(--navy-d) 0%,var(--navy) 100%);padding:4rem 1.5rem;position:relative;overflow:hidden}
+.abtsec::after{content:'';position:absolute;inset:0;background-image:url("https://i.ibb.co/b5QDj1JZ/image.png");background-repeat:repeat;background-size:150px 150px;opacity:0.08;pointer-events:none}
 .abtin{max-width:900px;margin:0 auto;text-align:center}
 .abttag{display:inline-block;background:rgba(232,93,4,.15);border:1px solid rgba(232,93,4,.4);color:#ffb27a;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;padding:4px 12px;border-radius:100px;margin-bottom:.8rem}
 .abtin h2{font-family:'Playfair Display',serif;font-size:1.65rem;color:#fff;margin-bottom:.8rem;line-height:1.2}
 .abtin p{color:rgba(255,255,255,.62);font-size:.84rem;line-height:1.72;margin-bottom:2rem}
-.howgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:left}
+.howgrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media(max-width: 768px) {
+  .howgrid {
+    grid-template-columns: 1fr;
+  }
+}
 .hstep{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:1.1rem}
-.hnum{font-family:'Playfair Display',serif;font-size:1.7rem;color:#ffd08a;margin-bottom:.35rem}
-.hstep strong{display:block;font-size:.8rem;color:#fff;margin-bottom:3px}
-.hstep div{font-size:.74rem;color:rgba(255,255,255,.52);line-height:1.5}
+.hnum {
+  color: #FFD700 !important;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  margin-bottom: 0.35rem;
+}
+
+.hstep strong {
+  color: #FFD700;
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 4px;
+}
+.hstep div div {
+  color: rgba(255, 255, 255, 0.816);
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
 .faqsec{padding:3.5rem 1.5rem;background:var(--off)}
 .faqin{max-width:680px;margin:0 auto}
 .fq{background:#fff;border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:.65rem;overflow:hidden;box-shadow:var(--sh)}
@@ -296,7 +335,8 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
 .ocdate{font-size:.7rem;color:var(--mut)}
 .ocitem{display:flex;justify-content:space-between;font-size:.76rem;padding:3px 0}
 .octot{display:flex;justify-content:space-between;font-weight:800;color:var(--navy);padding:.5rem 0;margin-top:.35rem;border-top:2px solid var(--bdr)}
-.footer{background:var(--navy-d);padding:2.5rem 1.5rem 1.5rem}
+.footer{background:var(--navy-d);padding:2.5rem 1.5rem 1.5rem;position:relative;overflow:hidden}
+.footer::after{content:'';position:absolute;inset:0;background-image:url("https://i.ibb.co/b5QDj1JZ/image.png");background-repeat:repeat;background-size:150px 150px;opacity:0.06;pointer-events:none}
 .ftin{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem}
 .ftbrand{display:flex;align-items:center;gap:9px;margin-bottom:.65rem}
 .ftbrand img{height:32px;width:auto}
@@ -310,7 +350,8 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
 .fcon strong{color:#ffd08a}
 .fbot{border-top:1px solid rgba(255,255,255,.08);padding-top:1rem;text-align:center;font-size:.68rem;color:rgba(255,255,255,.28)}
 .fbot strong{color:#ffd08a}
-.floatwa{position:fixed;bottom:88px;right:16px;z-index:999;width:50px;height:50px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:.2s;text-decoration:none}
+.floatwa{position:fixed;bottom:88px;right:16px;z-index:999;width:50px;height:50px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:.2s;text-decoration:none}
+.floatwa img{width:28px;height:28px;object-fit:contain;}
 .floatwa:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(0,0,0,.3)}
 .fwtip{position:absolute;right:58px;background:rgba(15,35,64,.82);color:#fff;font-size:.62rem;font-weight:700;padding:3px 9px;border-radius:5px;white-space:nowrap;opacity:0;pointer-events:none;transition:.2s;font-family:'Nunito',sans-serif}
 .floatwa:hover .fwtip{opacity:1}
@@ -375,15 +416,18 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
 </head>
 <body>
 
-<a class="floatwa" href="https://wa.me/628159161856" target="_blank">💬<span class="fwtip">WhatsApp: +62 815-9161-856</span></a>
+<a class="floatwa" href="https://wa.me/628159161856" target="_blank">
+  <img src="https://i.ibb.co/zTcVMnnv/whatsapplogo.png" alt="WhatsApp" style="width: 52px; height: 52px;">
+  <span class="fwtip">WhatsApp: +62 815-9161-856</span>
+</a>
 
 <div class="deadline">⏰ Batas Pemesanan / Last Order: <strong>5 Agustus 2026</strong></div>
 
 <nav class="navbar">
   <div class="nav-in">
     <div class="logo" onclick="showPage('home')">
-      <div class="logo-text">DORM<span>BROS</span></div>
-      <div class="logo-sub">University Essentials</div>
+      <div class="logo-text" style="font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 1px; font-weight: 400;">DORM<span style="font-family: 'Bebas Neue', sans-serif; color: var(--orange);">BROS</span></div>
+      <img src="dormbrosnobg.png" alt="DormBros Logo" style="height: 45px; width: auto; object-fit: contain;">
     </div>
     <div class="srch">
       <span class="si">🔍</span>
@@ -393,8 +437,8 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
     <div class="nav-links">
         <a onclick="showPage('home')">Shop</a>
         <a onclick="showPage('orders')">My Orders</a>
-        <a onclick="showPage('home'); setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),100)">About Us</a>
         <a onclick="showPage('home'); setTimeout(()=>document.getElementById('parents').scrollIntoView({behavior:'smooth'}),100)">Guide To Order</a>
+        <a onclick="showPage('home'); setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),100)">About Us</a>
         <a onclick="showPage('home'); setTimeout(()=>document.getElementById('faq').scrollIntoView({behavior:'smooth'}),100)">FAQ</a>
         <a onclick="toggleCart()">Cart 🛒</a>
     </div>
@@ -406,13 +450,11 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
   <div class="tbar-in">
     <div class="tbdg"><span class="tico">✅</span> Student-Run</div>
     <div class="tbdg"><span class="tico">🚚</span> Gratis Pengiriman</div>
-    <div class="tbdg"><span class="tico">🔒</span> BCA / WeChat / Alipay</div>
+    <div class="tbdg"><span class="tico">🔒</span> BCA / Alipay</div>
     <div class="tbdg"><span class="tico">📱</span> WhatsApp Support</div>
     <div class="tbdg"><span class="tico">🇮🇩</span> Indonesian-Friendly</div>
   </div>
 </div>
-
-<div class="del-notice">🚚 <span>GRATIS</span> Pengiriman ke Lobby Dorm CUHKSZ — Diantar sebelum tanggal kedatanganmu</div>
 
 <div class="botnav">
   <button class="bnb on" id="bnb-shop" onclick="showPage('home')">
@@ -486,22 +528,24 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
     <div>
       <div class="h-tag">⭐ Toko Resmi Mahasiswa CUHKSZ</div>
       <h1>Perlengkapan Dorm <em>Lengkap & Terpercaya</em></h1>
-      <p class="hero-sub">Semua kebutuhan dorm diantarkan langsung ke lobby CUHKSZ sebelum kamu tiba.</p>
-      <p class="hero-id">🇮🇩 Dorm essentials delivered to CUHKSZ lobby before your arrival date.</p>
+      <p class="hero-sub">All items will be delivered to your dorm lobby before your arrival.</p>
       <div class="hbtns">
-        <button class="hbtn hbtn-p" onclick="scrollToSec('bundles')">🎁 Lihat Bundel Hemat</button>
+        <button class="hbtn hbtn-p" onclick="scrollToSec('bundles')"> Lihat Bundel Hemat</button>
         <button class="hbtn hbtn-s" onclick="scrollToSec('sec-Sleep')">Semua Produk ↓</button>
       </div>
       <div class="hstats">
-        <div class="hstat"><strong>105</strong><span>Produk</span></div>
-        <div class="hstat"><strong>8</strong><span>Bundel</span></div>
-        <div class="hstat"><strong>GRATIS</strong><span>Pengiriman</span></div>
+        <div class="hstat"><strong>100+</strong><span>Products</span></div>
+        <div class="hstat"><strong>8</strong><span>Bundles</span></div>
+        <div class="hstat"><strong>Free</strong><span>Shipping</span></div>
+        <div class="hstat"><strong>Fully</strong><span>Trusted</span></div>
+        <div class="hstat"><strong>Supports</strong><span>BCA/Alipay</span></div>
+        <div class="hstat"><strong>Fast</strong><span>Response</span></div>
+
       </div>
     </div>
-    <div class="hero-vis">
-      <div style="font-size:2.5rem;font-family:'Playfair Display',serif;color:var(--navy);font-weight:700">DORM<span style="color:var(--orange)">BROS</span></div>
-      <div class="hero-vis-cta">CUHKSZ Dorm Store<br/>🇮🇩 Indonesian-Friendly</div>
-    </div>
+<div class="hero-vis">
+  <div style="height: 200px; display: flex; align-items: center; justify-content: center;">
+    <img src="https://i.ibb.co/HD9f0Vvx/dormbros-logo.png" alt="DormBros Logo" style="width: auto; height: 320px; max-width: 100%; object-fit: contain; margin-bottom: 0.5rem;">
   </div>
 </section>
 
@@ -515,13 +559,12 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
       <button class="catbtn" onclick="filterCategory('Sanitary',this)"><span class="ci">🚿</span>Kamar Mandi</button>
       <button class="catbtn" onclick="filterCategory('Room/Personal',this)"><span class="ci">🪴</span>Kamar & Meja</button>
       <button class="catbtn" onclick="filterCategory('Laundry',this)"><span class="ci">👕</span>Laundry</button>
-      <button class="catbtn" onclick="filterCategory('Kitchen/Food',this)"><span class="ci">🍳</span>Dapur & Makan</button>
+      <button class="catbtn" onclick="filterCategory('Kitchen',this)"><span class="ci">🍳</span>Dapur & Makan</button>
       <button class="catbtn" onclick="filterCategory('Stationary',this)"><span class="ci">✏️</span>Alat Tulis</button>
     </div>
     <div class="sbs scontact">
       <div class="sbt">Kontak / Contact</div>
       <div class="scontact-item">💬 <span>WA: <strong>+62 815-9161-856</strong></span></div>
-      <div class="scontact-item">📸 <span>IG: <strong>@dormbros</strong></span></div>
       <div class="scontact-item">📧 <span>dormbros512@gmail.com</span></div>
     </div>
   </aside>
@@ -549,7 +592,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
     </div>
     <div class="secg" id="sec-Kitchen" style="scroll-margin-top:80px">
       <div class="sechdr"><span class="sico">🍳</span><h2>Dapur & Makan / Kitchen & Dining</h2></div>
-      <div class="pgrid" id="g-Kitchen"></div>
+      <div class="pgrid" id="g-Kitchen/Food"></div>
     </div>
     <div class="secg" id="sec-Stationary" style="scroll-margin-top:80px">
       <div class="sechdr"><span class="sico">✏️</span><h2>Alat Tulis / Stationery</h2></div>
@@ -558,34 +601,29 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
   </main>
 </div>
 
-<section class="abtsec" id="about">
-  <div class="abtin">
-    <div class="abttag">Siapa Kami / About Us</div>
-    <h2>Mahasiswa bantu mahasiswa pindahan.</h2>
-    <p>DormBros adalah toko yang dijalankan mahasiswa CUHKSZ. Kami tahu persis apa yang dibutuhkan di dorm, dan kami antar langsung ke lobby sebelum kamu tiba.<br/><em style="opacity:.65;font-size:.8rem">Student-run store delivering dorm essentials to your CUHKSZ lobby before you arrive.</em></p>
-    <div class="howgrid">
-      <div class="hstep"><div class="hnum">01</div><div><strong>Pilih & Pesan</strong>Browse produk atau bundel, tambah ke keranjang.</div></div>
-      <div class="hstep"><div class="hnum">02</div><div><strong>Bayar & Upload</strong>Transfer BCA/WeChat/Alipay, upload screenshot.</div></div>
-      <div class="hstep"><div class="hnum">03</div><div><strong>Kami Antar</strong>Diantar ke lobby dorm sebelum tanggal kedatanganmu!</div></div>
+<section class="parsec" id="parents">
+  <div class="parin">
+    <div class="partag">Guide To Order</div>
+    <h2>How To Order From Our Website / Cara Memesan Dari Situs Web Kami</h2>
+    <p>Ikuti prosedur sederhana di bawah ini. <em style="font-size:.8rem">/ Follow the simple procedure below.</em></p>
+    <div class="pargrid">
+      <div class="parstep"><div class="pico">🛍️</div><strong>1. Pilih Barang</strong><p>Browse produk kita dan tambah ke keranjang.</p></div>
+      <div class="parstep"><div class="pico">💳</div><strong>2. Check-Out</strong><p>Isi data Anda dan unggah bukti pembayaran.</p></div>
+      <div class="parstep"><div class="pico">⏱️</div><strong>3. Menunggu Konfirmasi</strong><p>Tunggu email konfirmasi dan pesan WA dari kami.</p></div>
+      <div class="parstep"><div class="pico">📦</div><strong>4. Kami Antar</strong><p>Barang Anda tiba di lobby dorm sebelum tanggal kedatangan.</p></div>
+    </div>
+    <div class="parcon">
+      📞 <strong>Hubungi Kami:</strong> WhatsApp <strong>+62 815-9161-856</strong> &nbsp;|&nbsp; 📧 dormbros512@gmail.com<br/>
+      <em style="font-size:.75rem">Jika Anda mengalami masalah, jangan ragu untuk menghubungi kami.</em>
     </div>
   </div>
 </section>
 
-<section class="parsec" id="parents">
-  <div class="parin">
-    <div class="partag">👨‍👩‍👧 Untuk Orang Tua / For Parents</div>
-    <h2>Cara Memesan untuk Anak / How Parents Can Order</h2>
-    <p>Membantu anak pindah ke CUHKSZ? Anda bisa memesan dari Indonesia via transfer BCA. Semua barang akan diantarkan ke dorm anak sebelum mereka tiba.<br/><em style="font-size:.8rem">Helping your child move to CUHKSZ? Order from Indonesia via BCA transfer — items delivered to their dorm lobby.</em></p>
-    <div class="pargrid">
-      <div class="parstep"><div class="pico">🛍️</div><strong>1. Pilih Barang</strong><p>Browse produk bersama anak, tambah ke keranjang.</p></div>
-      <div class="parstep"><div class="pico">💳</div><strong>2. Transfer BCA</strong><p>a/n Michelle V. Anwar — Rek. 2680176518. Cantumkan nama anak.</p></div>
-      <div class="parstep"><div class="pico">📸</div><strong>3. Upload Bukti</strong><p>Screenshot transfer di-upload saat checkout.</p></div>
-      <div class="parstep"><div class="pico">📦</div><strong>4. Kami Antar</strong><p>Barang tiba di lobby dorm sebelum tanggal kedatangan anak.</p></div>
-    </div>
-    <div class="parcon">
-      📞 <strong>Hubungi Kami:</strong> WhatsApp <strong>+62 815-9161-856</strong> &nbsp;|&nbsp; 📧 dormbros512@gmail.com<br/>
-      <em style="font-size:.75rem">Kami bisa berbicara Bahasa Indonesia! / We speak Bahasa Indonesia!</em>
-    </div>
+<section class="abtsec" id="about">
+  <div class="abtin">
+    <div class="abttag">Siapa Kami / About Us</div>
+    <h2>Students Helping New Students Move.</h2>
+    <p>DormBros lahir dari kebutuhan nyata mahasiswa Indonesia di CUHKSZ. Kami tahu persis apa yang kamu butuhkan untuk memulai hidup di dorm karena kami juga mengalaminya sendiri.<br/><em style="opacity:.65;font-size:.8rem"></em></p>
   </div>
 </section>
 
@@ -607,7 +645,6 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
     <div class="ftcol">
       <h4>Kontak / Contact</h4>
       <div class="fcon">💬 <span>WA: <strong>+62 815-9161-856</strong></span></div>
-      <div class="fcon">📸 <span>IG: <strong>@dormbros</strong></span></div>
       <div class="fcon">📧 <span>dormbros512@gmail.com</span></div>
     </div>
     <div class="ftcol">
@@ -619,7 +656,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
     </div>
   </div>
   <div class="fbot">
-    <p>© 2026 DormBros · CUHKSZ · Dibuat dengan ❤️ untuk mahasiswa Indonesia</p>
+    <p>© 2026 DormBros · Dibuat dengan ❤️ untuk mahasiswa Indonesia di CUHKSZ</p>
     <p style="margin-top:.3rem">⚠️ Batas pemesanan terakhir: <strong>5 Agustus 2026</strong> untuk pengiriman sebelum semester dimulai.</p>
   </div>
 </footer>
@@ -648,8 +685,21 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
         <div class="paybox">
           <h4>💳 Cara Pembayaran</h4>
           <p>Transfer total ke salah satu:</p>
-          <div class="payacc"><strong>BCA Transfer</strong><br/>a/n Michelle Vanessa Anwar<br/>Rek: <span class="payhi">2680176518</span></div>
-          <div class="payacc"><strong>WeChat Pay / Alipay</strong><br/>ID: <span class="payhi">dormbros2026</span></div>
+          
+          <div class="payacc">
+            <strong>BCA Transfer</strong><br/>
+            a/n Givon Ryan Tjandra<br/>
+            Rek: <span class="payhi">4190190299</span>
+          </div>
+          
+          <div class="payacc">
+            <strong>Alipay</strong><br/>
+            ID: <span class="payhi">+86 13113661260</span>
+            <div style="margin-top: 10px;">
+              <img src="https://i.ibb.co/Gf9rVh96/image.png" alt="Alipay QR Code" style="width: 250px; height: 250px; object-fit: contain;">
+            </div>
+          </div>
+          
           <p style="margin-top:.4rem;font-size:.74rem">Kurs tetap: <strong>Rp 2.650 = ¥1</strong>. Selesaikan dalam 24 jam.</p>
         </div>
       </div>
@@ -657,15 +707,14 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
         <div class="fsec">
           <div class="fsect">👤 Data Diri / Personal Info</div>
           <div class="frow2">
-            <div class="fg"><label>Nama Lengkap / Full Name *</label><input type="text" id="cName" placeholder="Nama kamu"/></div>
-            <div class="fg"><label>NIM / Student ID *</label><input type="text" id="cSID" placeholder="e.g. 123456"/></div>
+            <div class="fg"><label>Nama Lengkap / Full Name *</label><input type="text" id="cName" placeholder="Nama Kamu"/></div>
           </div>
           <div class="fg"><label>Email *</label><input type="email" id="cEmail" placeholder="email@example.com"/></div>
           <div class="fg"><label>WhatsApp (+62) *</label><input type="tel" id="cWA" placeholder="+62 815-xxxx-xxxx"/></div>
         </div>
         <div class="fsec">
           <div class="fsect">🏠 Pengiriman / Delivery Info</div>
-          <div class="fg"><label>College & Nomor Kamar / Room *</label><input type="text" id="cRoom" placeholder="e.g. Harmonia College, Room 402"/></div>
+          <div class="fg"><label>College & Nomor Kamar / Room *</label><input type="text" id="cRoom" placeholder="e.g. College Muse B Room 402"/></div>
           <div class="fg">
             <label>📅 Tanggal Kedatangan / Arrival Date *</label>
             <input type="date" id="cArr" onchange="updateArrival()"/>
@@ -688,7 +737,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
         </div>
         <div class="fsec">
           <div class="fsect">📝 Catatan / Notes (opsional)</div>
-          <div class="fg"><textarea id="cNotes" rows="3" placeholder="Permintaan khusus / Special requests..."></textarea></div>
+          <div class="fg"><textarea id="cNotes" rows="3" placeholder="Permintaan barang khusus/ Special item requests.."></textarea></div>
         </div>
         <button class="subbtn" id="subbtn" onclick="submitOrder()">✅ Kirim Pesanan / Submit Order</button>
       </div>
@@ -1404,17 +1453,30 @@ function addBundleToCartWithSelections() {
 function filterCategory(cat, btn) {
   document.querySelectorAll('.catbtn').forEach(b => b.classList.remove('on'));
   if(btn) btn.classList.add('on');
+  
+  // Show all sections
   const bundlesSec = document.getElementById('bundles');
-  const sections = ['Sleep', 'Sanitary', 'Room/Personal', 'Laundry', 'Kitchen/Food', 'Stationary'];
-  if(cat === 'all') {
-    if(bundlesSec) bundlesSec.style.display = '';
-    sections.forEach(c => { const sec = document.getElementById(`sec-${c === 'Room/Personal' ? 'Room' : c}`); if(sec) sec.style.display = ''; });
-  } else if(cat === 'bundles') {
-    if(bundlesSec) bundlesSec.style.display = '';
-    sections.forEach(c => { const sec = document.getElementById(`sec-${c === 'Room/Personal' ? 'Room' : c}`); if(sec) sec.style.display = 'none'; });
-  } else {
-    if(bundlesSec) bundlesSec.style.display = 'none';
-    sections.forEach(c => { const sec = document.getElementById(`sec-${c === 'Room/Personal' ? 'Room' : c}`); if(sec) sec.style.display = c === cat ? '' : 'none'; });
+  const sections = ['Sleep', 'Sanitary', 'Room/Personal', 'Laundry', 'Kitchen', 'Stationary'];
+  
+  if(bundlesSec) bundlesSec.style.display = '';
+  sections.forEach(c => { 
+    const secId = c === 'Room/Personal' ? 'Room' : c;
+    const sec = document.getElementById(`sec-${secId}`);
+    if(sec) sec.style.display = '';
+  });
+  
+  // Scroll to the selected section
+  if(cat !== 'all' && cat !== 'bundles') {
+    let targetId = cat;
+    if (cat === 'Room/Personal') targetId = 'Room';
+    else if (cat === 'Kitchen') targetId = 'Kitchen';
+    
+    const targetSection = document.getElementById(`sec-${targetId}`);
+    if(targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  } else if (cat === 'bundles') {
+    document.getElementById('bundles').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
@@ -1549,14 +1611,13 @@ function removeUpload() {
 
 async function submitOrder() {
   const name = document.getElementById('cName').value.trim();
-  const sid = document.getElementById('cSID').value.trim();
   const email = document.getElementById('cEmail').value.trim();
   const wa = document.getElementById('cWA').value.trim();
   const room = document.getElementById('cRoom').value.trim();
   const arr = document.getElementById('cArr').value;
   const notes = document.getElementById('cNotes').value.trim();
   
-  if(!name||!sid||!email||!wa||!room||!arr) { 
+  if(!name||!email||!wa||!room||!arr) { 
     alert('Mohon isi semua field wajib'); 
     return; 
   }
@@ -1598,7 +1659,6 @@ async function submitOrder() {
   const emailParams = {
     order_id: orderId,                        // ← NEW: Order ID
     customer_name: name,
-    student_id: sid,
     customer_email: email,
     contact: wa,
     room: room,
@@ -1668,7 +1728,7 @@ async function submitOrder() {
 const FAQS = [
   {q:'Bagaimana cara memesan?',a:'1) Pilih produk → 2) Tambah ke keranjang → 3) Isi data & tanggal kedatangan → 4) Transfer pembayaran → 5) Upload screenshot → 6) Submit! Konfirmasi via WhatsApp dalam 24 jam.'},
   {q:'Kapan pesanan dikirim?',a:'Barang diantar SEBELUM tanggal kedatanganmu, 1-2 hari sebelumnya. Masukkan tanggal kedatangan saat checkout.'},
-  {q:'Metode pembayaran?',a:'BCA Transfer: a/n Michelle Vanessa Anwar — Rek. 2680176518. WeChat/Alipay: dormbros2026. Kurs: Rp 2.650 = ¥1.'},
+  {q:'Metode pembayaran?',a:'BCA Transfer: a/n Givon Ryan Tjandra — Rek. 4190190299. Alipay: +86 13113661260. Kurs: Rp 2.650 = ¥1.'},
   {q:'Ada biaya pengiriman?',a:'GRATIS! Semua pesanan diantar ke lobby dorm CUHKSZ.'},
   {q:'Ukuran kasur/kelambu?',a:'Shaw & Diligentia → 80×190cm. Harmonia, Muse, Minerva, Ling → 90×200cm.'}
 ];
