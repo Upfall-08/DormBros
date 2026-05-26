@@ -207,7 +207,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
 .sw[data-c="Khaki"]{background:#b5a44e}
 .sw[data-c="Dark Grey"]{background:#4b5563}
 .sw[data-c="Off White"]{background:#fafaf5;border-color:#ccc}
-.sw[data-c="Space Grey"]{background:#6b7280}
+.sw[data-c="Space Grey"]{background:#6e7177}
 .sw[data-c="Elegant Black"]{background:#1f2937}
 .sw[data-c="Matcha Green"]{background:#84cc16}
 .sw[data-c="Milk White"]{background:#fafaf8;border-color:#ddd}
@@ -227,6 +227,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
 .abttag{display:inline-block;background:rgba(232,93,4,.15);border:1px solid rgba(232,93,4,.4);color:#ffb27a;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;padding:4px 12px;border-radius:100px;margin-bottom:.8rem}
 .abtin h2{font-family:'Playfair Display',serif;font-size:1.65rem;color:#fff;margin-bottom:.8rem;line-height:1.2}
 .abtin p{color:rgba(255,255,255,.62);font-size:.84rem;line-height:1.72;margin-bottom:2rem}
+.abtin p{color:rgba(255,255,255,.62);font-size:.84rem;line-height:1.72;margin-bottom:0.1rem}
 .howgrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -769,7 +770,8 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
   <div class="abtin">
     <div class="abttag">Siapa Kami / About Us</div>
     <h2>Students Helping New Students Move.</h2>
-    <p>DormBros lahir dari kebutuhan nyata mahasiswa Indonesia di CUHKSZ. Kami tahu persis apa yang kamu butuhkan untuk memulai hidup di dorm karena kami juga mengalaminya sendiri.<br/><em style="opacity:.65;font-size:.8rem"></em></p>
+    <p>DormBros lahir dari kebutuhan nyata mahasiswa Indonesia di CUHKSZ. Kami tahu persis apa yang kamu butuhkan untuk memulai hidup di dorm karena kami juga mengalaminya sendiri. We know exactly how stressful it is to move to a new country — finding a mattress, buying toiletries, handling everything at once.<br><span style="color: #FFD700; font-weight: 700;">That's why we're here.</span></p>
+ <br/><em style="opacity:.65;font-size:.8rem"></em></p>
   </div>
 </section>
 
@@ -784,7 +786,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
   <div class="ftin">
     <div>
       <div class="ftbrand">
-        <div class="ftn">DORM<span>BROS</span></div>
+        <div style="font-family: 'Bebas Neue', cursive; font-size: 1.8rem; letter-spacing: 1px; color: white;">DORM<span style="color: var(--orange);">BROS</span></div>
       </div>
       <p class="ftp">Toko perlengkapan dorm untuk mahasiswa Indonesia di CUHKSZ. Terpercaya, terjangkau, tepat waktu.</p>
     </div>
@@ -1032,14 +1034,14 @@ const PRODUCTS = [
 ];
 
 const BUNDLES = [
-  {id:"B001",name:"Paket Tidur Hemat",en:"Low-Price Sleep Bundle",price:425,items:["Mattress 6cm Miniso 80x190/90x200 (P013)","Bedsheet 80x190/90x200 (P003)","Pillow Low (P017)","Blanket Normal (P008)","Blanket Cover (P005)","Eyes Cover (P011)"],image:"https://i.ibb.co/5X7jRtm6/image.png"},
-  {id:"B002",name:"Paket Tidur Standar",en:"Standard Sleep Bundle",price:793,items:["Mattress 10cm Miniso 80x190/90x200 (P015)","Bedsheet 80x190/90x200 (P003)","Pillow High (P019)","Blanket Ikea Warm (P007)","Pillow+Blanket Cover IKEA (P020)","Bolster (P009)","Bolster Case (P010)","Eyes Cover (P011)"],image:"https://i.ibb.co/67HXm4tV/image.png"},
-  {id:"B003",name:"Paket Tidur Premium",en:"Premium Sleep Bundle",price:1243,items:["Mattress 10cm IKEA 90x200 (P012)","Bedsheet 90x200/90x200 (P004)","Pillow High (P019)","Blanket Ikea Extra Warm (P006)","Pillow+Blanket Cover IKEA (P020)","Bolster (P009)","Bolster Case (P010)","Bedcurtain 80x190/90x200 Miniso (P002)","Eyes Cover (P011)"],image:"https://i.ibb.co/pv5p5ZsQ/image.png"},
-  {id:"B004",name:"Paket Kamar Mandi",en:"Bathroom Bundle",price:199,items:["Shower Basket (P039)","Soap Set (P027)","Toothbrush Set (P028)","Bathroom Sandals (P021)","Bath Towel Cotton 70x140 (P025)","Dry Tissue (P030)","Wet Tissue (P040)","Portable Bidet (P037)"],image:"https://i.ibb.co/kgrg51Ln/image.png"},
-  {id:"B005",name:"Paket Kamar",en:"Room Bundle",price:271,items:["Sticker Hooks Thick (P060)","Table Box Medium (P064)","Table Box Small (P063)","Trashbin (P067)","Trashbags (P066)","Extension Cord (P049)","Standing Desk Lamp (P056)","Mirror With Light (P055)","Stationary Organiser (P057)","Desk Organiser 1 (P044)","Broom/Dustpan/Mop Set (P042)","Bedside Organizer (P041)"],image:"https://i.ibb.co/C5HxdMhX/image.png"},
-  {id:"B006",name:"Paket Laundry",en:"Laundry Bundle",price:147,items:["Laundry Basket (P077)","Laundry Bag Large (P076)","Laundry Bag Medium (P075)","Laundry Bag Small (P074)","Detergent Pods (P071)","Hangers (P073)","Clothes Peg (P070)","Softener (P079)"],image:"https://i.ibb.co/Ps3Wp68F/image.png"},
-  {id:"B007",name:"Paket Dapur",en:"Kitchen Bundle",price:312,items:["Electric Pot (P082)","Plate & Bowl Set (P086)","Frying Pan (P083)","Knife Set (P084)","Microwavable Lunchbox (P085)","Utensil Set (P088)","Cup/Mug Set (P081)","Water Bottle 1000ml (P090)"],image:"https://i.ibb.co/WvMhFkNj/image.png"},
-  {id:"B008",name:"Paket Alat Tulis",en:"Stationery Bundle",price:154,items:["Stationary Set (P093)","Pen (P092)","Scissor+Cutter Set (P094)","Notebook B5 (P106)","Pencil Case (P097)","Highlighters (P098)","Double Tape (P100)","Heavy Duty Double Tape (P101)","Correction Tape (P103)","Gluestick (P105)"],image:"https://i.ibb.co/JRtnL4x0/image.png"}
+  {id:"B001",name:"Paket Tidur Hemat",en:"Low-Price Sleep Bundle",price:390,items:["Mattress 6cm Miniso 80x190/90x200 (P013)","Bedsheet 80x190/90x200 (P003)","Pillow Low (P017)","Blanket Normal (P008)","Blanket Cover (P005)","Eyes Cover (P011)"],image:"https://i.ibb.co/5X7jRtm6/image.png"},
+  {id:"B002",name:"Paket Tidur Standar",en:"Standard Sleep Bundle",price:720,items:["Mattress 10cm Miniso 80x190/90x200 (P015)","Bedsheet 80x190/90x200 (P003)","Pillow High (P019)","Blanket Ikea Warm (P007)","Pillow+Blanket Cover IKEA (P020)","Bolster (P009)","Bolster Case (P010)","Eyes Cover (P011)"],image:"https://i.ibb.co/67HXm4tV/image.png"},
+  {id:"B003",name:"Paket Tidur Premium",en:"Premium Sleep Bundle",price:1130,items:["Mattress 10cm IKEA 90x200 (P012)","Bedsheet 90x200/90x200 (P004)","Pillow High (P019)","Blanket Ikea Extra Warm (P006)","Pillow+Blanket Cover IKEA (P020)","Bolster (P009)","Bolster Case (P010)","Bedcurtain 80x190/90x200 Miniso (P002)","Eyes Cover (P011)"],image:"https://i.ibb.co/pv5p5ZsQ/image.png"},
+  {id:"B004",name:"Paket Kamar Mandi",en:"Bathroom Bundle",price:210,items:["Shower Basket (P039)","Soap Set (P027)","Toothbrush Set (P028)","Bathroom Sandals (P021)","Bath Towel Cotton 70x140 (P025)","Dry Tissue (P030)","Wet Tissue (P040)","Portable Bidet (P037)"],image:"https://i.ibb.co/kgrg51Ln/image.png"},
+  {id:"B005",name:"Paket Kamar",en:"Room Bundle",price:250,items:["Sticker Hooks Thick (P060)","Table Box Medium (P064)","Table Box Small (P063)","Trashbin (P067)","Trashbags (P066)","Extension Cord (P049)","Standing Desk Lamp (P056)","Mirror With Light (P055)","Stationary Organiser (P057)","Desk Organiser 1 (P044)","Broom/Dustpan/Mop Set (P042)","Bedside Organizer (P041)"],image:"https://i.ibb.co/C5HxdMhX/image.png"},
+  {id:"B006",name:"Paket Laundry",en:"Laundry Bundle",price:130,items:["Laundry Basket (P077)","Laundry Bag Large (P076)","Laundry Bag Medium (P075)","Laundry Bag Small (P074)","Detergent Pods (P071)","Hangers (P073)","Clothes Peg (P070)","Softener (P079)"],image:"https://i.ibb.co/Ps3Wp68F/image.png"},
+  {id:"B007",name:"Paket Dapur",en:"Kitchen Bundle",price:235,items:["Electric Pot (P082)","Plate & Bowl Set (P086)","Frying Pan (P083)","Knife Set (P084)","Microwavable Lunchbox (P085)","Utensil Set (P088)","Cup/Mug Set (P081)","Water Bottle 1000ml (P090)"],image:"https://i.ibb.co/WvMhFkNj/image.png"},
+  {id:"B008",name:"Paket Alat Tulis",en:"Stationery Bundle",price:130,items:["Stationary Set (P093)","Pen (P092)","Scissor+Cutter Set (P094)","Notebook B5 (P106)","Pencil Case (P097)","Highlighters (P098)","Double Tape (P100)","Heavy Duty Double Tape (P101)","Correction Tape (P103)","Gluestick (P105)"],image:"https://i.ibb.co/JRtnL4x0/image.png"}
 ];
 
 const productIdsInBundles = new Set();
@@ -1421,6 +1423,19 @@ function renderBundleDetailModal(bundle) {
   const html = `
     <div style="margin-bottom: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: center;">
+      ${(bundle.id === 'B001' || bundle.id === 'B002' || bundle.id === 'B003') ? `
+      <div style="background: var(--orange-p); border: 1px solid var(--orange); border-radius: var(--rs); padding: 12px; margin-bottom: 1rem;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span style="font-size: 1.2rem;">⚠️</span>
+          <strong style="color: var(--orange);">Info Ukuran Kasur / Mattress Size Info</strong>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--txt); margin: 0;">
+          <strong>Shaw College & Diligentia College:</strong> 80×190 cm<br>
+          <strong>Harmonia, Muse, Minerva, Ling College:</strong> 90×200 cm<br>
+          Pilih ukuran yang sesuai dengan college kamu di atas.
+        </p>
+      </div>
+      ` : ''}
         <div>
           <div class="mbdg mbdg-b" style="display: inline-block;">BUNDEL — ${bundle.id}</div>
           <h2 style="font-size: 1.5rem; color: var(--navy); margin-top: 0.5rem;">${bundle.name}</h2>
