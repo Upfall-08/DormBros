@@ -640,7 +640,13 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
       <div class="mname" id="mname"></div>
       <div class="mpm" id="mpm"></div>
       <div class="mdet" id="mdet"></div>
-      <div id="mdorminfo" style="display:none" class="dorminfo">⚠️ <strong>Ukuran bergantung college kamu / Size depends on your college assignment.</strong> Shaw College & Diligentia → 80×190cm. Harmonia, Muse, Minerva, Ling → 90×200cm. Pilih ukuran yang sesuai dengan dormmu.</div>
+      <div id="mdorminfo" style="display:none" class="dorminfo">
+        ⚠️ <strong>Ukuran bergantung college kamu / Size depends on your college assignment.</strong><br>
+        Shaw College & Diligentia → 80×190cm.<br>
+        Harmonia, Muse, Minerva, Ling → 90×200cm.<br><br>
+        📌 <strong>Belum tahu college/dorm kamu?</strong> Pilih ukuran 80×190cm dulu, nanti kami akan konfirmasi ulang via WhatsApp sebelum pesanan diproses.<br>
+        <em>Don't know your college/dorm yet? Just pick 80×190cm first, we will confirm again via WhatsApp before processing your order.</em>
+      </div>
       <div id="mcolwrap" style="display:none">
         <label class="molbl">Pilih Warna / Choose Color *</label>
         <div class="swats" id="mswats"></div>
@@ -927,8 +933,8 @@ emailjs.init(EMAILJS_PUBLIC_KEY);
 const PRODUCTS = [
   {id:"P001",name:"Bedcurtain 80x190 Miniso",cat:"Sleep",price:210,details:"Miniso Blackout Mosquito Net/Bed Curtain. Full 5 sided coverage, heat insulating bed canopy. Perfect for privacy and mosquito protection. Colors: Navy Blue/Grey/Beige",shortDesc:"Blackout bed curtain with mosquito net, 80x190cm",desc:"A complete 5-sided bed canopy that blocks light and keeps mosquitoes away. Heat insulating material keeps you cool in summer. Perfect for dorm privacy.",descId:"Kelambu anti nyamuk 5 sisi, bisa meredupkan cahaya. Bahan insulasi panas membuat tetap sejuk. Cocok untuk privasi di dorm.",specs:["5-sided full coverage","Heat insulating material","Mosquito net included","Easy to install","Size: 80x190cm"],colors:["Navy Blue","Grey","Beige"],images:["https://i.ibb.co/TxpCH0yc/image.png","https://i.ibb.co/JwCGTwF3/image.png","https://i.ibb.co/v6fvw3pY/image.png"],dormSize:true,inStock:true},
   {id:"P002",name:"Bedcurtain 90x190 Miniso",cat:"Sleep",price:220,details:"Miniso Blackout Mosquito Net/Bed Curtain. Full 5 sided coverage, heat insulating bed canopy. Colors: Navy Blue/Grey/Beige",shortDesc:"Blackout bed curtain with mosquito net, 90x190cm",desc:"A complete 5-sided bed canopy that blocks light and keeps mosquitoes away. Heat insulating material for year-round comfort. Great for dorm privacy.",descId:"Kelambu anti nyamuk 5 sisi. Bahan insulasi panas. Sangat baik untuk privasi di dorm.",specs:["5-sided full coverage","Heat insulating","Mosquito net","Easy to install","Size: 90x190cm"],colors:["Navy Blue","Grey","Beige"],images:["https://i.ibb.co/TxpCH0yc/image.png","https://i.ibb.co/JwCGTwF3/image.png","https://i.ibb.co/v6fvw3pY/image.png"],dormSize:true,inStock:true},
-  {id:"P003",name:"Bedsheet 80x190",cat:"Sleep",price:45,details:"Pure Cotton Fitted Bed Sheet. 100% Cotton, skin-friendly, breathable, suitable for all seasons. Fits 80x190cm dorm beds. Colors: White/Grey/Purple/Green",shortDesc:"100% cotton fitted sheet for 80x190cm bed",desc:"Premium pure cotton fitted bedsheet that's soft, breathable, and gentle on skin. Perfect for CUHKSZ dorm beds. Easy to wash and quick drying.",descId:"Sprei katun 100% yang lembut, breathable, dan nyaman di kulit. Cocok untuk kasur dorm ukuran 80x190cm.",specs:["100% Cotton","Breathable fabric","Fitted sheet style","Machine washable","Size: 80x190cm"],colors:["White","Grey","Purple","Green"],images:["https://i.ibb.co/yc1gLz3y/image.png","https://i.ibb.co/zHJzJbZy/image.png","https://i.ibb.co/GQ4QqJK5/image.png","https://i.ibb.co/rfwPW6wZ/image.png"],dormSize:false,inStock:true},
-  {id:"P004",name:"Bedsheet 90x200",cat:"Sleep",price:50,details:"Pure Cotton Fitted Bed Sheet. 100% Cotton, skin-friendly, breathable, suitable for all seasons. Fits 90x200cm beds. Colors: White/Grey/Purple/Green",shortDesc:"100% cotton fitted sheet for 90x200cm bed",desc:"Premium pure cotton fitted bedsheet that's soft, breathable, and gentle on skin. Perfect for larger dorm beds. Easy care and long-lasting.",descId:"Sprei katun 100% lembut untuk kasur 90x200cm. Breathable, mudah dicuci.",specs:["100% Cotton","Breathable","Fitted style","Machine washable","Size: 90x200cm"],colors:["White","Grey","Purple","Green"],images:["https://i.ibb.co/yc1gLz3y/image.png","https://i.ibb.co/zHJzJbZy/image.png","https://i.ibb.co/GQ4QqJK5/image.png","https://i.ibb.co/rfwPW6wZ/image.png"],dormSize:false,inStock:true},
+  {id:"P003",name:"Bedsheet 80x190",cat:"Sleep",price:45,details:"Pure Cotton Fitted Bed Sheet. 100% Cotton, skin-friendly, breathable, suitable for all seasons. Fits 80x190cm dorm beds. Colors: White/Grey/Purple/Green",shortDesc:"100% cotton fitted sheet for 80x190cm bed",desc:"Premium pure cotton fitted bedsheet that's soft, breathable, and gentle on skin. Perfect for CUHKSZ dorm beds. Easy to wash and quick drying.",descId:"Sprei katun 100% yang lembut, breathable, dan nyaman di kulit. Cocok untuk kasur dorm ukuran 80x190cm.",specs:["100% Cotton","Breathable fabric","Fitted sheet style","Machine washable","Size: 80x190cm"],colors:["White","Grey","Purple","Green"],images:["https://i.ibb.co/yc1gLz3y/image.png","https://i.ibb.co/zHJzJbZy/image.png","https://i.ibb.co/GQ4QqJK5/image.png","https://i.ibb.co/rfwPW6wZ/image.png"],dormSize:true,inStock:true},
+  {id:"P004",name:"Bedsheet 90x200",cat:"Sleep",price:50,details:"Pure Cotton Fitted Bed Sheet. 100% Cotton, skin-friendly, breathable, suitable for all seasons. Fits 90x200cm beds. Colors: White/Grey/Purple/Green",shortDesc:"100% cotton fitted sheet for 90x200cm bed",desc:"Premium pure cotton fitted bedsheet that's soft, breathable, and gentle on skin. Perfect for larger dorm beds. Easy care and long-lasting.",descId:"Sprei katun 100% lembut untuk kasur 90x200cm. Breathable, mudah dicuci.",specs:["100% Cotton","Breathable","Fitted style","Machine washable","Size: 90x200cm"],colors:["White","Grey","Purple","Green"],images:["https://i.ibb.co/yc1gLz3y/image.png","https://i.ibb.co/zHJzJbZy/image.png","https://i.ibb.co/GQ4QqJK5/image.png","https://i.ibb.co/rfwPW6wZ/image.png"],dormSize:true,inStock:true},
   {id:"P005",name:"Blanket Cover",cat:"Sleep",price:50,details:"Ultra Soft Bedding Set. Antibacterial washed cotton, 150x200cm. Keeps your blanket clean and adds a soft layer. Colors: Dark Grey/Off White/Blue",shortDesc:"Soft antibacterial duvet cover, 150x200cm",desc:"Protect your blanket with this ultra-soft duvet cover. Made from antibacterial washed cotton that's gentle on skin. Easy to remove and machine washable.",descId:"Sarung selimut lembut dari katun antibakteri. Mudah dilepas dan dicuci.",specs:["Antibacterial cotton","Ultra soft","Easy to remove","Machine washable","Size: 150x200cm"],colors:["Dark Grey","Off White","Blue"],images:["https://i.ibb.co/zWfNTLgs/image.png","https://i.ibb.co/fGQt1Dvf/image.png","https://i.ibb.co/jvtMDVNf/image.png"],dormSize:false,inStock:true},
   {id:"P006",name:"Blanket Ikea Extra Warm",cat:"Sleep",price:170,details:"IKEA Extra Warm Quilt. 100% Polyester, suitable for winter, machine washable. Weight 2.21kg. Size: 150x200cm",shortDesc:"IKEA extra warm winter quilt, 150x200cm",desc:"Stay warm during cold winter nights with this IKEA extra warm quilt. Lightweight yet provides excellent insulation. Machine washable for easy care.",descId:"Selimut IKEA extra hangat untuk musim dingin. Berat 2.21kg, bisa dicuci dengan mesin.",specs:["Extra warm","100% Polyester","Lightweight","Machine washable","Weight: 2.21kg","Size: 150x200cm"],colors:[],images:["https://i.ibb.co/x8RwK0d5/image.png"],dormSize:false,inStock:true},
   {id:"P007",name:"Blanket Ikea Warm",cat:"Sleep",price:120,details:"IKEA Warm Quilt. 100% Polyester, suitable for spring & autumn, machine washable. Weight 1.41kg. Size: 150x200cm",shortDesc:"IKEA warm quilt for spring/autumn, 150x200cm",desc:"Perfect for mild weather, this IKEA warm quilt provides just the right amount of warmth for spring and autumn. Lightweight and machine washable.",descId:"Selimut IKEA untuk musim semi/gugur. Berat 1.41kg, nyaman dan hangat.",specs:["Warm weight","100% Polyester","Lightweight","Machine washable","Weight: 1.41kg","Size: 150x200cm"],colors:[],images:["https://i.ibb.co/Xr9WDRHy/image.png"],dormSize:false,inStock:true},
@@ -1421,20 +1427,33 @@ function renderBundleDetailModal(bundle) {
   
   const html = `
     <div style="margin-bottom: 1.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
       ${(bundle.id === 'B001' || bundle.id === 'B002' || bundle.id === 'B003') ? `
       <div style="background: var(--orange-p); border: 1px solid var(--orange); border-radius: var(--rs); padding: 12px; margin-bottom: 1rem;">
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
           <span style="font-size: 1.2rem;">⚠️</span>
           <strong style="color: var(--orange);">Info Ukuran Kasur / Mattress Size Info</strong>
         </div>
-        <p style="font-size: 0.75rem; color: var(--txt); margin: 0;">
-          <strong>Shaw College & Diligentia College:</strong> 80×190 cm<br>
-          <strong>Harmonia, Muse, Minerva, Ling College:</strong> 90×200 cm<br>
-          Pilih ukuran yang sesuai dengan college kamu di atas.
-        </p>
+        
+        <table style="width: 100%; font-size: 0.75rem; margin-bottom: 12px; border-collapse: collapse;">
+          <tr style="border-bottom: 1px solid rgba(232,93,4,0.3);">
+            <td style="padding: 6px 0;"><strong>Shaw College & Diligentia</strong></td>
+            <td style="padding: 6px 0; text-align: right;">80×190 cm</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0;"><strong>Harmonia, Muse, Minerva, Ling</strong></td>
+            <td style="padding: 6px 0; text-align: right;">90×200 cm</td>
+          </tr>
+        </table>
+        
+        <div style="background: rgba(255,255,255,0.5); border-radius: 8px; padding: 8px; margin-top: 5px;">
+          <div style="font-size: 0.7rem; font-weight: 700; margin-bottom: 3px;">📌 Belum tahu college?</div>
+          <div style="font-size: 0.7rem;">Pilih <strong>80×190 cm</strong> dulu. Kami akan konfirmasi ulang via WhatsApp sebelum pesanan diproses.</div>
+          <div style="font-size: 0.65rem; color: var(--mut); margin-top: 4px;">Don't know your college? Pick 80×190 cm first. We'll confirm via WhatsApp.</div>
+        </div>
       </div>
       ` : ''}
+      
+      <div style="display: flex; justify-content: space-between; align-items: center;">
         <div>
           <div class="mbdg mbdg-b" style="display: inline-block;">BUNDEL — ${bundle.id}</div>
           <h2 style="font-size: 1.5rem; color: var(--navy); margin-top: 0.5rem;">${bundle.name}</h2>
