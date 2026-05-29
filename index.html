@@ -859,9 +859,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
       <div>
         <div class="fsec">
           <div class="fsect">👤 Data Diri / Personal Info</div>
-          <div class="frow2">
-            <div class="fg"><label>Nama Lengkap / Full Name *</label><input type="text" id="cName" placeholder="Nama Kamu"/></div>
-          </div>
+          <div class="fg"><label>Nama Lengkap / Full Name *</label><input type="text" id="cName" placeholder="Nama Kamu"/></div>
           <div class="fg"><label>Email *</label><input type="email" id="cEmail" placeholder="email@example.com"/></div>
           <div class="fg"><label>WhatsApp (+62) *</label><input type="tel" id="cWA" placeholder="+62 815-xxxx-xxxx"/></div>
         </div>
@@ -883,7 +881,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
             <input type="file" id="pf" accept="image/*" style="display:none" onchange="handleUpload(this)"/>
             
             <!-- ADD THIS REMOVE BUTTON SECTION -->
-            <div id="uploadPreview" style="display:none; margin-top:.8rem; display:flex; align-items:center; justify-content:space-between; background:var(--navy-p); padding:.6rem .8rem; border-radius:var(--rs); border:1px solid rgba(27,58,107,.15)">
+            <div id="uploadPreview" style="display: none; margin-top: .8rem; align-items: center; justify-content: space-between; background: var(--navy-p); padding: .6rem .8rem; border-radius: var(--rs); border: 1px solid rgba(27,58,107,.15)">
                 <span id="uploadFilename" style="font-size:.75rem; color:var(--navy);">File uploaded</span>
                 <button onclick="removeUpload()" style="background:#e03a3a; color:#fff; border:none; padding:5px 12px; border-radius:100px; font-size:.7rem; font-weight:700; cursor:pointer">✕ Hapus</button>
             </div>
@@ -1749,17 +1747,13 @@ async function handleUpload(input) {
   
   const uplArea = document.getElementById('upla');
   const uplLabel = document.getElementById('upllbl');
+  const previewDiv = document.getElementById('uploadPreview');
+  const filenameSpan = document.getElementById('uploadFilename');
   
   if(uplArea) uplArea.classList.add('upl');
   if(uplLabel) uplLabel.textContent = `📁 ${file.name} (uploading...)`;
   
-  // Show preview remove button if you have it
-  const previewDiv = document.getElementById('uploadPreview');
-  if(previewDiv) {
-    previewDiv.style.display = 'flex';
-    const filenameSpan = document.getElementById('uploadFilename');
-    if(filenameSpan) filenameSpan.textContent = `📎 ${file.name}`;
-  }
+  // DON'T show remove button here - wait for success
   
   const imageUrl = await uploadToImgBB(file);
   
@@ -1767,14 +1761,14 @@ async function handleUpload(input) {
     uploadUrl = imageUrl;
     if(uplLabel) uplLabel.textContent = '✅ Upload berhasil!';
     if(previewDiv) {
-      const filenameSpan = document.getElementById('uploadFilename');
+      previewDiv.style.display = 'flex';  // ← ONLY SHOW AFTER SUCCESS
       if(filenameSpan) filenameSpan.innerHTML = `✅ ${file.name}`;
     }
   } else {
     uploadUrl = null;
     if(uplLabel) uplLabel.textContent = '❌ Upload gagal - coba lagi';
     if(previewDiv) {
-      const filenameSpan = document.getElementById('uploadFilename');
+      previewDiv.style.display = 'flex';  // ← SHOW EVEN ON FAIL (so they can retry)
       if(filenameSpan) filenameSpan.innerHTML = `❌ Gagal: ${file.name}`;
     }
   }
@@ -1901,11 +1895,21 @@ async function submitOrder() {
     }).join('')}
     <div class="invtot"><span>TOTAL</span><span>${formatPrice(total)}</span></div>
     <div class="invidr">≈ ${formatIDR(total)}</div>
-    <div class="invarr">📅 Tiba: ${fd(arrD)}<br>📦 Estimasi: ${fd(d1)} – ${fd(d2)}</div>
-  `;
+    <div class="invarr">📅 Estimasi Kedatangan: ${fd(d1)} – ${fd(d2)}<br><br>⚠️<strong> Jika tidak mendapat konfirmasi email, langsung hubungi admin:</strong><br>📞 WhatsApp: <strong>+62 815 9161 856</strong></div>  `;
   
   // Clear cart
   cart = []; saveCart();
+  // Clear payment proof upload
+  uploadFile = null;
+  uploadUrl = null;
+  document.getElementById('pf').value = '';
+  const uplArea = document.getElementById('upla');
+  const uplLabel = document.getElementById('upllbl');
+  const previewDiv = document.getElementById('uploadPreview');
+  if(uplArea) uplArea.classList.remove('upl');
+  if(uplLabel) uplLabel.textContent = '📁 Klik untuk upload screenshot transfer';
+  if(previewDiv) previewDiv.style.display = 'none';
+  
   showPage('success');
   btn.textContent = '✅ Kirim Pesanan'; 
   btn.disabled = false;
