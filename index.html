@@ -642,8 +642,8 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
       <div class="mdet" id="mdet"></div>
       <div id="mdorminfo" style="display:none" class="dorminfo">
         ⚠️ <strong>Ukuran bergantung college kamu / Size depends on your college assignment.</strong><br>
-        Shaw College & Diligentia → 80×190cm.<br>
-        Harmonia, Muse, Minerva, Ling → 90×200cm.<br><br>
+        Diligentia, Muse, Harmonia & Shaw College → 80×190cm.<br>
+        Ling, Minerva, Eight(Music) & Duan Family College → 90×200cm.<br><br>
         📌 <strong>Belum tahu college/dorm kamu?</strong> Pilih ukuran 80×190cm dulu, nanti kami akan konfirmasi ulang via WhatsApp sebelum pesanan diproses.<br>
         <em>Don't know your college/dorm yet? Just pick 80×190cm first, we will confirm again via WhatsApp before processing your order.</em>
       </div>
@@ -1434,11 +1434,11 @@ function renderBundleDetailModal(bundle) {
         
         <table style="width: 100%; font-size: 0.75rem; margin-bottom: 12px; border-collapse: collapse;">
           <tr style="border-bottom: 1px solid rgba(232,93,4,0.3);">
-            <td style="padding: 6px 0;"><strong>Shaw College & Diligentia</strong></td>
+            <td style="padding: 6px 0;"><strong>Diligentia, Muse, Harmonia & Shaw College → 80×190cm.</strong></td>
             <td style="padding: 6px 0; text-align: right;">80×190 cm</td>
           </tr>
           <tr>
-            <td style="padding: 6px 0;"><strong>Harmonia, Muse, Minerva, Ling</strong></td>
+            <td style="padding: 6px 0;"><strong>Ling, Minerva, Eight(Music) & Duan Family College → 90×200cm.</strong></td>
             <td style="padding: 6px 0; text-align: right;">90×200 cm</td>
           </tr>
         </table>
@@ -1920,7 +1920,7 @@ const FAQS = [
   {q:'Kapan pesanan dikirim?',a:'Barang diantar SEBELUM tanggal kedatanganmu, 1-2 hari sebelumnya. Masukkan tanggal kedatangan saat checkout.'},
   {q:'Metode pembayaran?',a:'BCA Transfer: a/n Givon Ryan Tjandra — Rek. 4190190299. Alipay: +86 13113661260. Kurs: Rp 2.650 = ¥1.'},
   {q:'Ada biaya pengiriman?',a:'GRATIS! Semua pesanan diantar ke lobby dorm CUHKSZ.'},
-  {q:'Ukuran kasur/kelambu?',a:'Shaw & Diligentia → 80×190cm. Harmonia, Muse, Minerva, Ling → 90×200cm.'}
+  {q:'Ukuran kasur/kelambu?',a:'Diligentia, Muse, Harmonia & Shaw College → 80×190cm. Ling, Minerva, Eight(Music) & Duan Family College → 90×200cm.'}
 ];
 function renderFAQ() {
   document.getElementById('faqlist').innerHTML = FAQS.map((f,i)=>`<div class="fq" id="fq${i}"><button class="fqq" onclick="toggleFAQ(${i})"><span>${f.q}</span><span class="fqico">+</span></button><div class="fqa" id="fa${i}"><p>${f.a}</p></div></div>`).join('');
