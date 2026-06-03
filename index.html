@@ -196,7 +196,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
 .sw[data-c="Navy"]{background:#1b3a6b}
 .sw[data-c="Pink"]{background:#f4a7b9}
 .sw[data-c="Green"]{background:#22c55e}
-.sw[data-c="Beige"]{background:#c8b080}
+.sw[data-c="Beige"]{background:#cdb482}
 .sw[data-c="Brown"]{background:#92400e}
 .sw[data-c="Black"]{background:#111}
 .sw[data-c="Red"]{background:#e03a3a}
@@ -1269,7 +1269,34 @@ function openProduct(product) {
   const colorWrap = document.getElementById('mcolwrap');
   if(product.colors && product.colors.length) {
     colorWrap.style.display = 'block';
-    const colorMap = { White:'#f0ede8', Grey:'#8f9494', Blue:'#3b82f6', 'Navy Blue':'#1b3a6b', Pink:'#f4a7b9', Green:'#22c55e', Khaki:'#b5a44e', Cream:'#fef3c7', 'Dark Grey':'#4b5563', 'Off White':'#fafaf5', 'Elegant Black':'#1f2937', 'Space Grey':'#6b7280', 'Milk White':'#fafaf8', 'Matcha Green':'#84cc16', Female:'#f4a7b9', Male:'#1e40af' };
+    const colorMap = { 
+    White:'#f0ede8', 
+    Grey:'#8f9494', 
+    Blue:'#3b82f6', 
+    'Light Blue':'#7dd3e0',
+    'Navy Blue':'#1b3a6b', 
+    Navy:'#1b3a6b',
+    Pink:'#f4a7b9', 
+    Green:'#22c55e', 
+    Beige:'#cdb482',
+    Brown:'#92400e',
+    Black:'#111111',
+    Red:'#e03a3a',
+    Yellow:'#fbbf24',
+    Orange:'#f97316',
+    Purple:'#8b5cf6',
+    Khaki:'#b5a44e', 
+    Cream:'#fef3c7', 
+    'Dark Grey':'#4b5563', 
+    'Off White':'#fafaf5', 
+    'Elegant Black':'#1f2937', 
+    'Space Grey':'#6e7177', 
+    'Milk White':'#fafaf8', 
+    'Matcha Green':'#84cc16',
+    'Creamy White':'#fef9f0',
+    'Sapphire Blue':'#1d6fa4',
+    Female:'#f4a7b9', 
+    Male:'#1e40af'};
     document.getElementById('mswats').innerHTML = product.colors.map(c => `<div class="sw" style="background:${colorMap[c] || '#ccc'}" title="${c}" onclick="selectModalColor('${c}')"></div>`).join('');
     document.getElementById('mcsel').textContent = 'Pilih warna';
   } else { colorWrap.style.display = 'none'; }
