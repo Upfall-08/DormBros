@@ -544,6 +544,16 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
   }
 }
 
+/* Hide WhatsApp button when cart drawer is open */
+.cdr.open ~ .floatwa,
+.cdr.open + .floatwa {
+  display: none !important;
+}
+
+/* Also hide if WhatsApp is inside body after cart */
+body:has(.cdr.open) .floatwa {
+  display: none !important;
+}
 </style>
 </head>
 <body>
@@ -651,6 +661,16 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
         <label class="molbl">Pilih Warna / Choose Color *</label>
         <div class="swats" id="mswats"></div>
         <div class="csel" id="mcsel">Pilih warna / Choose a color</div>
+      </div>
+      <div id="msizewrap" style="display:none">
+        <label class="molbl">Pilih Ukuran / Choose Size *</label>
+        <div class="size-buttons" id="msizebtns"></div>
+        <div class="csel" id="msizesel">Pilih ukuran / Choose a size</div>
+      </div>
+      <div id="mscentwrap" style="display:none">
+        <label class="molbl">Pilih Aroma / Choose Scent *</label>
+        <div class="scent-buttons" id="mscentbtns"></div>
+        <div class="csel" id="mscentsel">Pilih aroma / Choose a scent</div>
       </div>
       <div class="qrow">
         <div class="qctrl">
@@ -865,7 +885,7 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
         </div>
         <div class="fsec">
           <div class="fsect">🏠 Pengiriman / Delivery Info</div>
-          <div class="fg"><label>College & Nomor Kamar / Room *</label><input type="text" id="cRoom" placeholder="e.g. College Muse B Room 402"/></div>
+          <div class="fg"><label>College & Nomor Kamar / Room *</label><input type="text" id="cRoom" placeholder="e.g. College Muse B Room 402 / tidak tahu"/></div>
           <div class="fg">
             <label>📅 Tanggal Kedatangan / Arrival Date *</label>
             <input type="date" id="cArr" onchange="updateArrival()"/>
@@ -951,7 +971,7 @@ const PRODUCTS = [
   {id:"P019",name:"Pillow High (Cover Included)",cat:"Sleep",price:55,details:"High Pillow. High resilience, antibacterial, neck support, cloud soft. Height: 9-10cm after sleep. Includes pillow case.",shortDesc:"High pillow 9-10cm, antibacterial, includes case",desc:"Ideal for side sleepers who need extra height. Premium high-resilience foam that maintains its shape. Excellent neck and shoulder support.",descId:"Bantal tinggi 9-10cm. Ideal untuk tidur miring, mendukung leher dan bahu.",specs:["High height (9-10cm)","High resilience","Antibacterial","Neck support","Includes pillow case"],colors:[],images:["Images/highpillow.png"],dormSize:false,inStock:true},
   {id:"P020",name:"Pillow+Blanket Cover IKEA",cat:"Sleep",price:120,details:"IKEA Duvet Cover Set. Machine washable, skin-friendly & breathable. Includes: 1 Quilt Cover 150x200cm + 1 Pillowcase.",shortDesc:"IKEA duvet cover + pillowcase set",desc:"Complete bedding set from IKEA. Soft, breathable fabric that's gentle on skin. Includes matching duvet cover and pillowcase.",descId:"Set sarung selimut + sarung bantal IKEA. Lembut, breathable, dan nyaman di kulit.",specs:["Machine washable","Skin-friendly & breathable","Includes duvet cover + pillowcase","Duvet: 150x200cm","Pillowcase: standard size"],colors:[],images:["Images/ikeacover_set.png"],dormSize:false,inStock:true},
   {id:"P021",name:"Bathroom Sandals",cat:"Sanitary",price:15,details:"EVA Non-Slip Slippers. Waterproof, wear-resistant, sizes 35-44, black",shortDesc:"Non-slip EVA bathroom slippers",desc:"Stay safe in wet bathrooms with these non-slip EVA slippers. Waterproof and wear-resistant. Available in multiple sizes.",descId:"Sandal mandi EVA anti-slip. Tahan air, ukuran 35-44.",specs:["EVA material","Non-slip sole","Waterproof","Wear-resistant","Sizes: 35-44","Color: Black"],colors:[],images:["Images/sandals.png"],dormSize:false,inStock:true},
-  {id:"P022",name:"Bath Loofah",cat:"Sanitary",price:10,details:"Bath Ball/Loofah. Large size, fluffy & soft, durable, 68g. Colors: Creamy White/Sapphire Blue",shortDesc:"Soft fluffy bath loofah",desc:"Create rich lather with this soft bath loofah. Large size covers more area. Durable and long-lasting. Perfect for daily shower use.",descId:"Bath sponge/loofah lembut dan fluffy. Menghasilkan busa yang kaya.",specs:["Large size","Fluffy & soft","Durable","Long-lasting","68g"],colors:["Creamy White"],images:["Images/loofah.png"],dormSize:false,inStock:true},
+  {id:"P022",name:"Bath Loofah",cat:"Sanitary",price:10,details:"Bath Ball/Loofah. Large size, fluffy & soft, durable, 68g. Colors: Creamy White",shortDesc:"Soft fluffy bath loofah",desc:"Create rich lather with this soft bath loofah. Large size covers more area. Durable and long-lasting. Perfect for daily shower use.",descId:"Bath sponge/loofah lembut dan fluffy. Menghasilkan busa yang kaya.",specs:["Large size","Fluffy & soft","Durable","Long-lasting","68g"],images:["Images/loofah.png"],dormSize:false,inStock:true},
   {id:"P023",name:"Bath Towel 70x140",cat:"Sanitary",price:42,details:"Coral Fleece Bath Towel. Thickened, absorbent & quick drying. Size: 70x140cm. Colors: Blue/Grey",shortDesc:"Quick-dry coral fleece towel 70x140cm",desc:"Super absorbent coral fleece towel that dries quickly. Thickened for extra comfort. Perfect for daily shower use.",descId:"Handuk bulu domba cepat kering. Tebal dan nyaman. Ukuran 70x140cm.",specs:["Coral fleece","Quick drying","Thickened","Absorbent","Size: 70x140cm","Colors: Blue/Grey"],colors:["Blue","Grey"],images:["Images/towel_blue.png","Images/towel_grey.png"],dormSize:false,inStock:true},
   {id:"P024",name:"Bath Towel 90x180",cat:"Sanitary",price:70,details:"Coral Fleece Bath Towel. Thickened, absorbent & quick drying. Size: 90x180cm. Colors: Blue/Grey",shortDesc:"Large quick-dry coral fleece towel 90x180cm",desc:"Extra large bath towel that wraps around you completely. Super absorbent coral fleece that dries quickly. Luxuriously soft and thick.",descId:"Handuk bulu domba besar 90x180cm. Sangat lembut dan cepat kering.",specs:["Coral fleece","Quick drying","Extra large","Thick & absorbent","Size: 90x180cm","Colors: Blue/Grey"],colors:["Blue","Grey"],images:["Images/towel_blue.png","Images/towel_grey.png"],dormSize:false,inStock:true},
   {id:"P025",name:"Bath Towel Cotton 70x140",cat:"Sanitary",price:45,details:"100% Cotton Bath Towel. Extra large thick pure cotton, lint-free, weight: 320g. Size: 70x140cm. Available colors: Blue, Orange, Green, White.",shortDesc:"100% cotton bath towel 70x140cm",desc:"Premium pure cotton towel that's soft and gentle on skin. Highly absorbent and lint-free. Weight: 320g for perfect thickness. Available in Blue, Orange, Green, and White.",descId:"Handuk katun 100% yang lembut dan tidak berbulu. Berat 320g. Tersedia warna Biru, Oranye, Hijau, Putih.",specs:["100% Cotton","Lint-free","Highly absorbent","Weight: 320g","Size: 70x140cm","Colors: Blue, Orange, Green, White"],colors:["Blue","Orange","Green","White"],images:["Images/cotton_towel.png"],dormSize:false,inStock:true},
@@ -975,7 +995,7 @@ const PRODUCTS = [
   {id:"P043",name:"Bug Spray",cat:"Room/Personal",price:20,details:"Insecticide Spray. Fragrance-free, effective for mosquitoes, cockroaches, flies, etc. 200ml",shortDesc:"Insecticide spray, 200ml",desc:"Keep bugs away with this effective insecticide spray. Fragrance-free formula. Works on mosquitoes, cockroaches, flies, and other common pests. 200ml can.",descId:"Semprotan serangga, 200ml. Tanpa wangi, efektif untuk nyamuk, kecoa, lalat.",specs:["Insecticide spray","Fragrance-free","Effective against mosquitoes","Cockroaches & flies","200ml can"],colors:[],images:["Images/bugspray.png"],dormSize:false,inStock:true},
   {id:"P044",name:"Desk Organiser 1",cat:"Room/Personal",price:30,details:"2-Layer Storage Box. Detachable transparent acrylic, drawer style with top grid. Size: 27x20x23cm. Colors: Ivory White/Chesnut Coffee",shortDesc:"2-layer acrylic desk organiser",desc:"Keep your desk tidy with this 2-layer storage box. Drawer style with top grid for pens and small items. Transparent acrylic so you can see contents.",descId:"Rak meja 2 tingkat, akrilik transparan. Bisa lihat isinya, praktis untuk alat tulis.",specs:["2-layer detachable","Drawer style handle","Top grid for pens","Size: 27x20x23cm","Colors: Ivory White/Chesnut Coffee"],colors:["Ivory White","Chesnut Coffee"],images:["Images/organiser1_white.png","Images/organiser1.png"],dormSize:false,inStock:true},
   {id:"P045",name:"Desk Organiser 2",cat:"Room/Personal",price:25,details:"Desktop Drawer Storage Box. Transparent acrylic, for stationery & cosmetics. Size: 22.5x16.5x20cm, white",shortDesc:"Acrylic drawer organiser for desk",desc:"Organize your stationery or cosmetics with this acrylic drawer. Transparent design makes it easy to find what you need. Sleek white color.",descId:"Laci meja akrilik untuk alat tulis atau kosmetik. Transparan, mudah lihat isinya.",specs:["Drawer-style","Transparent acrylic","For stationery & cosmetics","Size: 22.5x16.5x20cm","White color"],colors:[],images:["Images/organiser2.png"],dormSize:false,inStock:true},
-  {id:"P046",name:"Electric Diffuser",cat:"Room/Personal",price:50,details:"Aromatherapy Humidifier. Automatic air freshener, rechargeable, long battery life. Scents: Lavender+Ocean, Gardenia+Jasmine, White Tea+Gardenia",shortDesc:"Rechargeable aromatherapy diffuser",desc:"Make your dorm smell amazing with this electric diffuser. Adds moisture to the air while dispersing your choice of essential oil scents.",descId:"Diffuser elektrik untuk wewangian ruangan. Bisa isi ulang, baterai tahan lama.",specs:["Aromatherapy & humidifier","Automatic","Rechargeable","Long battery life","3 scent options available"],colors:[],images:["Images/diffuser.png"],dormSize:false,inStock:true},
+  {id:"P046",name:"Electric Diffuser",cat:"Room/Personal",price:50,details:"Aromatherapy Humidifier. Automatic air freshener, rechargeable, long battery life. Scents: Lavender+Ocean, Gardenia+Jasmine, White Tea+Gardenia",shortDesc:"Rechargeable aromatherapy diffuser",desc:"Make your dorm smell amazing with this electric diffuser. Adds moisture to the air while dispersing your choice of essential oil scents.",descId:"Diffuser elektrik untuk wewangian ruangan. Bisa isi ulang, baterai tahan lama.",specs:["Aromatherapy & humidifier","Automatic","Rechargeable","Long battery life","3 scent options available"],scents:["Lavender+Ocean", "Gardenia+Jasmine", "White Tea+Gardenia"],colors:[],images:["Images/diffuser.png"],dormSize:false,inStock:true},
   {id:"P047",name:"Electric Mini Fan",cat:"Room/Personal",price:50,details:"Handheld Mini Fan. USB rechargeable, portable, ultra quiet, 6-speed adjustable, 10-12 hour battery life. Includes charging cable + base stand.",shortDesc:"Portable rechargeable mini fan",desc:"Beat the heat with this powerful mini fan. 6 speed settings, ultra quiet operation. 10-12 hours of use on a full charge. Perfect for desk or travel.",descId:"Kipas mini portabel, isi ulang USB. 6 kecepatan, hening, tahan 10-12 jam.",specs:["Handheld & desktop","USB rechargeable","6-speed adjustable","Ultra quiet","10-12 hour battery","Charging cable + stand included"],colors:[],images:["Images/fan.png"],dormSize:false,inStock:true},
   {id:"P048",name:"Ergonomic Chair",cat:"Room/Personal",price:200,details:"Ergonomic Home Chair. Comfortable for prolonged sitting, skin-friendly & breathable, latex cushion, adjustable back support + headrest. Colors: Black/White",shortDesc:"Ergonomic study chair with lumbar support",desc:"Study in comfort with this ergonomic chair. Adjustable back support and headrest. Latex cushion is breathable and comfortable for long study sessions.",descId:"Kursi ergonomis untuk belajar. Bisa diatur sandaran, bantal lateks, nyaman untuk duduk lama.",specs:["Ergonomic design","Breathable fabric","Latex cushion","Adjustable back support","Adjustable headrest","Colors: Black/White"],colors:["Black","White"],images:["Images/ergonomic_black.png","Images/ergonomic_white.png"],dormSize:false,inStock:true},
   {id:"P049",name:"Extension Cord",cat:"Room/Personal",price:35,details:"USB Power Strip. 4 AC outlets + 3 USB ports. 2500W capacity, 4 socket ports, 3 USB ports.",shortDesc:"Power strip with 4 outlets + 3 USB ports",desc:"Charge all your devices with this power strip. 4 standard AC outlets and 3 USB ports. Surge protection keeps your electronics safe.",descId:"Stop kontak dengan 4 lubang + 3 port USB. Proteksi lonjakan listrik.",specs:["4 AC outlets","3 USB ports","2500W capacity","Extension cable","Surge protection"],colors:[],images:["Images/cable.png"],dormSize:false,inStock:true},
@@ -985,20 +1005,20 @@ const PRODUCTS = [
   {id:"P053",name:"Massage Gun",cat:"Room/Personal",price:85,details:"Lenovo Massage Gun. Muscle relaxation massager, silent electric technology, aluminium alloy. Includes: 4 massage heads + carrying case.",shortDesc:"Lenovo deep tissue massage gun",desc:"Relieve muscle tension after studying or working out. Quiet operation, 4 different heads for different muscle groups. Premium aluminum alloy build.",descId:"Pijat elektrik Lenovo untuk relaksasi otot. 4 kepala, operation senyap.",specs:["Lenovo brand","Muscle massager","Silent electric","Aluminium alloy","4 massage heads","Carrying case included","Grey color"],colors:[],images:["Images/massage.png"],dormSize:false,inStock:true},
   {id:"P107",name:"Memory Foam Chair Cushion",cat:"Room/Personal",price:25,details:"Thickened Memory Foam Seat Cushion for long sitting hours. Anti-slip bottom with securing ribbon. Premium linen cover with resilient memory foam. Size: 40x40x4cm.",shortDesc:"Memory foam cushion, anti-slip, 40x40x4cm",desc:"Premium memory foam seat cushion designed for long study sessions. Features anti-slip treads on bottom and securing ribbon to keep in place. Made with breathable premium linen and resilient memory foam that won't flatten. Size: 40x40x4cm. Available in Dark Grey and Blue.",descId:"Bantalan kursi memory foam tebal untuk duduk lama. Anti-slip dengan pita pengikat. Ukuran 40x40x4cm. Tersedia warna Abu-abu Gelap dan Biru.",specs:["Memory foam","Anti-slip bottom","Securing ribbon","Premium linen cover","Size: 40x40x4cm","Colors: Dark Grey, Blue"],colors:["Dark Grey","Blue"],images:["Images/seatcushion.jpg","Images/seatcushion_grey.jpg","Images/seatcushion_blue.jpg"],dormSize:false,inStock:true},
   {id:"P054",name:"Mirror",cat:"Room/Personal",price:15,details:"Foldable Desktop Mirror. Portable, high definition, size: 15.5x20cm, black",shortDesc:"Foldable desktop mirror",desc:"Compact mirror perfect for your desk or vanity. Foldable design makes it easy to store. High definition reflection. Matte black finish.",descId:"Cermin meja lipat. Portable, definisi tinggi, ukuran 15.5x20cm, warna hitam.",specs:["Foldable design","Portable","High definition","Size: 15.5x20cm","Color: Black"],colors:[],images:["Images/mirror_black.png"],dormSize:false,inStock:true},
-  {id:"P055",name:"Mirror With Light",cat:"Room/Personal",price:20,details:"LED Table Mirror. Foldable, dimmable, portable, magnetic cover, tri-color light. Size: 15x20.5cm. Includes USB charging cable. Colors: Black/White",shortDesc:"LED lighted makeup mirror",desc:"Perfect for makeup or grooming. Tri-color lighting (warm/cool/natural) with adjustable brightness. Foldable design with protective magnetic cover.",descId:"Cermin rias dengan lampu LED. Bisa diatur kecerahan, 3 warna cahaya. Bisa dilipat.",specs:["LED lighted","Foldable","Dimmable","Tri-color light","Magnetic cover","USB rechargeable","Size: 15x20.5cm","Colors: Black/White"],colors:["White","Black"],images:["Images/ledmirror_white.png","Images/ledmirror_black.pngg"],dormSize:false,inStock:true},
+  {id:"P055",name:"Mirror With Light",cat:"Room/Personal",price:20,details:"LED Table Mirror. Foldable, dimmable, portable, magnetic cover, tri-color light. Size: 15x20.5cm. Includes USB charging cable. Colors: Black/White",shortDesc:"LED lighted makeup mirror",desc:"Perfect for makeup or grooming. Tri-color lighting (warm/cool/natural) with adjustable brightness. Foldable design with protective magnetic cover.",descId:"Cermin rias dengan lampu LED. Bisa diatur kecerahan, 3 warna cahaya. Bisa dilipat.",specs:["LED lighted","Foldable","Dimmable","Tri-color light","Magnetic cover","USB rechargeable","Size: 15x20.5cm","Colors: Black/White"],colors:["White","Black"],images:["Images/ledmirror_white.png","Images/ledmirror_black.png"],dormSize:false,inStock:true},
   {id:"P056",name:"Standing Desk Lamp",cat:"Room/Personal",price:30,details:"Standing Desk Lamp. Eye-protecting, tri-color lighting, multi-angle adjustment, built-in penholder + phone stand. Includes USB charging cable.",shortDesc:"Desk lamp with pen holder & phone stand",desc:"This standing lamp saves desk space while providing excellent lighting. Built-in pen holder and phone stand keep your desk organized. 3 light colors.",descId:"Lampu meja berdiri dengan tempat pulpen & HP. 3 warna cahaya, bisa diatur sudut.",specs:["Standing design","Eye-protecting","Tri-color lighting","Multi-angle adjustment","Built-in penholder & phone stand","USB charging cable included"],colors:[],images:["Images/tablelamp.png"],dormSize:false,inStock:true},
   {id:"P057",name:"Stationary Organiser",cat:"Room/Personal",price:15,details:"Desktop Stationery Grid. Multi-functional desk grid, size: 16x10x11cm. Colors: Black/White/Grey",shortDesc:"Desktop stationary organizer grid",desc:"Keep your pens, pencils, and small items organized with this grid organizer. Multi-functional design fits on any desk. Simple and stylish.",descId:"Tempat alat tulis desktop. Grid multifungsi, ukuran 16x10x11cm.",specs:["Multi-functional grid","Desktop organizer","Size: 16x10x11cm","Colors: Black/White/Grey"],colors:["Black","White","Grey"],images:["Images/stationaryorganiser.png","Images/stationaryorganiser_white.png","Images/stationaryorganiser_grey.png"],dormSize:false,inStock:true},
   {id:"P058",name:"Shoe Rack",cat:"Room/Personal",price:25,details:"Shoe Rack. Multi-layered, dustproof, large capacity. Size: 44x40x19cm",shortDesc:"Compact 2-layer shoe rack",desc:"Keep your shoes organized with this space-saving shoe rack. Multi-layered design fits up to 6 pairs. Dustproof and stable.",descId:"Rak sepatu kompak. 2 tingkat, bisa muat 6 pasang.",specs:["Multi-layered","Dustproof","Large capacity","Stable design","Size: 44x40x19cm"],colors:[],images:["Images/rack.png"],dormSize:false,inStock:true},
   {id:"P059",name:"Sticker Hooks Thin",cat:"Room/Personal",price:12,details:"Sticker Hooks. Strong residue-free, no drilling required. 20 pieces/pack",shortDesc:"20 adhesive sticker hooks",desc:"Hang lightweight items without drilling. Strong adhesive that removes cleanly without residue. Perfect for towels, keys, or small bags.",descId:"20 kait stiker. Kuat, tanpa bor, tidak meninggalkan bekas.",specs:["Adhesive sticker","No drilling required","Residue-free","Strong hold","20 pieces per pack"],colors:[],images:["Images/hooks1.png"],dormSize:false,inStock:true},
   {id:"P060",name:"Sticker Hooks Thick",cat:"Room/Personal",price:15,details:"Heavy Duty Sticker Hooks. Super strong adhesion, for heavy duty items. 10 pieces/pack",shortDesc:"10 heavy duty adhesive hooks",desc:"Hang heavier items like bags or towels with these strong hooks. Extra thick adhesive for maximum hold. Removes cleanly without damaging walls.",descId:"10 kait stiker heavy duty. Untuk barang berat, perekat super kuat.",specs:["Heavy duty","Super strong adhesion","No drilling","Removes cleanly","10 pieces per pack"],colors:[],images:["Images/hooks2.png"],dormSize:false,inStock:true},
   {id:"P061",name:"Swimming Set",cat:"Room/Personal",price:50,details:"Swimming Goggles + Cap Set. Waterproof & anti-fog, curved wide-angle view. Required for CUHKSZ swimming. Colors: Black/White",shortDesc:"Swimming goggles + swim cap set",desc:"Required for CUHKSZ swimming classes! Anti-fog goggles with wide-angle view for clear vision. Includes matching swim cap. Available in black or white.",descId:"Set kacamata renang + topi renang. Diwajibkan untuk kelas renang CUHKSZ! Anti-fog.",specs:["Anti-fog goggles","Swim cap included","Waterproof","Curved wide-angle view","CUHKSZ swimming required","Colors: Black/White"],colors:["Black","White"],images:["Images/swimming_black.png","Images/swimming_white.png"],dormSize:false,inStock:true},
-  {id:"P062",name:"Room Fragrance",cat:"Room/Personal",price:18,details:"Aromatherapy Diffuser. High-end indoor fragrance, keep air fresh. Includes bottle + 200ml liquid. Fragrances: Forest Air, Jasmine, Ocean, Osmanthus",shortDesc:"Room fragrance diffuser 200ml",desc:"Make your dorm smell amazing with this aromatherapy diffuser. Long-lasting fragrance keeps your room fresh. Choose from 4 refreshing scents.",descId:"Pengharum ruangan 200ml. Wangi tahan lama, pilih dari 4 aroma.",specs:["Aromatherapy diffuser","200ml fragrance liquid","Long-lasting","High-end scent","Scents: Forest Air/Jasmine/Ocean/Osmanthus"],colors:[],images:["Images/fragrance.png"],dormSize:false,inStock:true},
+  {id:"P062",name:"Room Fragrance",cat:"Room/Personal",price:18,details:"Aromatherapy Diffuser. High-end indoor fragrance, keep air fresh. Includes bottle + 200ml liquid. Fragrances: Forest Air, Jasmine, Ocean, Osmanthus",shortDesc:"Room fragrance diffuser 200ml",desc:"Make your dorm smell amazing with this aromatherapy diffuser. Long-lasting fragrance keeps your room fresh. Choose from 4 refreshing scents.",descId:"Pengharum ruangan 200ml. Wangi tahan lama, pilih dari 4 aroma.",specs:["Aromatherapy diffuser","200ml fragrance liquid","Long-lasting","High-end scent","Scents: Forest Air/Jasmine/Ocean/Osmanthus"],scents:["Forest Air", "Jasmine", "Ocean", "Osmanthus"],colors:[],images:["Images/fragrance.png"],dormSize:false,inStock:true},
   {id:"P063",name:"Table Box Small",cat:"Room/Personal",price:15,details:"Storage Box. White portable storage basket, handheld-style. Size: 20x14x7cm",shortDesc:"Small storage box 20x14x7cm",desc:"Perfect for organizing small items like snacks, cosmetics, or stationery. Portable handheld design. Simple white color matches any decor.",descId:"Tempat penyimpanan kecil 20x14x7cm. Praktis untuk camilan, kosmetik, atau alat tulis.",specs:["Portable storage","Handheld style","Size: 20x14x7cm","White color"],colors:[],images:["Images/boxes.png"],dormSize:false,inStock:true},
   {id:"P064",name:"Table Box Medium",cat:"Room/Personal",price:18,details:"Storage Box. White portable storage basket, handheld-style. Size: 24x17x10cm",shortDesc:"Medium storage box 24x17x10cm",desc:"Medium sized storage for books, notebooks, or larger items. Handheld design makes it easy to carry around. Clean white aesthetic.",descId:"Tempat penyimpanan sedang 24x17x10cm. Pas untuk buku atau barang lebih besar.",specs:["Portable storage","Handheld style","Size: 24x17x10cm","White color"],colors:[],images:["Images/boxes.png"],dormSize:false,inStock:true},
   {id:"P065",name:"Table Box Large",cat:"Room/Personal",price:22,details:"Storage Box. White portable storage basket, handheld-style. Size: 30x20x12cm",shortDesc:"Large storage box 30x20x12cm",desc:"Large storage for bigger items like snacks, supplies, or clothes. Handheld design makes it portable. Sturdy plastic construction.",descId:"Tempat penyimpanan besar 30x20x12cm. Cocok untuk camilan, pakaian, atau perlengkapan.",specs:["Portable storage","Handheld style","Size: 30x20x12cm","White color"],colors:[],images:["Images/boxes.png"],dormSize:false,inStock:true},
   {id:"P066",name:"Trashbags",cat:"Room/Personal",price:10,details:"Trash Bags. Thick drawstring garbage bags, black, 100 pieces",shortDesc:"100 drawstring trash bags",desc:"Keep your dorm clean with these strong trash bags. Drawstring closure makes tying easy. Black color conceals contents. 100 bags included.",descId:"100 kantong sampah, tebal, tali serut. Warna hitam.",specs:["Thick drawstring design","100 pieces","Black color"],colors:[],images:["Images/trashbags.png"],dormSize:false,inStock:true},
   {id:"P067",name:"Trashbin",cat:"Room/Personal",price:18,details:"Trash Can. 20L capacity, minimalist design with detachable outer rim. Size: 27x28cm. Colors: Grey/Cream/White",shortDesc:"20L dorm room trash bin",desc:"A stylish trash can for your dorm room. Large 20L capacity means fewer trips to empty it. Detachable rim for easy cleaning.",descId:"Tempat sampah 20L untuk dorm. Desain minimalis, bisa dilepas untuk mudah dibersihkan.",specs:["20L capacity","Minimalist design","Detachable outer rim","Size: 27x28cm","Colors: Grey/Cream/White"],colors:["Grey","Cream","White"],images:["Images/trashcan_grey.png","Images/trashcan_beige.png","Images/trashcan_white.png"],dormSize:false,inStock:true},
-  {id:"P068",name:"Umbrella",cat:"Room/Personal",price:40,details:"Rain Umbrella. UV protection, reinforced double exoskeleton for wind resistance. Diameter 106cm. Colors: Beige/Black",shortDesc:"Large windproof umbrella with UV protection",desc:"Stay dry in Shenzhen's rainy weather. UV protection also guards against sun. Reinforced double exoskeleton won't flip inside out in strong winds.",descId:"Payung besar anti-angin dengan perlindungan UV. Diameter 106cm.",specs:["UV protection","Reinforced double exoskeleton","Wind resistant","Diameter 106cm","Colors: Beige/Black"],colors:["Beige","Black"],images:["Images/umbrella.png","Images/umbrella_beige.png","Images/umbrella_black.png"],dormSize:false,inStock:true},
+  {id:"P068",name:"Umbrella",cat:"Room/Personal",price:40,details:"Rain Umbrella. UV protection, reinforced double exoskeleton for wind resistance. Diameter 106cm. Colors: Beige/Black",shortDesc:"Large windproof umbrella with UV protection",desc:"Stay dry in Shenzhen's rainy weather. UV protection also guards against sun. Reinforced double exoskeleton won't flip inside out in strong winds.",descId:"Payung besar anti-angin dengan perlindungan UV. Diameter 106cm.",specs:["UV protection","Reinforced double exoskeleton","Wind resistant","Diameter 106cm","Colors: Beige/Black"],colors:["Beige","Black"],images:["Images/umbrella.png","Images/umbrella_white.png","Images/umbrella_black.png"],dormSize:false,inStock:true},
   {id:"P069",name:"Vacuum",cat:"Room/Personal",price:150,details:"Vacuum Cleaner. High power, strong suction 15000Pa, 270° rotating head, handheld/stick 2-in-1. Includes brush + 2 filters.",shortDesc:"2-in-1 handheld & stick vacuum",desc:"Keep your dorm floor clean with this powerful vacuum. 15000Pa suction power. Converts from stick to handheld for versatile cleaning. 2 filters included.",descId:"Vacuum cleaner 2-in-1, handheld + stick. Hisapan kuat 15000Pa.",specs:["High power vacuum","15000Pa suction","270° rotating head","Handheld/stick 2-in-1","Includes brush + 2 filters"],colors:[],images:["Images/vacuum.png"],dormSize:false,inStock:true},
   {id:"P070",name:"Clothes Peg",cat:"Laundry",price:12,details:"Clothespins. Strong windproof clothespin, ideal for socks & small items. 18 pieces/pack",shortDesc:"18 windproof clothespins",desc:"Keep your laundry secure on the line with these strong clothespins. Windproof design holds even in breezy conditions. Perfect for socks and delicates.",descId:"18 jepitan jemuran anti-angin. Kuat, ideal untuk kaus kaki.",specs:["18 pieces","Windproof","Strong grip","Ideal for socks & small items","White color"],colors:[],images:["Images/clothespeg.png"],dormSize:false,inStock:true},
   {id:"P071",name:"Detergent Pods",cat:"Laundry",price:30,details:"Laundry Detergent Pods. Long-lasting rose scent, stain remover, machine washable, 42 pods/box",shortDesc:"42 laundry detergent pods",desc:"Convenient laundry pods that dissolve completely. Rose scent leaves clothes smelling fresh. 42 pods last all semester. Simply toss in the machine.",descId:"42 pods deterjen laundry. Wangi mawar tahan lama, mudah digunakan.",specs:["42 pods per box","Long-lasting rose scent","Stain remover","Machine washable","Easy to use"],colors:[],images:["Images/detergent.png"],dormSize:false,inStock:true},
@@ -1011,7 +1031,7 @@ const PRODUCTS = [
   {id:"P078",name:"Lint Roller",cat:"Laundry",price:25,details:"Lint Roller. Hair/dust/lint removal tool. Includes: 1 roller + 3 refill rolls",shortDesc:"Lint roller with 3 refills",desc:"Remove pet hair, lint, and dust from clothes quickly. Compact size is perfect for dorm use. Includes 3 refill rolls, so it lasts all semester.",descId:"Lint roller untuk bulu, debu. Termasuk 3 roll refill.",specs:["Lint roller","1 roller included","3 refill rolls","For clothes & pants","Short handle"],colors:[],images:["Images/lintroller.png"],dormSize:false,inStock:true},
   {id:"P079",name:"Softener",cat:"Laundry",price:20,details:"Fabric Softener. Anti-wrinkle, natural lavender fragrance, protects clothes & colors. Size: 1.2kg",shortDesc:"1.2kg lavender fabric softener",desc:"Keep your clothes soft and smelling fresh with this fabric softener. Lavender scent is relaxing. 1.2kg bottle lasts a long time. Anti-wrinkle formula.",descId:"Pelembut pakaian lavender 1.2kg. Anti-kusut, wangi tahan lama.",specs:["1.2 kg bottle","Anti-wrinkle","Natural lavender fragrance","Protects clothes & colors"],colors:[],images:["Images/softener.png"],dormSize:false,inStock:true},
   {id:"P080",name:"Boiling Pot",cat:"Kitchen/Food",price:60,details:"Stainless Steel Pot. 430 thickened steel, healthy zero coating, multi-purpose. Pot diameter 18cm, includes lid.",shortDesc:"Stainless steel pot 18cm with lid",desc:"Perfect for cooking instant noodles or boiling water. Thickened stainless steel heats evenly. Zero coating means no chemicals. Includes matching lid.",descId:"Panci stainless steel 18cm dengan tutup. Untuk masak mie atau air panas.",specs:["Stainless steel","430 thickened steel","Zero coating","Multi-purpose","Diameter 18cm","Lid included"],colors:[],images:["Images/pot.png"],dormSize:false,inStock:true},
-  {id:"P081",name:"Cup/Mug Set",cat:"Kitchen/Food",price:15,details:"Ceramic Cup Set. High-quality, super heat resistant. Includes: cup + tea spoon + lid. Colors: Khaki/Grey",shortDesc:"Ceramic mug with spoon and lid",desc:"A stylish ceramic mug that keeps your drink hot longer with the included lid. Heat-resistant design. Comes with a matching tea spoon.",descId:"Mug keramik dengan sendok dan tutup. Tahan panas, wangi tetap terjaga.",specs:["Ceramic cup","Heat resistant","Includes lid","Includes tea spoon","Capacity 350ml","Colors: Khaki/Grey"],colors:["Khaki","Grey"],images:["Images/cup_beige.png","Images/cup_grey.png"],dormSize:false,inStock:true},
+  {id:"P081",name:"Cup/Mug Set",cat:"Kitchen/Food",price:15,details:"Ceramic Cup Set. High-quality, super heat resistant. Includes: cup + tea spoon + lid. Colors: Khaki/Grey",shortDesc:"Ceramic mug with spoon and lid",desc:"A stylish ceramic mug that keeps your drink hot longer with the included lid. Heat-resistant design. Comes with a matching tea spoon.",descId:"Mug keramik dengan sendok dan tutup. Tahan panas, wangi tetap terjaga.",specs:["Ceramic cup","Heat resistant","Includes lid","Includes tea spoon","Capacity 350ml","Colors: Khaki/Grey"],colors:["Beige","Grey"],images:["Images/cup_beige.png","Images/cup_grey.png"],dormSize:false,inStock:true},
   {id:"P082",name:"Electric Pot",cat:"Kitchen/Food",price:100,details:"Multi-functional Electric Cooker. All-in-one (steaming/boiling/frying/stir-frying). 800W power, ceramic non-stick inner lining. Includes lid, 2 sponges, wooden spatula, cable, steamer basket.",shortDesc:"Multi-functional electric cooking pot",desc:"The ultimate dorm cooking appliance! Boil, steam, fry, or stir-fry. 800W power heats up fast. Ceramic non-stick coating is easy to clean. Includes steamer basket.",descId:"Panci listrik multifungsi. Bisa rebus, kukus, goreng. 800W, anti lengket.",specs:["All-in-one cooker","Steam/boil/fry/stir-fry","800W power","Ceramic non-stick","Includes steamer basket","Wooden spatula included"],colors:[],images:["Images/cooker.png"],dormSize:false,inStock:true},
   {id:"P083",name:"Frying Pan",cat:"Kitchen/Food",price:55,details:"Non-Stick Frying Pan. Universal for induction/gas stove, wear-resistant, long-lasting. Diameter 24cm, includes tempered cover.",shortDesc:"Non-stick frying pan 24cm with lid",desc:"Cook eggs, stir-fry vegetables, or sear meat with this non-stick pan. Works on induction and gas stoves. Tempered glass lid lets you monitor cooking.",descId:"Wajan anti lengket 24cm dengan tutup. Bisa untuk kompor induksi atau gas.",specs:["Non-stick coating","Universal for induction/gas","Wear-resistant","Diameter 24cm","Tempered cover included"],colors:[],images:["Images/fryingpan.png"],dormSize:false,inStock:true},
   {id:"P084",name:"Knife Set",cat:"Kitchen/Food",price:50,details:"Knife Set. Kitchen knife + fruit knife + peeler + food scissors + storage cutting board.",shortDesc:"5-piece kitchen knife set + cutting board",desc:"Complete kitchen knife set for dorm cooking. Includes chef knife, fruit knife, peeler, food scissors, and a storage cutting board. All you need for meal prep.",descId:"Set pisau dapur 5-in-1 + talenan. Pisau dapur, pisau buah, pengupas, gunting, talenan.",specs:["Kitchen knife","Fruit knife","Peeler","Food scissors","Storage cutting board included","Stainless steel"],colors:[],images:["Images/knifeset.png","Images/knifeset2.png"],dormSize:false,inStock:true},
@@ -1109,20 +1129,35 @@ function updateCartUI() {
 }
 
 function quickAdd(product) {
-  // Check if product has colors/options
-  if(product.colors && product.colors.length > 0) {
-    // Must open modal to choose color first
+  // Check if product has any options that require modal
+  if((product.colors && product.colors.length > 0) || 
+     (product.sizes && product.sizes.length > 0) || 
+     (product.scents && product.scents.length > 0)) {
+    // Must open modal to choose options first
     openProduct(product);
     return;
   }
-  // No colors? Add directly to cart
-  addToCart(product, 1, null);
+  // No options? Add directly to cart
+  addToCart(product, 1, null, null, null, null);
 }
 
-function addToCart(product, qty, color, size, selections) {
-  const key = product.id + (color ? '|' + color : '') + (size ? '|' + size : '') + (selections ? '|' + selections : '');
+function addToCart(product, qty, color, size, scent, selections) {
+  const key = product.id + (color ? '|' + color : '') + (size ? '|' + size : '') + (scent ? '|' + scent : '') + (selections ? '|' + selections : '');
   const existing = cart.find(i => i.key === key);
   const img = product.images ? product.images[0] : (product.image || '');
+  
+  // Build selections summary for email
+  let summary = selections || '';
+  if (size && !summary.includes(size)) {
+    summary = summary ? `${summary}, ${size}` : size;
+  }
+  if (scent && !summary.includes(scent)) {
+    summary = summary ? `${summary}, ${scent}` : scent;
+  }
+  if (color && !summary.includes(color)) {
+    summary = summary ? `${summary}, ${color}` : color;
+  }
+  
   if(existing) { 
     existing.qty += qty; 
   } else { 
@@ -1134,9 +1169,10 @@ function addToCart(product, qty, color, size, selections) {
       image: img, 
       qty, 
       color, 
-      size, 
+      size,
+      scent,
       isBundle: product.isBundle || false,
-      selections: selections || product.selections || null
+      selections: summary
     }); 
   }
   saveCart();
@@ -1252,7 +1288,9 @@ function renderProducts() {
 function openProduct(product) {
   currentModalProduct = product;
   currentModalQty = 1;
+  currentModalScent = null; // Add this with other currentModal variables
   currentModalColor = null;
+  currentModalSize = null; // Add this for size tracking
   currentModalImages = product.images || [];
   document.getElementById('mimg').src = currentModalImages[0] || '';
   const thumbs = document.getElementById('mthumbs');
@@ -1266,6 +1304,8 @@ function openProduct(product) {
   document.getElementById('mpm').textContent = formatPrice(product.price);
   document.getElementById('mdet').innerHTML = product.details;
   document.getElementById('mdorminfo').style.display = product.dormSize ? 'block' : 'none';
+  
+  // Handle color selection
   const colorWrap = document.getElementById('mcolwrap');
   if(product.colors && product.colors.length) {
     colorWrap.style.display = 'block';
@@ -1292,26 +1332,97 @@ function openProduct(product) {
     'Elegant Black':'#1f2937', 
     'Space Grey':'#EBEBEB', 
     'Milk White':'#fafaf8', 
-    'Matcha Green':'#84cc16',
+    'Matcha Green':'#5E9450',
     'Creamy White':'#fef9f0',
     'Sapphire Blue':'#1d6fa4',
+    'Ivory White':'#FAF2ED',
+    'Chesnut Coffee':'#D9E0C1',
+    'Milky Starry Night':'#D1D7F0',
+    'Plain Grey':'#546161',
+
     Female:'#f4a7b9', 
     Male:'#1e40af'};
     document.getElementById('mswats').innerHTML = product.colors.map(c => `<div class="sw" style="background:${colorMap[c] || '#ccc'}" title="${c}" onclick="selectModalColor('${c}')"></div>`).join('');
     document.getElementById('mcsel').textContent = 'Pilih warna';
   } else { colorWrap.style.display = 'none'; }
+  
+  // Handle size selection (for products with sizes array)
+  const sizeWrap = document.getElementById('msizewrap');
+  if(product.sizes && product.sizes.length > 0) {
+    sizeWrap.style.display = 'block';
+    const sizeBtns = document.getElementById('msizebtns');
+    sizeBtns.innerHTML = product.sizes.map(size => `
+      <button class="size-option" data-size="${size}" onclick="selectModalSize('${size}')" style="padding: 6px 14px; margin: 4px; border: 1.5px solid var(--bdr); border-radius: 100px; background: var(--off); color: var(--text); cursor: pointer; font-size: 0.75rem; font-weight: 600;">
+        ${size}
+      </button>
+    `).join('');
+    document.getElementById('msizesel').textContent = 'Pilih ukuran';
+  } else {
+    sizeWrap.style.display = 'none';
+  }
+  
+  const scentWrap = document.getElementById('mscentwrap');
+  if(product.scents && product.scents.length > 0) {
+    scentWrap.style.display = 'block';
+    const scentBtns = document.getElementById('mscentbtns');
+    scentBtns.innerHTML = product.scents.map(scent => `
+      <button class="scent-option" data-scent="${scent}" onclick="selectModalScent('${scent}')" style="padding: 6px 14px; margin: 4px; border: 1.5px solid var(--bdr); border-radius: 100px; background: var(--off); color: var(--text); cursor: pointer; font-size: 0.75rem; font-weight: 600;">
+        ${scent}
+      </button>
+    `).join('');
+    document.getElementById('mscentsel').textContent = 'Pilih aroma';
+  } else {
+    scentWrap.style.display = 'none';
+  }
+
   document.getElementById('mqty').textContent = '1';
   document.getElementById('mov').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function setModalImage(idx) { document.getElementById('mimg').src = currentModalImages[idx]; document.querySelectorAll('.mth').forEach((t,i)=>t.classList.toggle('on',i===idx)); }
+function selectModalSize(size) {
+  currentModalSize = size;
+  document.querySelectorAll('.size-option').forEach(btn => {
+    btn.style.background = 'var(--off)';
+    btn.style.color = 'var(--text)';
+    btn.style.border = '1.5px solid var(--bdr)';
+  });
+  event.target.style.background = 'var(--navy)';
+  event.target.style.color = 'white';
+  event.target.style.border = '1.5px solid var(--navy)';
+  document.getElementById('msizesel').textContent = `Dipilih: ${size}`;
+}
 function selectModalColor(c) { currentModalColor = c; document.querySelectorAll('.sw').forEach(s=>s.classList.remove('on')); event.target.classList.add('on'); document.getElementById('mcsel').textContent = 'Dipilih: '+c; }
 function changeModalQty(d) { currentModalQty = Math.max(1, currentModalQty + d); document.getElementById('mqty').textContent = currentModalQty; }
+function selectModalScent(scent) {
+  currentModalScent = scent;
+  document.querySelectorAll('.scent-option').forEach(btn => {
+    btn.style.background = 'var(--off)';
+    btn.style.color = 'var(--text)';
+    btn.style.border = '1.5px solid var(--bdr)';
+  });
+  event.target.style.background = 'var(--navy)';
+  event.target.style.color = 'white';
+  event.target.style.border = '1.5px solid var(--navy)';
+  document.getElementById('mscentsel').textContent = `Dipilih: ${scent}`;
+}
 function addFromModal() {
   if(!currentModalProduct) return;
-  if(currentModalProduct.colors && currentModalProduct.colors.length && !currentModalColor) { alert('Pilih warna terlebih dahulu!'); return; }
-  addToCart(currentModalProduct, currentModalQty, currentModalColor);
+  if(currentModalProduct.colors && currentModalProduct.colors.length && !currentModalColor) { 
+    alert('Pilih warna terlebih dahulu!'); 
+    return; 
+  }
+  if(currentModalProduct.sizes && currentModalProduct.sizes.length && !currentModalSize) { 
+    alert('Pilih ukuran terlebih dahulu!'); 
+    return; 
+  }
+  if(currentModalProduct.scents && currentModalProduct.scents.length && !currentModalScent) { 
+    alert('Pilih aroma terlebih dahulu!'); 
+    return; 
+  }
+  // Pass size as the 4th parameter, scent as 5th, selections as 6th
+  addToCart(currentModalProduct, currentModalQty, currentModalColor, currentModalSize, currentModalScent, null);
   closeModal();
 }
 function closeModal() { document.getElementById('mov').classList.remove('open'); document.body.style.overflow = ''; }
@@ -1677,8 +1788,8 @@ function addBundleToCartWithSelections() {
     isBundle: true,
     images: [currentBundle.image],
     price: finalPrice / currentBundleQty
-  }, currentBundleQty, null, null, selectionsSummary.join(', '));
-  
+  }, currentBundleQty, null, null, null, selectionsSummary.join(', '));
+    
   closeBundleModal();
   flashCart();
 }
