@@ -1302,7 +1302,10 @@ function openProduct(product) {
   document.getElementById('mpid').textContent = product.id;
   document.getElementById('mname').textContent = product.name;
   document.getElementById('mpm').textContent = formatPrice(product.price);
-  document.getElementById('mdet').innerHTML = product.details;
+  document.getElementById('mdet').innerHTML = `
+    <div style="margin-bottom: 8px;">${product.desc || product.details}</div>
+    ${product.descId ? `<div style="font-size: 0.75rem; color: var(--mut); border-top: 1px solid var(--bdr); padding-top: 8px; margin-top: 6px;">${product.descId}</div>` : ''}
+  `;
   document.getElementById('mdorminfo').style.display = product.dormSize ? 'block' : 'none';
   
   // Handle color selection
