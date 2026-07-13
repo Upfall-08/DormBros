@@ -936,8 +936,32 @@ body:has(.cdr.open) .floatwa {
 </div>
 
 <script>
-const RATE = 2650;
+const RATE = 2700;
 
+// ===== GOOGLE SHEETS BACKUP =====
+const GSHEET_URL = 'https://script.google.com/macros/s/AKfycbxe0HvTdYoFG_sSEb9nWIpfJT4m5GNM-WSqJ7-4GmMisyJ3_IShNeK8DA8LTh1qkVBU7Q/exec';
+
+async function saveToGoogleSheet(orderData) {
+  try {
+    // 5 second timeout — if sheet fails, order still goes through
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    
+    await fetch(GSHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData),
+      signal: controller.signal
+    });
+    
+    clearTimeout(timeout);
+    console.log('✅ Saved to Google Sheet');
+  } catch(error) {
+    // Sheet failed but DON'T stop the order
+    console.error('❌ Google Sheet save failed:', error);
+  }
+}
 // ===== ADD THIS RIGHT HERE =====
 // EMAILJS CONFIGURATION
 const EMAILJS_SERVICE_ID = 'service_2ka60gh';
@@ -2012,6 +2036,24 @@ async function submitOrder() {
     payment_screenshot: uploadUrl
   };
   
+// Save to Google Sheet first (most reliable)
+  try {
+    await saveToGoogleSheet({
+      order_id: orderId,
+      name: name,
+      email: email,
+      whatsapp: wa,
+      room: room,
+      arrival_date: arr,
+      items: orderItemsWithCodes,
+      total: `¥${total} (Rp ${Math.round(total*RATE).toLocaleString('id-ID')})`,
+      notes: notes || 'Tidak ada catatan',
+      payment_proof: uploadUrl
+    });
+  } catch(e) {
+    console.error('Sheet error:', e);
+  }
+
   try {
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, emailParams);
     console.log('Email sent successfully! Order ID:', orderId);
