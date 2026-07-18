@@ -376,8 +376,10 @@ button{font-family:'Nunito',sans-serif;cursor:pointer}
   .nav-links{display:none}
   .hero-in{grid-template-columns:1fr}
   .hero-vis{display:none}
-  .cogrid{grid-template-columns:1fr}
-  .osbox{position:static}
+  .cogrid{grid-template-columns:1fr;display:flex;flex-direction:column;}
+  #formcol{order:1;}
+  #mobilePayBox{display:block !important;}
+  #osbox{display:none;}
   .mbox{grid-template-columns:1fr;max-width:440px}
   .mgal{border-radius:var(--rm) var(--rm) 0 0;min-height:unset;max-height:320px;overflow:visible;}
   .mimg{border-radius:var(--rm) var(--rm) 0 0;aspect-ratio:unset;height:220px;width:100%;object-fit:contain;}
@@ -849,7 +851,7 @@ body:has(.cdr.open) .floatwa {
       <div class="pstep"><div class="pnum">4</div><span>Selesai</span></div>
     </div>
     <div class="cogrid">
-      <div class="osbox">
+      <div class="osbox" id="osbox">
         <div class="osbox-ttl">📋 Ringkasan Pesanan</div>
         <div id="ositems"></div>
         <div class="ostot"><span>TOTAL</span><span id="ostot"></span></div>
@@ -876,7 +878,7 @@ body:has(.cdr.open) .floatwa {
           <p style="margin-top:.4rem;font-size:.74rem">Kurs tetap: <strong>Rp 2.675 = ¥1</strong>. Selesaikan dalam 24 jam.</p>
         </div>
       </div>
-      <div>
+      <div id="formcol">
         <div class="fsec">
           <div class="fsect">👤 Data Diri / Personal Info</div>
           <div class="fg"><label>Nama Lengkap / Full Name *</label><input type="text" id="cName" placeholder="Nama Kamu"/></div>
@@ -906,6 +908,34 @@ body:has(.cdr.open) .floatwa {
                 <button onclick="removeUpload()" style="background:#e03a3a; color:#fff; border:none; padding:5px 12px; border-radius:100px; font-size:.7rem; font-weight:700; cursor:pointer">✕ Hapus</button>
             </div>
         </div>
+        <!-- MOBILE ONLY: Order summary + payment shown here -->
+        <div id="mobilePayBox" style="display:none">
+          <div style="background:#fff;border:1px solid var(--bdr);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;box-shadow:var(--sh);">
+            <div class="osbox-ttl">📋 Ringkasan Pesanan</div>
+            <div id="ositems2"></div>
+            <div class="ostot"><span>TOTAL</span><span id="ostot2"></span></div>
+            <div class="ostidr" id="ostidr2"></div>
+            <div style="margin-top:.65rem;font-size:.74rem;color:var(--navy);background:var(--navy-p);border-radius:var(--rs);padding:.4rem .7rem;font-weight:700">🚚 GRATIS Pengiriman ke Lobby Dorm!</div>
+            <div class="paybox">
+              <h4>💳 Cara Pembayaran</h4>
+              <p>Transfer total ke salah satu:</p>
+              <div class="payacc">
+                <strong>BCA Transfer</strong><br/>
+                a/n Givon Ryan Tjandra<br/>
+                Rek: <span class="payhi">4190190299</span>
+              </div>
+              <div class="payacc">
+                <strong>Alipay</strong><br/>
+                ID: <span class="payhi">+86 13113661260</span>
+                <div style="margin-top:10px;">
+                  <img src="Images/alipay.png" alt="Alipay QR Code" style="width:250px;height:250px;object-fit:contain;">
+                </div>
+              </div>
+              <p style="margin-top:.4rem;font-size:.74rem">Kurs tetap: <strong>Rp 2.675 = ¥1</strong>. Selesaikan dalam 24 jam.</p>
+            </div>
+          </div>
+        </div>
+
         <div class="fsec">
           <div class="fsect">📝 Catatan / Notes (opsional)</div>
           <div class="fg"><textarea id="cNotes" rows="3" placeholder="Permintaan barang khusus/ Special item requests.."></textarea></div>
@@ -1878,6 +1908,9 @@ function goCheckout() {
   document.getElementById('ositems').innerHTML = cart.map(i => `<div class="osi"><span class="osi-n">${i.name}${i.color?` (${i.color})`:''} ×${i.qty}</span><span>${formatPrice(i.price*i.qty)}</span></div>`).join('');
   document.getElementById('ostot').textContent = formatPrice(total);
   document.getElementById('ostidr').textContent = `≈ ${formatIDR(total)} (kurs Rp ${RATE}/¥1)`;
+  document.getElementById('ositems2').innerHTML = document.getElementById('ositems').innerHTML;
+  document.getElementById('ostot2').textContent = formatPrice(total);
+  document.getElementById('ostidr2').textContent = `≈ ${formatIDR(total)} (kurs Rp ${RATE}/¥1)`;
   document.getElementById('cArr').min = new Date().toISOString().split('T')[0];
   showPage('checkout');
 }
