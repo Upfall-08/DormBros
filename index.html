@@ -1026,7 +1026,7 @@ const PRODUCTS = [
   {id:"P018",name:"Pillow Medium (Cover Included)",cat:"Sleep",price:50,details:"Medium Pillow. High resilience, antibacterial, neck support, cloud soft. Height: 7-8cm after sleep. Includes pillow case.",shortDesc:"Medium pillow 7-8cm, antibacterial, includes case",desc:"The most popular height for back sleepers. Provides excellent neck support while maintaining cloud-soft comfort. Antibacterial and hypoallergenic.",descId:"Bantal sedang 7-8cm. Paling populer, mendukung leher dengan baik.",specs:["Medium height (7-8cm)","High resilience","Antibacterial","Neck support","Includes pillow case"],colors:[],images:["Images/midpillow.png"],dormSize:false,inStock:true},
   {id:"P019",name:"Pillow High (Cover Included)",cat:"Sleep",price:55,details:"High Pillow. High resilience, antibacterial, neck support, cloud soft. Height: 9-10cm after sleep. Includes pillow case.",shortDesc:"High pillow 9-10cm, antibacterial, includes case",desc:"Ideal for side sleepers who need extra height. Premium high-resilience foam that maintains its shape. Excellent neck and shoulder support.",descId:"Bantal tinggi 9-10cm. Ideal untuk tidur miring, mendukung leher dan bahu.",specs:["High height (9-10cm)","High resilience","Antibacterial","Neck support","Includes pillow case"],colors:[],images:["Images/highpillow.png"],dormSize:false,inStock:true},
   {id:"P020",name:"Pillow+Blanket Cover IKEA",cat:"Sleep",price:120,details:"IKEA Duvet Cover Set. Machine washable, skin-friendly & breathable. Includes: 1 Quilt Cover 150x200cm + 1 Pillowcase.",shortDesc:"IKEA duvet cover + pillowcase set",desc:"Complete bedding set from IKEA. Soft, breathable fabric that's gentle on skin. Includes matching duvet cover and pillowcase.",descId:"Set sarung selimut + sarung bantal IKEA. Lembut, breathable, dan nyaman di kulit.",specs:["Machine washable","Skin-friendly & breathable","Includes duvet cover + pillowcase","Duvet: 150x200cm","Pillowcase: standard size"],colors:[],images:["Images/ikeacover_set.png"],dormSize:false,inStock:true},
-  {id:"P021",name:"Bathroom Sandals",cat:"Sanitary",price:15,details:"EVA Non-Slip Slippers. Waterproof, wear-resistant, sizes 35-44, black",shortDesc:"Non-slip EVA bathroom slippers",desc:"Stay safe in wet bathrooms with these non-slip EVA slippers. Waterproof and wear-resistant. Available in multiple sizes.",descId:"Sandal mandi EVA anti-slip. Tahan air, ukuran 35-44.",specs:["EVA material","Non-slip sole","Waterproof","Wear-resistant","Sizes: 35-44","Color: Black"],colors:[],images:["Images/sandals.png"],dormSize:false,inStock:true},
+  {id:"P021",name:"Bathroom Sandals",cat:"Sanitary",price:15,details:"EVA Non-Slip Slippers. Waterproof, wear-resistant, sizes 35-44, black",shortDesc:"Non-slip EVA bathroom slippers",desc:"Stay safe in wet bathrooms with these non-slip EVA slippers. Waterproof and wear-resistant. Available in sizes 35-44.",descId:"Sandal mandi EVA anti-slip. Tahan air, ukuran 35-44.",specs:["EVA material","Non-slip sole","Waterproof","Wear-resistant","Sizes: 35-44","Color: Black"],colors:[],sizes:["35-36","37-38","39-40","41-42","43-44"],images:["Images/sandals.png"],dormSize:false,inStock:true},
   {id:"P022",name:"Bath Loofah",cat:"Sanitary",price:10,details:"Bath Ball/Loofah. Large size, fluffy & soft, durable, 68g. Colors: Creamy White",shortDesc:"Soft fluffy bath loofah",desc:"Create rich lather with this soft bath loofah. Large size covers more area. Durable and long-lasting. Perfect for daily shower use.",descId:"Bath sponge/loofah lembut dan fluffy. Menghasilkan busa yang kaya.",specs:["Large size","Fluffy & soft","Durable","Long-lasting","68g"],images:["Images/loofah.png"],dormSize:false,inStock:true},
   {id:"P023",name:"Bath Towel 70x140",cat:"Sanitary",price:42,details:"Coral Fleece Bath Towel. Thickened, absorbent & quick drying. Size: 70x140cm. Colors: Blue/Grey",shortDesc:"Quick-dry coral fleece towel 70x140cm",desc:"Super absorbent coral fleece towel that dries quickly. Thickened for extra comfort. Perfect for daily shower use.",descId:"Handuk bulu domba cepat kering. Tebal dan nyaman. Ukuran 70x140cm.",specs:["Coral fleece","Quick drying","Thickened","Absorbent","Size: 70x140cm","Colors: Blue/Grey"],colors:["Blue","Grey"],images:["Images/towel_blue.png","Images/towel_grey.png"],dormSize:false,inStock:true},
   {id:"P024",name:"Bath Towel 90x180",cat:"Sanitary",price:70,details:"Coral Fleece Bath Towel. Thickened, absorbent & quick drying. Size: 90x180cm. Colors: Blue/Grey",shortDesc:"Large quick-dry coral fleece towel 90x180cm",desc:"Extra large bath towel that wraps around you completely. Super absorbent coral fleece that dries quickly. Luxuriously soft and thick.",descId:"Handuk bulu domba besar 90x180cm. Sangat lembut dan cepat kering.",specs:["Coral fleece","Quick drying","Extra large","Thick & absorbent","Size: 90x180cm","Colors: Blue/Grey"],colors:["Blue","Grey"],images:["Images/towel_blue.png","Images/towel_grey.png"],dormSize:false,inStock:true},
@@ -1544,8 +1544,8 @@ function renderBundleDetailModal(bundle) {
   let itemsHtml = '';
   
   bundleItems.forEach(product => {
-    let hasSize = (product.id === 'P001' || product.id === 'P002' || product.id === 'P003' || product.id === 'P004' || product.id === 'P013' || product.id === 'P014' || product.id === 'P015' || product.id === 'P016' || product.id === 'P038');
-
+    let hasSize = (product.id === 'P001' || product.id === 'P002' || product.id === 'P003' || product.id === 'P004' || product.id === 'P013' || product.id === 'P014' || product.id === 'P015' || product.id === 'P016' || product.id === 'P038' || product.id === 'P021');
+    
     if (bundle.id === "B003" && product.id === "P004") {
         hasSize = false;  // Remove size selection for bedsheet in premium bundle
     }
@@ -1590,20 +1590,35 @@ function renderBundleDetailModal(bundle) {
     // Size selection for mattresses
     if(hasSize) {
       const selectedSize = bundleSelections[product.id]?.size;
-      itemsHtml += `
-        <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--bdr);">
-          <label style="font-size: 0.7rem; font-weight: 700; color: var(--navy); display: block; margin-bottom: 8px;">📏 Pilih Ukuran / Choose Size:</label>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button onclick="selectBundleItemSize('${product.id}', '80x190', 0)" id="size_${product.id}_80" class="size-btn" style="padding: 6px 14px; border: 1.5px solid var(--bdr); border-radius: 100px; background: ${selectedSize === '80x190' ? 'var(--navy)' : 'var(--off)'}; color: ${selectedSize === '80x190' ? 'white' : 'var(--text)'}; cursor: pointer; font-size: 0.7rem; font-weight: 600;">
-              80×190 cm - ${formatPrice(size80Price)}
-            </button>
-            <button onclick="selectBundleItemSize('${product.id}', '90x200', ${priceDiff})" id="size_${product.id}_90" class="size-btn" style="padding: 6px 14px; border: 1.5px solid var(--bdr); border-radius: 100px; background: ${selectedSize === '90x200' ? 'var(--navy)' : 'var(--off)'}; color: ${selectedSize === '90x200' ? 'white' : 'var(--text)'}; cursor: pointer; font-size: 0.7rem; font-weight: 600;">
-            90×200 cm - ${formatPrice(size90Price)}
-            </button>
+  
+      if(product.id === 'P021') {
+        itemsHtml += `
+          <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--bdr);">
+            <label style="font-size: 0.7rem; font-weight: 700; color: var(--navy); display: block; margin-bottom: 8px;">👟 Pilih Ukuran / Choose Size:</label>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              ${['35-36','37-38','39-40','41-42','43-44'].map(s => `
+                <button onclick="selectBundleItemSize('P021', '${s}', 0)" id="size_P021_${s.replace('-','')}" style="padding: 6px 14px; border: 1.5px solid var(--bdr); border-radius: 100px; background: ${selectedSize === s ? 'var(--navy)' : 'var(--off)'}; color: ${selectedSize === s ? 'white' : 'var(--txt)'}; cursor: pointer; font-size: 0.7rem; font-weight: 600;">${s}</button>
+              `).join('')}
+            </div>
+            <div id="size_msg_P021" style="font-size: 0.65rem; color: var(--orange); margin-top: 6px;">${selectedSize ? `✓ Dipilih: ${selectedSize}` : ''}</div>
           </div>
-          <div id="size_msg_${product.id}" style="font-size: 0.65rem; color: var(--orange); margin-top: 6px;">${selectedSize ? `✓ Dipilih: ${selectedSize}` : ''}</div>
-        </div>
-      `;
+        `;
+      } else {
+        itemsHtml += `
+          <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--bdr);">
+            <label style="font-size: 0.7rem; font-weight: 700; color: var(--navy); display: block; margin-bottom: 8px;">📏 Pilih Ukuran / Choose Size:</label>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <button onclick="selectBundleItemSize('${product.id}', '80x190', 0)" id="size_${product.id}_80" class="size-btn" style="padding: 6px 14px; border: 1.5px solid var(--bdr); border-radius: 100px; background: ${selectedSize === '80x190' ? 'var(--navy)' : 'var(--off)'}; color: ${selectedSize === '80x190' ? 'white' : 'var(--text)'}; cursor: pointer; font-size: 0.7rem; font-weight: 600;">
+                80×190 cm - ${formatPrice(size80Price)}
+              </button>
+              <button onclick="selectBundleItemSize('${product.id}', '90x200', ${priceDiff})" id="size_${product.id}_90" class="size-btn" style="padding: 6px 14px; border: 1.5px solid var(--bdr); border-radius: 100px; background: ${selectedSize === '90x200' ? 'var(--navy)' : 'var(--off)'}; color: ${selectedSize === '90x200' ? 'white' : 'var(--text)'}; cursor: pointer; font-size: 0.7rem; font-weight: 600;">
+                90×200 cm - ${formatPrice(size90Price)}
+              </button>
+            </div>
+            <div id="size_msg_${product.id}" style="font-size: 0.65rem; color: var(--orange); margin-top: 6px;">${selectedSize ? `✓ Dipilih: ${selectedSize}` : ''}</div>
+          </div>
+        `;
+      }
     }
     
     // Color selection
@@ -1724,20 +1739,25 @@ function selectBundleItemSize(productId, size, priceDiff) {
   bundleSelections[productId].priceAdjustment = priceDiff;
   
   // Update button styles
-  document.querySelectorAll(`#size_${productId}_80, #size_${productId}_90`).forEach(btn => {
-    btn.style.background = 'var(--off)';
-    btn.style.color = 'var(--text)';
-  });
-  const activeBtn = document.getElementById(`size_${productId}_${size === '80x190' ? '80' : '90'}`);
-  if(activeBtn) {
-    activeBtn.style.background = 'var(--navy)';
-    activeBtn.style.color = 'white';
+  if(productId === 'P021') {
+    ['3536','3738','3940','4142','4344'].forEach(s => {
+      const btn = document.getElementById(`size_P021_${s}`);
+      if(btn) { btn.style.background = 'var(--off)'; btn.style.color = 'var(--txt)'; }
+    });
+    const activeBtn = document.getElementById(`size_P021_${size.replace('-','')}`);
+    if(activeBtn) { activeBtn.style.background = 'var(--navy)'; activeBtn.style.color = 'white'; }
+  } else {
+    document.querySelectorAll(`#size_${productId}_80, #size_${productId}_90`).forEach(btn => {
+      btn.style.background = 'var(--off)';
+      btn.style.color = 'var(--text)';
+    });
+    const activeBtn = document.getElementById(`size_${productId}_${size === '80x190' ? '80' : '90'}`);
+    if(activeBtn) { activeBtn.style.background = 'var(--navy)'; activeBtn.style.color = 'white'; }
   }
   
   const msgEl = document.getElementById(`size_msg_${productId}`);
   if(msgEl) msgEl.textContent = `✓ Dipilih: ${size}`;
   
-  // Update total price
   const newTotal = calculateBundleTotalPrice();
   const priceEl = document.getElementById('bundleTotalPrice');
   if(priceEl) priceEl.textContent = formatPrice(newTotal);
